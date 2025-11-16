@@ -1,0 +1,72 @@
+/* === Cake Customizer Styles === */
+
+.cake-page-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #fffaf8;
+}
+
+/* === Controls Panel === */
+
+.cake-controls {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  padding: 20px;
+  width: 260px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.cake-controls h3 {
+  margin: 0 0 10px;
+}
+
+.cake-layer-box {
+  background: #f2f2f2;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.cake-layer-box strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.cake-layer-box input[type="color"] {
+  width: 100%;
+  height: 40px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.cake-layer-box input[type="range"] {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* Buttons */
+.cake-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.cake-btn.add {
+  background: #5a2e1a;
+}
+
+.cake-btn.remove {
+  background: #d14242;
+}
