@@ -9,7 +9,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/cake" element={<CustomCakePage />} />
+        <Route path="/custom-cakes" element={<CustomCakePage />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </Router>
