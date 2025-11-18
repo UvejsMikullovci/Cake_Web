@@ -1,0 +1,32 @@
+.dessert-wraper {
+  width: 100%;
+  min-height: 100vh;
+
+}
+
+.banner-collection {
+      background: linear-gradient(133deg, #ffeaeb, #ffffff);
+    padding: 160px 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 150px;
+}
+
+
+
+.collection-title {
+  text-align:center;
+  font-size: 52px;
+  font-weight: 800;
+  color: #581b28;
+  margin-top: 24px;
+  line-height: 1.2;
+}
+
+.collection-description {
+  text-align:center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #00211ABF;
+}

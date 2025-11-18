@@ -1,83 +1,9 @@
 .home-wrapper {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #fff1f2, #f7c0c3);
+
 }
 
-
-.navbar {
-  width: 100%;
-    padding: 24px 40px;
-    background: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 50;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.logo-img {
-    height: 6vh;
-    width: 250%;
-}
-
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-  font-size: 17px;
-  font-weight: 500;
-}
-
-.nav-links a {
-     color: #101010;
-    text-decoration: none;
-    transition: 0.2s;
-}
-
-
-
-.nav-icon-button{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
- .nav-icons{
-    display: flex;
-gap: 15px;
-}
-.icon:hover {
-    background-color: #F7C0C385;
-}
-
-.icon {
-    font-size: 18px;
-    cursor: pointer;
-    color: #101010;
-    padding: 5px;
-    border-radius: 50%;
-    transition: all 0.3s 
-ease;
-}
-
-.dashboard-btn {
-  background: #581B28;
-    color: white;
-    padding: 10px 26px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.dashboard-btn:hover {
-  background: #581b28e8;
-}
-
-/* BANNER */
 .banner {
       background: linear-gradient(133deg, #ffeaeb, #ffffff);
     padding: 160px 40px 80px;
@@ -140,7 +66,7 @@ ease;
 }
 
 .btn-primary:hover {
-  background: #9d174d;
+  background: #581b28e8;;
 }
 
 .btn-outline {
@@ -155,7 +81,8 @@ ease;
 }
 
 .btn-outline:hover {
-  background: #ffe4e6;
+    color:white;
+  background: #581B28;
 }
 
 .stats {
@@ -186,4 +113,536 @@ ease;
     width: 650px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.bouncy-cake{
+    position: absolute;
+    left: 570px;
+    top: -15px;
+    width: 100px;               
+  height: 100px;
+  background-color: #F7C0C3;     
+  border-radius: 50%;       
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: jump 1s ease-in-out infinite;
+  
+}
+
+.cake-emoji {
+  font-size: 45px;   
+         
+}
+
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px); 
+  }
+}
+
+.cookie{
+    right:580px;
+    top:450px;
+    position: absolute;
+    width: 100px;               
+  height: 100px;
+  background-color: #581B28;     
+  border-radius: 50%;       
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  
+}
+
+.cookie-emoji {
+  font-size: 45px;   
+         
+}
+.pink-wave img{
+    width:100%;
+}
+
+.pink-wave {
+    top:-105px;
+    position: absolute;
+  background-size: cover;
+  height: 120px;
+ width:100%;
+  margin-bottom: 30px;
+}
+.signature-section {
+  width: 100%;
+  text-align: center;
+  margin-top: 100px;
+  padding-bottom: 60px;
+  position: relative;
+}
+
+.signature-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #4a1f28;
+}
+
+.signature-subtitle {
+  margin-top: 10px;
+  color: #6d5f63;
+  font-size: 15px;
+  margin-bottom: 40px;
+}
+.cards-grid {
+     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 55px;
+    width: 88%;
+    margin: auto;
+}
+
+.sweet-card {
+   border: 3.5px dashed #f3b5c4;
+  width: 400px;            
+  border-radius: 12px;
+  overflow: visible;       
+  transition: transform .25s ease;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+ height: 350px;
+  overflow: hidden;        
+  border-radius: 12px;
+}
+
+.image-wrapper img {
+  border-radius: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    display: block;
+    width: 95%;
+    height: 95%;
+    object-fit: cover;
+    transform-origin: center center;
+    transition: transform .45s 
+cubic-bezier(.2, .9, .2, 1);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.sweet-card:hover .image-wrapper img,
+.image-wrapper:hover img {
+  transform: scale(1.1); 
+}
+
+.hover-overlay {
+  overflow: hidden;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.35);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none; 
+}
+
+.sweet-card:hover .hover-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hover-icons {
+  display: flex;
+  gap:10px;
+   font-size: 18px;
+    cursor: pointer;
+    color: #101010;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s 
+ease;
+}
+
+.sweet-card:hover .hover-icons {
+  transform: translateY(0);
+  opacity: 1;
+}
+.card-title {
+    color: #581B28;
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.card-price {
+  margin-top: 5px;
+  font-weight: 700;
+  color: #581B28;
+  font-size:20px;
+}
+
+
+.view-all-btn {
+  background-color: #FFFCF6;
+  margin-top: 40px;
+  color: #581B28;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 30px;
+  border: 0.5px solid #F7C0C3;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-all-btn:hover {
+  background-color: #F7C0C3;
+}
+
+.Eye{
+     height: 40px;
+    color: #581B28;
+    width: 40px;
+    background-color: #FFFCF6;
+    border-radius: 20px;
+}
+.Eye svg{
+  margin-top:10px;
+}
+
+.shopcart svg{
+  margin-top:10px;
+}
+
+.shopcart{
+background-color: #581B28;
+color: #FFFCF6;
+border-radius:20px;
+width:40px;
+height:40px;
+}
+
+.occasion-section {
+width: 100%;
+padding: 60px 0;
+background: linear-gradient(to bottom, #f7c0c329, #FFFCF6);
+text-align: center;
+}
+
+
+.occasion-title {
+font-size: 40px;
+font-weight: 700;
+color: #581B28;
+margin-bottom: 50px;
+}
+
+
+.occasion-grid {
+max-width: 1350px;
+margin: auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 30px;
+padding: 0 20px;
+}
+
+
+.occasion-card {
+background: #ffffff;
+border: 1px solid #f3c5c5;
+border-radius: 25px;
+padding: 40px;
+transition: 0.3s ease;
+box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+
+.occasion-card:hover {
+box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+
+.occasion-icon {
+width: 65px;
+height: 65px;
+margin: auto;
+border-radius: 50%;
+    background: linear-gradient(122deg, #F7C0C3, #581b28);
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+margin-bottom: 20px;
+}
+
+
+.occasion-card-title {
+      font-weight: 500;
+font-size: 26px;
+color: #581B28;
+margin-bottom: 15px;
+}
+
+
+.occasion-card-text {
+color: #444;
+line-height: 1.6;
+}
+
+.how-section {
+  width: 100%;
+  padding: 70px 0;
+  text-align: center;
+  background: white;
+}
+
+.how-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #581B28;
+  margin-bottom: 10px;
+}
+
+.how-subtext {
+  font-size: 18px;
+  color: #6b6b6b;
+  margin-bottom: 60px;
+}
+
+.how-grid {
+
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+ 
+}
+
+.how-card {
+  text-align: center;
+}
+
+.how-circle {
+  width: 90px;
+  height: 90px;
+  margin: auto;
+  border-radius: 50%;
+  background: linear-gradient(122deg, #F7C0C3, #581b28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+.how-card-title {
+  font-size: 22px;
+  color: #581B28;
+  margin-bottom: 10px;
+}
+
+
+.how-card-text {
+  color: #555;
+  font-size: 17px;
+}
+
+.blog-section {
+  width: 100%;
+  padding: 70px 0;
+  background: linear-gradient(to bottom, #fff7f5, #fff3f0);
+  text-align: center;
+}
+
+.blog-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #581B28;
+  margin-bottom: 50px;
+}
+
+/* Blog cards grid */
+.blog-grid {
+  max-width: 1350px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 35px;
+  padding: 0 20px;
+}
+
+/* Each card */
+.blog-card {
+  background: #ffffff;
+  border: 1px solid #f3c8c8;
+  border-radius: 25px;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Image wrapper */
+.blog-image-wrapper {
+  position: relative;
+}
+
+.blog-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #f3c8c8;
+}
+
+/* Tag badge */
+.blog-tag {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #581B28;
+  padding: 7px 16px;
+  color: white;
+  font-size: 14px;
+  border-radius: 20px;
+}
+
+/* Card content */
+.blog-content {
+      margin-top: -20px;
+    padding: 25px;
+    text-align: left;
+}
+
+.blog-card-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #581B28;
+  margin-bottom: 20px;
+}
+
+/* Read More button */
+.blog-readmore {
+  border: none;
+  background: none;
+  color: #581B28;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.blog-readmore span {
+  font-size: 20px;
+  margin-top: -2px;
+}
+
+/* View All Button */
+.blog-footer {
+  margin-top: 40px;
+}
+
+.blog-view-all {
+    background: none;
+    border: 1px solid #581B28;
+    color: #581B28;
+    padding: 12px 35px;
+    border-radius: 25px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s 
+ease;
+}
+
+.blog-view-all:hover {
+  background: #581B28;
+  color: white;
+}
+
+.newsletter-banner {
+  height: 200px;
+    width: 86%;
+    padding: 70px 20px;
+    border-radius: 40px;
+    text-align: center;
+    background: linear-gradient(to bottom, #F7C0C3, #581B28);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.newsletter-banner h2 {
+  font-size: 40px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.newsletter-banner p {
+  font-size: 18px;
+  margin-bottom: 35px;
+  opacity: 0.9;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.newsletter-form input {
+  width: 320px;
+  padding: 14px 18px;
+  border-radius: 25px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+}
+
+.newsletter-form button {
+  padding: 14px 32px;
+  border-radius: 25px;
+  border: none;
+  background-color: #581B28;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background-color: #581b28e8;
+}
+
+.footer-section{
+  margin-top:150px;
+}
+
+.pink-wave2 img{
+    width:100%;
+}
+
+.pink-wave2 {
+    
+  top: 3200px;
+    position: absolute;
+    background-size: cover;
+    height: 120px;
+    width: 100%;
+  
 }
