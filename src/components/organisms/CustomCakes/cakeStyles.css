@@ -1,0 +1,328 @@
+.cake-page-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #fff7f2 0%, #fbeae2 40%, #f3d7c8 100%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+}
+
+.cake-left-panel {
+  flex: 3;
+  min-width: 0;
+  position: relative;
+}
+
+.cake-right-panel {
+  flex: 2;
+  min-width: 320px;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  box-shadow: -12px 0 35px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 28px;
+}
+
+.cake-canvas-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+
+.cake-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: 100%;
+}
+
+.cake-controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cake-controls-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.cake-controls-subtitle {
+  font-size: 13px;
+  color: #777;
+}
+
+
+.cake-section {
+  border-radius: 14px;
+  padding: 14px 14px 10px;
+  background: #f7f4f2;
+}
+
+.cake-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.cake-section-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cake-section-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f0e2da;
+  color: #7b4e35;
+}
+
+.cake-size-options {
+  display: flex;
+  gap: 8px;
+}
+
+.cake-pill {
+  flex: 1;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid transparent;
+  background: #fdfaf7;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cake-pill-label {
+  font-weight: 500;
+}
+
+.cake-pill-sub {
+  font-size: 11px;
+  color: #888;
+}
+
+.cake-pill.active {
+  background: #2d3436;
+  color: white;
+  border-color: #2d3436;
+}
+
+.cake-pill.active .cake-pill-sub {
+  color: #f0e2da;
+}
+
+.cake-layers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 190px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.cake-layer-card {
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: white;
+  border: 1px solid #eee1d9;
+}
+
+.cake-layer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.cake-layer-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.cake-layer-chip {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f5ede7;
+}
+
+.cake-select-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.cake-select {
+  flex: 1;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 7px;
+  border: 1px solid #dbcac0;
+  background: #fefcfb;
+}
+
+.cake-slider-row {
+  margin-top: 4px;
+}
+
+.cake-slider-label {
+  font-size: 11px;
+  color: #888;
+  margin-bottom: 2px;
+}
+
+.cake-slider {
+  width: 100%;
+}
+
+.cake-btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.cake-btn {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cake-btn.primary {
+  background: #2d3436;
+  color: white;
+}
+
+.cake-btn.secondary {
+  background: #efe2da;
+  color: #5f4330;
+}
+
+.cake-toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.cake-toggle-pill {
+  padding: 5px 9px;
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid #ddd0c7;
+  background: white;
+  cursor: pointer;
+}
+
+.cake-toggle-pill.active {
+  background: #f3d7c8;
+  border-color: #e2b79d;
+  color: #5a2e1a;
+}
+
+.cake-input {
+  width: 100%;
+  padding: 7px 9px;
+  font-size: 13px;
+  border-radius: 9px;
+  border: 1px solid #dbcac0;
+  background: #fefcfb;
+}
+
+.cake-gift-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.cake-gift-label {
+  font-size: 13px;
+}
+
+.cake-switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: #ddd;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cake-switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.2s ease;
+}
+
+.cake-switch.on {
+  background: #2ecc71;
+}
+
+.cake-switch.on .cake-switch-thumb {
+  transform: translateX(16px);
+}
+
+.cake-footer {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px dashed #e1d2c8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cake-price-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cake-price-label {
+  font-size: 11px;
+  color: #888;
+}
+
+.cake-price-value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.cake-primary-action {
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #ff7e5f, #ea4673);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .cake-page-layout {
+    flex-direction: column;
+  }
+
+  .cake-right-panel {
+    max-width: 100%;
+    box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.08);
+  }
+}
