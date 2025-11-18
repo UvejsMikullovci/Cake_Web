@@ -1,5 +1,7 @@
 import React from "react";
 import { Text } from "@react-three/drei";
+import Strawberry from "../../models/Strawberry";
+import FrostingText from "./FrostingText";
 
 const BASE_COLORS = {
   vanilla: "#f5d8a9",
@@ -45,53 +47,33 @@ export default function Cake({
   const topLayerHeight = layers[layers.length - 1].height;
   const topY = topLayerYOffset + topLayerHeight / 2;
 
+  const boxInnerHeight = totalHeight + 0.9;
   const boxWidth = baseRadius * 2.6;
   const boxDepth = boxWidth;
-  const boxInnerHeight = totalHeight + 0.9;
-  const boxBaseHeight = 0.35;
 
   return (
     <group position={[0, -1.2, 0]}>
-      {sendAsGift && (
-        <group>
-          <mesh position={[0, 0.15, 0]}>
-            <boxGeometry args={[boxWidth, 0.3, boxDepth]} />
-            <meshStandardMaterial color="#f7e3d7" roughness={0.9} />
-          </mesh>
+      {/* TABLE / PLATE */}
+      <mesh
+        receiveShadow
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, -0.05, 0]}
+      >
+        <circleGeometry args={[baseRadius * 1.8, 64]} />
+        <meshStandardMaterial
+          color="#fdf4ec"
+          roughness={0.8}
+          metalness={0.05}
+        />
+      </mesh>
 
-          <mesh position={[0, boxInnerHeight / 2 + 0.2, 0]}>
-            <boxGeometry args={[boxWidth * 1.1, boxInnerHeight, boxDepth * 1.1]} />
-            <meshPhysicalMaterial
-              transparent={true}
-              opacity={0.12}
-              roughness={0}
-              metalness={0}
-              transmission={1}
-              thickness={0.25}
-              ior={1.2}
-              color="#ffffff"
-            />
-          </mesh>
+      {/* SHADOW PLATE */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.08, 0]}>
+        <circleGeometry args={[baseRadius * 1.5, 48]} />
+        <meshBasicMaterial color="#e0c8ba" />
+      </mesh>
 
-          <mesh position={[0, boxInnerHeight + 0.35, 0]}>
-            <torusGeometry args={[boxWidth * 0.42, 0.08, 16, 40]} />
-            <meshStandardMaterial color="#ff7e8b" roughness={0.2} />
-          </mesh>
-
-          <group position={[0, boxInnerHeight + 0.42, 0]}>
-            <mesh rotation={[0, 0, Math.PI / 6]}>
-              <boxGeometry args={[0.14, 0.38, 0.12]} />
-              <meshStandardMaterial color="#ff7e8b" />
-            </mesh>
-
-            <mesh rotation={[0, 0, -Math.PI / 6]}>
-              <boxGeometry args={[0.14, 0.38, 0.12]} />
-              <meshStandardMaterial color="#ff7e8b" />
-            </mesh>
-          </group>
-        </group>
-      )}
-
+      {/* CAKE LAYERS */}
       {layers.map((layer, index) => {
         const radius = baseRadius - index * 0.18;
         const height = layer.height;
@@ -109,6 +91,7 @@ export default function Cake({
 
         return (
           <group key={layer.id}>
+            {/* CAKE BODY */}
             <mesh
               position={[0, cakeBodyY, 0]}
               castShadow
@@ -124,6 +107,7 @@ export default function Cake({
               />
             </mesh>
 
+            {/* TOP FROSTING DISC */}
             <mesh position={[0, frostingTopY, 0]} castShadow>
               <cylinderGeometry
                 args={[radius * 1.02, radius * 0.98, 0.18, radialSegments, 1]}
@@ -135,6 +119,7 @@ export default function Cake({
               />
             </mesh>
 
+            {/* FROSTING BORDER BALLS */}
             <group position={[0, frostingTopY + 0.08, 0]}>
               {Array.from({ length: 18 }).map((_, i) => {
                 const angle = (i / 18) * Math.PI * 2;
@@ -154,6 +139,7 @@ export default function Cake({
               })}
             </group>
 
+            {/* CHOCOLATE DRIPS */}
             {layer.frostingFlavor === "chocolate" && (
               <group>
                 {Array.from({ length: 12 }).map((_, i) => {
@@ -184,6 +170,7 @@ export default function Cake({
               </group>
             )}
 
+            {/* CAKE SLICE / FILLING VIEW */}
             {decorations.slice && (
               <mesh
                 position={[0, cakeBodyY, radius * 0.01]}
@@ -213,33 +200,29 @@ export default function Cake({
         );
       })}
 
+      {/* TOP DECORATIONS + TEXT */}
       <group position={[0, topY + topLayerHeight / 2 + 0.24, 0]}>
+        {/* FROSTING TEXT (our tube-based system) */}
         {message && (
-          <Text
-            position={[0, 0.02, 0]}
-            rotation={[-Math.PI / 2, 0, 0]}
-            fontSize={0.32}
-            maxWidth={baseRadius * 2.1}
-            textAlign="center"
-            anchorX="center"
-            anchorY="middle"
-            outlineWidth={0.015}
-            outlineColor="#5a2e1a"
-            color="#ffffff"
-          >
-            {message}
-          </Text>
+          <group rotation={[-0.18, 0, 0]}>
+            <FrostingText
+              text={message}
+              size={0.65}
+              letterSpacing={0.3}
+            />
+          </group>
         )}
 
+        {/* CANDLES */}
         {decorations.candles && (
           <group>
             {Array.from({ length: 6 }).map((_, i) => {
               const angle = (i / 6) * Math.PI * 2;
-              const r = (baseRadius - (layers.length - 1) * 0.18) * 0.7;
+              const r = (baseRadius - (layers.length - 1) * 0.18) * 0.65;
               const x = Math.cos(angle) * r;
               const z = Math.sin(angle) * r;
               return (
-                <group key={i} position={[x, 0.15, z]}>
+                <group key={i} position={[x, 0.18, z]}>
                   <mesh castShadow>
                     <cylinderGeometry args={[0.05, 0.05, 0.4, 16]} />
                     <meshStandardMaterial color="#ffffff" />
@@ -258,92 +241,36 @@ export default function Cake({
           </group>
         )}
 
+        {/* STRAWBERRIES (GLB) */}
         {decorations.strawberries && (
           <group>
             {Array.from({ length: 8 }).map((_, i) => {
               const angle = (i / 8) * Math.PI * 2;
-              const r = (baseRadius - (layers.length - 1) * 0.18) * 0.9;
+              const r = (baseRadius - (layers.length - 1) * 0.18) * 0.78;
               const x = Math.cos(angle) * r;
               const z = Math.sin(angle) * r;
+              const rotY = angle + Math.PI / 2;
 
               return (
-                <group key={i} position={[x, 0.22, z]}>
-                  {/* Strawberry Body */}
-                  <mesh castShadow>
-                    <sphereGeometry args={[0.1, 50, 50]} />
-                    <meshPhysicalMaterial
-                      color="#d5303e"
-                      roughness={0.25}
-                      metalness={0.15}
-                      clearcoat={1}
-                      clearcoatRoughness={0.15}
-                      reflectivity={1}
-                      sheen={1}
-                      sheenRoughness={0.3}
-                    />
-                  </mesh>
-
-                  {/* Seeds */}
-                  {Array.from({ length: 32 }).map((_, j) => {
-                    const seedAngle = Math.random() * Math.PI * 2;
-                    const seedHeight = Math.random() * 0.15 - 0.05;
-
-                    const sx = Math.cos(seedAngle) * 0.085;
-                    const sz = Math.sin(seedAngle) * 0.085;
-
-                    return (
-                      <mesh
-                        key={j}
-                        position={[sx, seedHeight, sz]}
-                        scale={[1, 1.4, 1]}
-                      >
-                        <sphereGeometry args={[0.008, 8, 8]} />
-                        <meshStandardMaterial
-                          color="#ffef8b"
-                          roughness={0.3}
-                          metalness={0.2}
-                        />
-                      </mesh>
-                    );
-                  })}
-
-                  {/* Leaf Crown */}
-                  {Array.from({ length: 5 }).map((_, k) => {
-                    const leafAngle = (k / 5) * Math.PI * 2;
-                    const lx = Math.cos(leafAngle) * 0.04;
-                    const lz = Math.sin(leafAngle) * 0.04;
-
-                    return (
-                      <mesh key={k} position={[lx, 0.13, lz]} rotation={[0.4, 0, leafAngle]}>
-                        <coneGeometry args={[0.04, 0.12, 8]} />
-                        <meshStandardMaterial
-                          color="#2e9e4f"
-                          roughness={0.5}
-                          metalness={0.1}
-                        />
-                      </mesh>
-                    );
-                  })}
-
-                  {/* Stem */}
-                  <mesh position={[0, 0.19, 0]}>
-                    <cylinderGeometry args={[0.01, 0.01, 0.06, 8]} />
-                    <meshStandardMaterial color="#3d7f3a" roughness={0.6} />
-                  </mesh>
-                </group>
+                <Strawberry
+                  key={i}
+                  position={[x, -0.02, z]}
+                  rotation={[Math.PI / 2, rotY, 0]}
+                  scale={0.8}
+                />
               );
             })}
           </group>
         )}
+
+        {/* SPRINKLES */}
         {decorations.sprinkles && (
           <group>
-            {Array.from({ length: 20 }).map((_, i) => {
+            {Array.from({ length: 26 }).map((_, i) => {
               const angle = Math.random() * Math.PI * 2;
-
               const r =
                 (baseRadius - (layers.length - 1) * 0.18) *
-                (0.82 + Math.random() * 0.18);
-
+                (0.45 + Math.random() * 0.35);
               const x = Math.cos(angle) * r;
               const z = Math.sin(angle) * r;
 
@@ -351,7 +278,7 @@ export default function Cake({
               const c = colors[i % colors.length];
 
               return (
-                <mesh key={i} position={[x, 0.12, z]}>
+                <mesh key={i} position={[x, 0.04, z]}>
                   <boxGeometry args={[0.03, 0.015, 0.08]} />
                   <meshStandardMaterial color={c} />
                 </mesh>
@@ -360,6 +287,28 @@ export default function Cake({
           </group>
         )}
       </group>
+
+      {/* GIFT BOX */}
+      {sendAsGift && (
+        <group position={[0, 0.5, -3.4]}>
+          <mesh castShadow>
+            <boxGeometry args={[boxWidth * 0.9, 1.2, boxDepth * 0.9]} />
+            <meshStandardMaterial color="#fef2f5" />
+          </mesh>
+          <mesh castShadow>
+            <boxGeometry args={[boxWidth * 0.92, 0.25, boxDepth * 0.92]} />
+            <meshStandardMaterial color="#ff7e8b" />
+          </mesh>
+          <mesh>
+            <boxGeometry args={[0.1, 1.25, boxDepth * 0.92]} />
+            <meshStandardMaterial color="#ff7e8b" />
+          </mesh>
+          <mesh>
+            <boxGeometry args={[boxWidth * 0.92, 1.25, 0.1]} />
+            <meshStandardMaterial color="#ff7e8b" />
+          </mesh>
+        </group>
+      )}
     </group>
   );
 }
