@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { MapPinIcon, PhoneIcon, EnvelopeIcon, ClockIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import emailjs from "@emailjs/browser";
 import "./ContactFaqPage.css";
+import Navbar from "../organisms/Navbar";
+import Footer from "../organisms/Footer"; 
 
 const faqData = [
   { question: "What are your delivery areas?", answer: "We deliver within a 25-mile radius of our bakery..." },
@@ -27,7 +29,6 @@ const ContactFaqPage = () => {
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
 
-  // Initialize EmailJS with your public key
   useEffect(() => {
     emailjs.init("IyzrrMLeesthFmSC7");
     contentRefs.current = contentRefs.current.slice(0, faqData.length);
@@ -47,7 +48,6 @@ const ContactFaqPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
@@ -59,28 +59,21 @@ const ContactFaqPage = () => {
 
     setSending(true);
 
-    // Send email via EmailJS
     emailjs
-      .send(
-        "service_aiqcgge", // your service ID
-        "template_ek5hkpa", // your template ID
-        {
-          from_name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          address: formData.address,
-          message: formData.message,
-        }
-      )
+      .send("service_aiqcgge", "template_ek5hkpa", {
+        from_name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        message: formData.message,
+      })
       .then(
-        (response) => {
-          console.log("EmailJS response:", response);
+        () => {
           alert("Message sent successfully!");
           setFormData({ name: "", email: "", phone: "", address: "", message: "" });
           setSending(false);
         },
-        (err) => {
-          console.error("EmailJS error:", err);
+        () => {
           alert("Failed to send message. Try again later.");
           setSending(false);
         }
@@ -89,15 +82,24 @@ const ContactFaqPage = () => {
 
   return (
     <div className="cf-page">
-      {/* Hero Section */}
+      <Navbar />
+      {/* ---------------- HERO SECTION ---------------- */}
       <section className="cf-hero">
+
+        {/* Navbar inside hero */}
+        <div className="cf-hero-nav">
+          <Navbar />
+        </div>
+
         <div className="cf-hero-inner">
           <h1>Get in Touch</h1>
           <p>Have a question or special request? We'd love to hear from you!</p>
         </div>
+
         <div className="cf-hero-wave" aria-hidden="true" />
       </section>
 
+      {/* Wave Banner */}
       <svg className="svgBaner" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path
           d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
@@ -105,8 +107,10 @@ const ContactFaqPage = () => {
         ></path>
       </svg>
 
+      {/* ---------------- MAIN CONTENT ---------------- */}
       <main className="cf-main">
         <div className="cf-grid">
+
           {/* Contact Form */}
           <aside className="cf-card form-card" aria-labelledby="contact-form-title">
             <h2 id="contact-form-title">Send Us a Message</h2>
@@ -181,7 +185,7 @@ const ContactFaqPage = () => {
             </form>
           </aside>
 
-          {/* Contact Info */}
+          {/* Contact Information */}
           <section className="cf-card info-card" aria-labelledby="contact-info-title">
             <h2 id="contact-info-title">Contact Information</h2>
             <div className="info-list">
@@ -270,6 +274,7 @@ const ContactFaqPage = () => {
           </div>
         </section>
       </main>
+      <Footer/>
     </div>
   );
 };

@@ -24,7 +24,9 @@ export default function Navbar (){
                 <div className="nav-icons">
                   <FiHeart className="icon" />
                   <FiShoppingCart className="icon" />
-                  <FiUser className="icon" />
+                  <NavLink to="/auth">
+                    <FiUser className="icon" />
+                  </NavLink>
                    
                 </div>
                 <button className="dashboard-btn">Dashboard</button>

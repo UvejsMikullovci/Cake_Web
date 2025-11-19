@@ -5,6 +5,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import "./SignInSignUp.css";
+import Navbar from "../organisms/Navbar";
+import Footer from "../organisms/Footer"; 
 
 const SignInSignUp = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -88,6 +90,7 @@ const SignInSignUp = () => {
 
   return (
     <div className="auth-page">
+      <Navbar />
       <div className="auth-card">
         <h2>{isSignUp ? "Sign Up" : "Sign In"}</h2>
         <form onSubmit={handleSubmit}>
@@ -128,6 +131,7 @@ const SignInSignUp = () => {
           </span>
         </p>
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import "./Desserts.css";
 
 function Desserts() {
   const cakeCard = [
-    s
+    
   ]
   return (
     <div className="dessert-wraper">
