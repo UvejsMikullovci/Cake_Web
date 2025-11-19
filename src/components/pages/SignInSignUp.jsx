@@ -1,18 +1,24 @@
 import React, { useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 import "./SignInSignUp.css";
 import Navbar from "../organisms/Navbar";
-import Footer from "../organisms/Footer"; 
+import Footer from "../organisms/Footer";
+import SignIn from '../Photos/Random/cakee.jpg';
+import SignUp from '../Photos/Random/Artisanpastries.jpg';
 
 const SignInSignUp = () => {
+  const navigate = useNavigate();
   const [isSignUp, setIsSignUp] = useState(false);
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    confirmPassword: "",
+  });
   const [errors, setErrors] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -25,7 +31,6 @@ const SignInSignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors("");
-    setSuccess("");
 
     if (!formData.email.trim() || !formData.password.trim()) {
       setErrors("Email and password are required.");
@@ -39,100 +44,118 @@ const SignInSignUp = () => {
       setErrors("Password must be at least 6 characters.");
       return;
     }
+    if (isSignUp && formData.password !== formData.confirmPassword) {
+      setErrors("Passwords do not match.");
+      return;
+    }
 
     setLoading(true);
 
     try {
       if (isSignUp) {
-        await createUserWithEmailAndPassword(
-          auth,
-          formData.email,
-          formData.password
-        );
-        setSuccess("Sign-up successful! You can now sign in.");
+        await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+        navigate("/");
       } else {
-        await signInWithEmailAndPassword(
-          auth,
-          formData.email,
-          formData.password
-        );
-        setSuccess("Sign-in successful!");
+        await signInWithEmailAndPassword(auth, formData.email, formData.password);
+        navigate("/");
       }
-
-      setFormData({ email: "", password: "" });
     } catch (err) {
-      let friendlyMessage = "Something went wrong. Please try again.";
-      if (err.code) {
-        switch (err.code) {
-          case "auth/invalid-email":
-            friendlyMessage = "Invalid email address.";
-            break;
-          case "auth/user-disabled":
-            friendlyMessage = "This account has been disabled.";
-            break;
-          case "auth/user-not-found":
-          case "auth/wrong-password":
-            friendlyMessage = "Email or password is incorrect.";
-            break;
-          case "auth/email-already-in-use":
-            friendlyMessage = "This email is already registered.";
-            break;
-          case "auth/weak-password":
-            friendlyMessage = "Password should be at least 6 characters.";
-            break;
-        }
-      }
-      setErrors(friendlyMessage);
+      let msg = "Something went wrong.";
+      if (err.code === "auth/email-already-in-use") msg = "Email already registered.";
+      if (err.code === "auth/wrong-password") msg = "Invalid password.";
+      if (err.code === "auth/user-not-found") msg = "User does not exist.";
+      setErrors(msg);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="auth-page">
+    <>
       <Navbar />
-      <div className="auth-card">
-        <h2>{isSignUp ? "Sign Up" : "Sign In"}</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Email
+      <div className="auth-container">
+        <div
+          className="auth-left"
+          style={{
+            backgroundImage: `url(${isSignUp ? SignUp : SignIn})`,
+          }}
+        >
+          <div className="auth-left-content">
+            <img src="/icons/cake-icon.png" className="auth-left-icon" alt="" />
+            <h1>{isSignUp ? "Join CakeCrush!" : "Welcome Back!"}</h1>
+            <p>
+              {isSignUp
+                ? "Create an account to unlock exclusive perks, save favorites, and never miss a sweet deal."
+                : "Sign in to access your orders, save favorites, and get exclusive offers."}
+            </p>
+          </div>
+        </div>
+
+        <div className="auth-right">
+          <div className="auth-header">
+            <img src="/icons/cake-icon.png" alt="" className="auth-logo" />
+            <h2>{isSignUp ? "Create Account" : "Sign In"}</h2>
+          </div>
+          <form onSubmit={handleSubmit} className="auth-form">
+            {isSignUp && (
+              <div className="name-row">
+                <input
+                  name="firstName"
+                  placeholder="First Name"
+                  onChange={handleChange}
+                />
+                <input
+                  name="lastName"
+                  placeholder="Last Name"
+                  onChange={handleChange}
+                />
+              </div>
+            )}
             <input
               type="email"
               name="email"
+              placeholder="you@example.com"
               value={formData.email}
               onChange={handleChange}
-              placeholder="you@example.com"
             />
-          </label>
-          <label>
-            Password
             <input
               type="password"
               name="password"
+              placeholder="Password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Enter password"
             />
-          </label>
-          {errors && <p className="error">{errors}</p>}
-          {success && <p className="success">{success}</p>}
-          <button type="submit" disabled={loading}>
-            {loading
-              ? "Please wait..."
-              : isSignUp
-              ? "Sign Up"
-              : "Sign In"}
-          </button>
-        </form>
-        <p className="toggle">
-          {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
-          <span onClick={() => setIsSignUp(!isSignUp)}>
-            {isSignUp ? "Sign In" : "Sign Up"}
-          </span>
-        </p>
+            {isSignUp && (
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
+            )}
+            {errors && <p className="error">{errors}</p>}
+            <button type="submit" className="auth-btn" disabled={loading}>
+              {loading ? "Please wait..." : isSignUp ? "Create Account" : "Sign In"}
+            </button>
+          </form>
+          <div className="divider">
+            <span>Or continue with</span>
+          </div>
+          <div className="social-buttons">
+            <button className="google-btn">Google</button>
+            <button className="fb-btn">Facebook</button>
+          </div>
+          <p className="toggle-text">
+            {isSignUp ? "Already have an account?" : "Don't have an account?"}
+            <span onClick={() => setIsSignUp(!isSignUp)}>
+              {isSignUp ? " Sign in" : " Sign up"}
+            </span>
+          </p>
+        </div>
       </div>
-      <Footer/>
-    </div>
+      <Footer />
+    </>
   );
 };
 
