@@ -135,7 +135,11 @@ text: "Custom creations for corporate events, baby showers, and more",
   return (
     <div className="home-wrapper">
       
+<<<<<<< HEAD
 <Navbar/>
+=======
+      <Navbar />
+>>>>>>> 7e227a1f8a4dee0ce7520b146980507803842917
       <section className="banner">
         <div className="banner-text">
           <span className="badge"><LuSparkles /> Freshly Baked Daily</span>

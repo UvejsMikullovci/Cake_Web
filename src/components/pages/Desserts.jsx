@@ -250,6 +250,7 @@ const productsData = [
 ];
 
 function Desserts() {
+<<<<<<< HEAD
   const [category, setCategory] = useState("Birthday");
   const [sortBy, setSortBy] = useState("popular");
 
@@ -272,6 +273,11 @@ function Desserts() {
     }
   });
 
+=======
+  const cakeCard = [
+    
+  ]
+>>>>>>> 7e227a1f8a4dee0ce7520b146980507803842917
   return (
     <div className="dessert-wrapper">
       <Navbar />
