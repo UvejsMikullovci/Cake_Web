@@ -251,6 +251,7 @@ const productsData = [
 
 function Desserts() {
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [category, setCategory] = useState("Birthday");
   const [sortBy, setSortBy] = useState("popular");
 
@@ -278,6 +279,8 @@ function Desserts() {
     
   ]
 >>>>>>> 7e227a1f8a4dee0ce7520b146980507803842917
+=======
+>>>>>>> 140e98d0c4d3e679285fa1af2ab443b41e83d0e0
   return (
     <div className="dessert-wrapper">
       <Navbar />

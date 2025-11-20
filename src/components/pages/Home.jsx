@@ -134,10 +134,13 @@ text: "Custom creations for corporate events, baby showers, and more",
 
   return (
     <div className="home-wrapper">
+<<<<<<< HEAD
       
 <<<<<<< HEAD
 <Navbar/>
 =======
+=======
+>>>>>>> 140e98d0c4d3e679285fa1af2ab443b41e83d0e0
       <Navbar />
 >>>>>>> 7e227a1f8a4dee0ce7520b146980507803842917
       <section className="banner">
