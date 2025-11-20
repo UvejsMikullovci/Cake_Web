@@ -135,7 +135,7 @@ text: "Custom creations for corporate events, baby showers, and more",
   return (
     <div className="home-wrapper">
       
-
+<Navbar/>
       <section className="banner">
         <div className="banner-text">
           <span className="badge"><LuSparkles /> Freshly Baked Daily</span>
@@ -284,9 +284,10 @@ text: "Custom creations for corporate events, baby showers, and more",
       </section>
       <section className="subscribe-banner">
            <div className="newsletter-banner">
+            <div className="newsletter-content">
       <h2>🍰 Sweet Deals in Your Inbox</h2>
       <p>Subscribe to get exclusive offers, new product alerts, and baking tips!</p>
-
+</div>
       <div className="newsletter-form">
         <input type="email" placeholder="Enter your email" />
         <button>Subscribe</button>
