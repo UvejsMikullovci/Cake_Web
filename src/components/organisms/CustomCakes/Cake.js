@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "@react-three/drei";
 import Strawberry from "../../models/Strawberry";
+import Candle from "../../models/Candle";
 
 const BASE_COLORS = {
   vanilla: "#f5d8a9",
@@ -194,33 +195,6 @@ export default function Cake({
 
         {decorations.candles && (
           <group>
-            {Array.from({ length: 6 }).map((_, i) => {
-              const angle = (i / 6) * Math.PI * 2;
-              const r = (baseRadius - (layers.length - 1) * 0.18) * 0.65;
-              const x = Math.cos(angle) * r;
-              const z = Math.sin(angle) * r;
-              return (
-                <group key={i} position={[x, 0.18, z]}>
-                  <mesh castShadow>
-                    <cylinderGeometry args={[0.05, 0.05, 0.4, 16]} />
-                    <meshStandardMaterial color="#ffffff" />
-                  </mesh>
-                  <mesh position={[0, 0.25, 0]}>
-                    <coneGeometry args={[0.06, 0.1, 12]} />
-                    <meshStandardMaterial
-                      emissive="#ffdd55"
-                      color="#ffdd55"
-                      emissiveIntensity={2}
-                    />
-                  </mesh>
-                </group>
-              );
-            })}
-          </group>
-        )}
-
-        {decorations.strawberries && (
-          <group>
             {Array.from({ length: 8 }).map((_, i) => {
               const angle = (i / 8) * Math.PI * 2;
               const r = (baseRadius - (layers.length - 1) * 0.18) * 0.78;
@@ -229,10 +203,36 @@ export default function Cake({
               const rotY = angle + Math.PI / 2;
 
               return (
+                <Candle
+                  color="red"
+                  key={i}
+                  position={[x, -0.3, z]}
+                  rotation={[0, rotY, 0]}
+                  scale={0.3}
+                />
+              );
+            })}
+          </group>
+        )}
+        {decorations.strawberries && (
+          <group>
+            {Array.from({ length: 8 }).map((_, i) => {
+              const angle = (i / 8) * Math.PI * 2;
+
+              const offset = Math.PI / 8;
+
+              const shiftedAngle = angle + offset;
+
+              const r = (baseRadius - (layers.length - 1) * 0.18) * 0.78;
+              const x = Math.cos(shiftedAngle) * r;
+              const z = Math.sin(shiftedAngle) * r;
+              const rotY = shiftedAngle + Math.PI / 2;
+
+              return (
                 <Strawberry
                   key={i}
                   position={[x, -0.02, z]}
-                  rotation={[Math.PI / 2, rotY, 0]}
+                  rotation={[0, rotY, 0]}
                   scale={0.8}
                 />
               );

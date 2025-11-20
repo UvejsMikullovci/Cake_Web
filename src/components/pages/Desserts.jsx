@@ -4,9 +4,6 @@ import Footer from "../organisms/Footer";
 import "./Desserts.css";
 
 function Desserts() {
-  const cakeCard = [
-    
-  ]
   return (
     <div className="dessert-wraper">
       <Navbar />

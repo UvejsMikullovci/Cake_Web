@@ -134,7 +134,6 @@ text: "Custom creations for corporate events, baby showers, and more",
 
   return (
     <div className="home-wrapper">
-      
       <Navbar />
       <section className="banner">
         <div className="banner-text">
