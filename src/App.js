@@ -7,6 +7,7 @@ import CustomCakePage from "./components/pages/CustomCakes/CakePage";
 import ContactFaqPage from "./components/pages/Contact";
 import SignInSignUp from "./components/pages/SignInSignUp";
 import Blog from "./components/pages/Blog";
+import About from "./components/pages/About";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/desserts" element={<Desserts />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );

@@ -177,15 +177,16 @@ width: 90%;
   margin-top:150px;
 }
 
-.dessert-wave img{
+.pinkwave img{
     width:100%;
 }
 
-.dessert-wave {
-    top:-105px;
+.pinkwave {
+    top: 420px;
     position: absolute;
   background-size: cover;
   height: 120px;
  width:100%;
   margin-bottom: 30px;
 }
+
