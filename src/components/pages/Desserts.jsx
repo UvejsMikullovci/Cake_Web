@@ -25,6 +25,7 @@ import Bakllava from '../Photos/Random/Bakllava.jpg';
 import ClassicApplePie from '../Photos/Random/ClassicApplePie.jpg';
 import Praline from '../Photos/Random/Praline.jpg';
 import CherryDelight from '../Photos/Random/CherryDelight.jpg';
+import ppink from '../Photos/Random/ppink.jpg';
 import "./Desserts.css";
 
 const productsData = [
@@ -93,9 +94,8 @@ function Desserts() {
             full <br /> range of handcrafted delights
           </p>
         </div>
-        
       </section>
-
+       <div className="pinkwave"><img src={ppink} className="pinkkwave"></img></div>
       <div className="sort-section">
         <span>Sort by:</span>
         <select className="sort-dropdown" onChange={(e) => setSortBy(e.target.value)}>
