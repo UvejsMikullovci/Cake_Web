@@ -2,16 +2,16 @@ import React from "react";
 import "./cakeStyles.css";
 
 const SIZE_LABELS = {
-  small: { title: "Small", subtitle: "Ø 15 cm" },
-  medium: { title: "Medium", subtitle: "Ø 20 cm" },
-  large: { title: "Large", subtitle: "Ø 25 cm" },
+  small: { title: "Small", subtitle: "6–8 servings" },
+  medium: { title: "Medium", subtitle: "10–14 servings" },
+  large: { title: "Large", subtitle: "16–20 servings" },
 };
 
 const BASE_FLAVORS = [
   { value: "vanilla", label: "Vanilla" },
   { value: "chocolate", label: "Chocolate" },
   { value: "redVelvet", label: "Red Velvet" },
-  { value: "strawberryCake", label: "Strawberry" },
+  { value: "strawberryCake", label: "Strawberry Cake" },
 ];
 
 const FROSTING_FLAVORS = [
@@ -28,6 +28,46 @@ const FILLING_FLAVORS = [
   { value: "hazelnut", label: "Hazelnut Praline" },
 ];
 
+const FLAVOR_COLORS = {
+  vanilla: "#f4e3d3",
+  chocolate: "#5c3b2b",
+  redVelvet: "#b73a4c",
+  strawberryCake: "#f5a8b3",
+  strawberry: "#f5a8b3",
+  lemon: "#f4de7a",
+  hazelnut: "#c7a27b",
+};
+
+const CANDLE_COLORS = [
+  { value: "red", label: "Red" },
+  { value: "green", label: "Green" },
+  { value: "blue", label: "Blue" },
+  { value: "yellow", label: "Yellow" },
+  { value: "pink", label: "Pink" },
+  { value: "purple", label: "Purple" },
+  { value: "orange", label: "Orange" },
+  { value: "black", label: "Black" },
+];
+
+function FlavorDotsRow({ options, value, onChange }) {
+  return (
+    <div className="cake-flavor-dot-row">
+      {options.map((opt) => (
+        <button
+          key={opt.value}
+          type="button"
+          className={
+            "cake-flavor-dot" +
+            (value === opt.value ? " selected" : "")
+          }
+          style={{ "--flavor-color": FLAVOR_COLORS[opt.value] || "#ddd" }}
+          title={opt.label}
+          onClick={() => onChange(opt.value)}
+        />
+      ))}
+    </div>
+  );
+}
 export default function CakeControls({
   layers,
   setLayers,
@@ -40,6 +80,8 @@ export default function CakeControls({
   sendAsGift,
   setSendAsGift,
   price,
+  textSize,
+  setTextSize
 }) {
   const updateLayer = (id, key, value) => {
     setLayers((prev) =>
@@ -76,15 +118,16 @@ export default function CakeControls({
         <div>
           <div className="cake-controls-title">Custom Cake Builder</div>
           <div className="cake-controls-subtitle">
-            Live 3D preview · Gift ready
+            Build your dream cake step-by-step
           </div>
         </div>
       </div>
 
+      {/* SIZE */}
       <div className="cake-section">
         <div className="cake-section-header">
-          <div className="cake-section-title">Size & Diameter</div>
-          <div className="cake-section-badge">Per party size</div>
+          <div className="cake-section-title">Size</div>
+          <div className="cake-section-badge">Diameter & servings</div>
         </div>
         <div className="cake-size-options">
           {Object.entries(SIZE_LABELS).map(([key, info]) => (
@@ -103,12 +146,15 @@ export default function CakeControls({
         </div>
       </div>
 
+      {/* LAYERS */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">
             Layers & Flavors ({layers.length})
           </div>
-          <div className="cake-section-badge">Base · Frosting · Filling</div>
+          <div className="cake-section-badge">
+            Base · Frosting · Filling
+          </div>
         </div>
 
         <div className="cake-layers-list">
@@ -118,60 +164,12 @@ export default function CakeControls({
                 <span className="cake-layer-label">
                   Layer {index + 1}
                 </span>
-                <span className="cake-layer-chip">
-                  {layer.baseFlavor.replace(/([A-Z])/g, " $1")}
-                </span>
               </div>
 
-              <div className="cake-select-row">
-                <select
-                  className="cake-select"
-                  value={layer.baseFlavor}
-                  onChange={(e) =>
-                    updateLayer(layer.id, "baseFlavor", e.target.value)
-                  }
-                >
-                  {BASE_FLAVORS.map((f) => (
-                    <option key={f.value} value={f.value}>
-                      {f.label}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  className="cake-select"
-                  value={layer.frostingFlavor}
-                  onChange={(e) =>
-                    updateLayer(layer.id, "frostingFlavor", e.target.value)
-                  }
-                >
-                  {FROSTING_FLAVORS.map((f) => (
-                    <option key={f.value} value={f.value}>
-                      {f.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="cake-select-row">
-                <select
-                  className="cake-select"
-                  value={layer.fillingFlavor}
-                  onChange={(e) =>
-                    updateLayer(layer.id, "fillingFlavor", e.target.value)
-                  }
-                >
-                  {FILLING_FLAVORS.map((f) => (
-                    <option key={f.value} value={f.value}>
-                      {f.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
+              {/* HEIGHT */}
               <div className="cake-slider-row">
                 <div className="cake-slider-label">
-                  Height: {layer.height.toFixed(2)} (thicker → taller cake)
+                  Height: {layer.height.toFixed(2)}
                 </div>
                 <input
                   className="cake-slider"
@@ -186,6 +184,56 @@ export default function CakeControls({
                       "height",
                       parseFloat(e.target.value)
                     )
+                  }
+                />
+                {/* 🔤 TEXT SIZE SLIDER */}
+                <div className="cake-slider-row" style={{ marginTop: 12 }}>
+                  <div className="cake-slider-label">Text Size: {textSize.toFixed(2)}</div>
+
+                  <input
+                    className="cake-slider"
+                    type="range"
+                    min="0.12"
+                    max="0.45"
+                    step="0.01"
+                    value={textSize}
+                    onChange={(e) => setTextSize(parseFloat(e.target.value))}
+                  />
+                </div>
+              </div>
+
+              {/* BASE */}
+              <div className="cake-flavor-group">
+                <div className="cake-flavor-group-title">Base</div>
+                <FlavorDotsRow
+                  options={BASE_FLAVORS}
+                  value={layer.baseFlavor}
+                  onChange={(val) =>
+                    updateLayer(layer.id, "baseFlavor", val)
+                  }
+                />
+              </div>
+
+              {/* FROSTING */}
+              <div className="cake-flavor-group">
+                <div className="cake-flavor-group-title">Frosting</div>
+                <FlavorDotsRow
+                  options={FROSTING_FLAVORS}
+                  value={layer.frostingFlavor}
+                  onChange={(val) =>
+                    updateLayer(layer.id, "frostingFlavor", val)
+                  }
+                />
+              </div>
+
+              {/* FILLING */}
+              <div className="cake-flavor-group">
+                <div className="cake-flavor-group-title">Filling</div>
+                <FlavorDotsRow
+                  options={FILLING_FLAVORS}
+                  value={layer.fillingFlavor}
+                  onChange={(val) =>
+                    updateLayer(layer.id, "fillingFlavor", val)
                   }
                 />
               </div>
@@ -211,6 +259,7 @@ export default function CakeControls({
         </div>
       </div>
 
+      {/* DECORATIONS */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Decorations</div>
@@ -228,6 +277,7 @@ export default function CakeControls({
           >
             Candles
           </button>
+
           <button
             type="button"
             className={
@@ -238,6 +288,18 @@ export default function CakeControls({
           >
             Strawberries
           </button>
+
+          <button
+            type="button"
+            className={
+              "cake-toggle-pill" +
+              (decorations.oreos ? " active" : "")
+            }
+            onClick={() => toggleDecoration("oreos")}
+          >
+            Oreos
+          </button>
+
           <button
             type="button"
             className={
@@ -251,6 +313,34 @@ export default function CakeControls({
         </div>
       </div>
 
+      {/* 🎨 CANDLE COLOR SELECTOR */}
+      {decorations.candles && (
+        <div className="cake-section">
+          <div className="cake-section-header">
+            <div className="cake-section-title">Candle Color</div>
+            <div className="cake-section-badge">8 colors</div>
+          </div>
+
+          <div className="cake-flavor-dot-row">
+            {CANDLE_COLORS.map((c) => (
+              <button
+                key={c.value}
+                type="button"
+                className={
+                  "cake-flavor-dot" +
+                  (decorations.candleColor === c.value ? " selected" : "")
+                }
+                style={{ "--flavor-color": c.value }}
+                onClick={() =>
+                  setDecorations((prev) => ({ ...prev, candleColor: c.value }))
+                }
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* MESSAGE */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Top Text & Gift</div>
@@ -269,10 +359,9 @@ export default function CakeControls({
 
         <div className="cake-gift-row">
           <div className="cake-gift-label">Send as a gift (with box)</div>
+
           <div
-            className={
-              "cake-switch" + (sendAsGift ? " on" : "")
-            }
+            className={"cake-switch" + (sendAsGift ? " on" : "")}
             onClick={() => setSendAsGift((prev) => !prev)}
           >
             <div className="cake-switch-thumb" />
@@ -280,11 +369,13 @@ export default function CakeControls({
         </div>
       </div>
 
+      {/* FOOTER */}
       <div className="cake-footer">
         <div className="cake-price-chip">
           <div className="cake-price-label">Live price</div>
           <div className="cake-price-value">${price}</div>
         </div>
+
         <button type="button" className="cake-primary-action">
           Add to Cart & Gift
         </button>

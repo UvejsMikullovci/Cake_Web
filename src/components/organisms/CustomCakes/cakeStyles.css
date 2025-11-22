@@ -1,41 +1,53 @@
+/* LAYOUT (same structure, softer colors) */
+
 .cake-page-layout {
   display: flex;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-  background: radial-gradient(circle at top, #fff7f2 0%, #fbeae2 40%, #f3d7c8 100%);
+  margin-top: 7.3rem;
+  overflow-y: hidden;
+  background: #fffcf6; /* CakeCrush warm off-white */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+}
+
+body {
+    overflow-y: hidden;
 }
 
 .cake-left-panel {
   flex: 3;
   min-width: 0;
-  position: relative;
+  position:sticky;
 }
 
 .cake-right-panel {
   flex: 2;
   min-width: 320px;
   max-width: 480px;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(16px);
-  box-shadow: -12px 0 35px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 252, 246, 0.98);
+  backdrop-filter: blur(14px);
+  box-shadow: -12px 0 35px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  padding: 24px 28px;
+  padding: 24px 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-
 .cake-canvas-wrapper {
   width: 100%;
   height: 100%;
 }
 
+/* CONTROLS WRAPPER */
 
 .cake-controls {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  height: 100%;
+  gap: 14px;
+  flex: 1;              /* takes full height */
+  overflow-y: auto;     /* scrolls inside */
+  overflow-x: hidden;
+  padding-right: 6px;   /* space for scrollbar */
 }
 
 .cake-controls-header {
@@ -48,18 +60,21 @@
   font-size: 22px;
   font-weight: 600;
   letter-spacing: 0.02em;
+  color: #101010;
 }
 
 .cake-controls-subtitle {
   font-size: 13px;
-  color: #777;
+  color: #7b7b7b;
 }
 
+/* SECTIONS */
 
 .cake-section {
-  border-radius: 14px;
-  padding: 14px 14px 10px;
-  background: #f7f4f2;
+  border-radius: 16px;
+  padding: 14px 14px 12px;
+  background: #ffffff;
+  border: 1px solid #f0e4dd;
 }
 
 .cake-section-header {
@@ -72,15 +87,18 @@
 .cake-section-title {
   font-size: 14px;
   font-weight: 600;
+  color: #101010;
 }
 
 .cake-section-badge {
   font-size: 11px;
   padding: 2px 8px;
   border-radius: 999px;
-  background: #f0e2da;
-  color: #7b4e35;
+  background: #f7e7dc;
+  color: #8a5a3c;
 }
+
+/* SIZE */
 
 .cake-size-options {
   display: flex;
@@ -90,49 +108,62 @@
 .cake-pill {
   flex: 1;
   border-radius: 999px;
-  padding: 6px 10px;
+  padding: 7px 10px;
   font-size: 13px;
-  border: 1px solid transparent;
-  background: #fdfaf7;
+  border: 1px solid #e6d8d0;
+  background: #fffdfb;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  transition: background 0.18s ease, border-color 0.18s ease,
+    transform 0.1s ease;
+}
+
+.cake-pill:hover {
+  transform: translateY(-1px);
 }
 
 .cake-pill-label {
   font-weight: 500;
+  color: #1c1c1c;
 }
 
 .cake-pill-sub {
   font-size: 11px;
-  color: #888;
+  color: #272727;
 }
 
 .cake-pill.active {
-  background: #2d3436;
-  color: white;
-  border-color: #2d3436;
+  background: #fb91a8be; /* CakeCrush deep berry */
+  color: #1b1b1b;
+  border-color: #581b28;
 }
 
-.cake-pill.active .cake-pill-sub {
-  color: #f0e2da;
-}
+/* LAYERS LIST */
 
 .cake-layers-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-height: 190px;
   overflow-y: auto;
   padding-right: 4px;
 }
 
+.cake-layers-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cake-layers-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+}
+
 .cake-layer-card {
-  border-radius: 10px;
-  padding: 8px 10px;
-  background: white;
-  border: 1px solid #eee1d9;
+  border-radius: 12px;
+  padding: 10px 11px;
+  background: #fffdfb;
+  border: 1px solid #efe1d9;
 }
 
 .cake-layer-row {
@@ -145,29 +176,10 @@
 .cake-layer-label {
   font-size: 13px;
   font-weight: 500;
+  color: #101010;
 }
 
-.cake-layer-chip {
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: #f5ede7;
-}
-
-.cake-select-row {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-
-.cake-select {
-  flex: 1;
-  font-size: 12px;
-  padding: 4px 6px;
-  border-radius: 7px;
-  border: 1px solid #dbcac0;
-  background: #fefcfb;
-}
+/* SLIDER */
 
 .cake-slider-row {
   margin-top: 4px;
@@ -175,18 +187,64 @@
 
 .cake-slider-label {
   font-size: 11px;
-  color: #888;
-  margin-bottom: 2px;
+  color: #8a8a8a;
+  margin-bottom: 3px;
 }
 
 .cake-slider {
   width: 100%;
 }
 
+/* FLAVOR GROUPS – Base / Frosting / Filling clearly divided */
+
+.cake-flavor-group {
+  margin-top: 14px; /* <– this is your separation */
+}
+
+.cake-flavor-group-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9b8c83;
+  margin-bottom: 6px;
+}
+
+/* DOTS */
+
+.cake-flavor-dot-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cake-flavor-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--flavor-color, #ddd);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.cake-flavor-dot:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.cake-flavor-dot.selected {
+  border-color: #581b28;
+  box-shadow: 0 0 0 2px rgba(247, 192, 195, 0.7); /* soft pink halo */
+}
+
+/* BUTTONS */
+
 .cake-btn-row {
   display: flex;
   gap: 10px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .cake-btn {
@@ -200,14 +258,16 @@
 }
 
 .cake-btn.primary {
-  background: #2d3436;
+  background: #581b28;
   color: white;
 }
 
 .cake-btn.secondary {
-  background: #efe2da;
+  background: #f3e4dd;
   color: #5f4330;
 }
+
+/* DECORATIONS */
 
 .cake-toggle-row {
   display: flex;
@@ -217,27 +277,31 @@
 }
 
 .cake-toggle-pill {
-  padding: 5px 9px;
+  padding: 5px 10px;
   font-size: 12px;
   border-radius: 999px;
-  border: 1px solid #ddd0c7;
+  border: 1px solid #e1d5ce;
   background: white;
   cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease,
+    color 0.16s ease;
 }
 
 .cake-toggle-pill.active {
-  background: #f3d7c8;
-  border-color: #e2b79d;
-  color: #5a2e1a;
+  background: #f7c0c3;
+  border-color: #e89bab;
+  color: #581b28;
 }
+
+/* INPUTS / GIFT */
 
 .cake-input {
   width: 100%;
   padding: 7px 9px;
   font-size: 13px;
   border-radius: 9px;
-  border: 1px solid #dbcac0;
-  background: #fefcfb;
+  border: 1px solid #e1d5ce;
+  background: #fffcf6;
 }
 
 .cake-gift-row {
@@ -249,6 +313,7 @@
 
 .cake-gift-label {
   font-size: 13px;
+  color: #101010;
 }
 
 .cake-switch {
@@ -256,7 +321,7 @@
   width: 40px;
   height: 22px;
   border-radius: 999px;
-  background: #ddd;
+  background: #d5d5d5;
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -273,17 +338,19 @@
 }
 
 .cake-switch.on {
-  background: #2ecc71;
+  background: #581b28;
 }
 
 .cake-switch.on .cake-switch-thumb {
   transform: translateX(16px);
 }
 
+/* FOOTER */
+
 .cake-footer {
   margin-top: auto;
   padding-top: 10px;
-  border-top: 1px dashed #e1d2c8;
+  border-top: 1px dashed #eadbd1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -297,24 +364,27 @@
 
 .cake-price-label {
   font-size: 11px;
-  color: #888;
+  color: #8a8a8a;
 }
 
 .cake-price-value {
   font-size: 20px;
   font-weight: 700;
+  color: #101010;
 }
 
 .cake-primary-action {
   padding: 9px 14px;
   border-radius: 999px;
   border: none;
-  background: linear-gradient(135deg, #ff7e5f, #ea4673);
+  background: linear-gradient(135deg, #f7c0c3, #581b28);
   color: white;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
 }
+
+/* RESPONSIVE */
 
 @media (max-width: 900px) {
   .cake-page-layout {
