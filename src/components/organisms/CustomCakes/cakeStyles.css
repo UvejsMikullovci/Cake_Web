@@ -22,7 +22,7 @@ body {
 
 .cake-right-panel {
   flex: 2;
-  min-width: 320px;
+  min-width: 321px;
   max-width: 480px;
   background: rgba(255, 252, 246, 0.98);
   backdrop-filter: blur(14px);
