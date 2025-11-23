@@ -1,18 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Home from "./components/pages/Home";
 import Desserts from "./components/pages/Desserts";
-import "./App.css";
 import CustomCakePage from "./components/pages/CustomCakes/CakePage";
 import ContactFaqPage from "./components/pages/Contact";
 import SignInSignUp from "./components/pages/SignInSignUp";
 import Blog from "./components/pages/Blog";
 import About from "./components/pages/About";
-<<<<<<< HEAD
 import Gallery from "./components/pages/Gallery";
-=======
 import PaymentsAndCheckout from "./components/pages/PaymentsAndCheckout";
->>>>>>> 6facb57b7cbe33c31b80816ad1867a230edd5c4f
+
+import "./App.css";
 
 export default function App() {
   return (
@@ -26,11 +25,8 @@ export default function App() {
         <Route path="/desserts" element={<Desserts />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/about" element={<About />} />
-<<<<<<< HEAD
-        <Route path="/gallery" element={<Gallery/>} />
-=======
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/checkout" element={<PaymentsAndCheckout />} />
->>>>>>> 6facb57b7cbe33c31b80816ad1867a230edd5c4f
       </Routes>
     </Router>
   );

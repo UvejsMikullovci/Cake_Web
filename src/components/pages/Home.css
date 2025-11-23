@@ -17,6 +17,14 @@
   max-width: 460px;
 }
 
+.wavy-divider svg {
+    width: calc(100% + 1.3px);
+    height: 60px;
+    display: block;
+    position: relative;
+    
+}
+
 .badge {
   border: 1px solid #F7C0C3;
   background: white;
