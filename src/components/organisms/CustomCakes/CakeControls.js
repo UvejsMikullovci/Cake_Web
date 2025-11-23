@@ -1,6 +1,13 @@
 import React from "react";
 import "./cakeStyles.css";
 
+import { db, auth } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
+
+// ─────────────────────────────────────────────────────────────
+// CONSTANTS
+// ─────────────────────────────────────────────────────────────
+
 const SIZE_LABELS = {
   small: { title: "Small", subtitle: "6–8 servings" },
   medium: { title: "Medium", subtitle: "10–14 servings" },
@@ -49,6 +56,10 @@ const CANDLE_COLORS = [
   { value: "black", label: "Black" },
 ];
 
+// ─────────────────────────────────────────────────────────────
+// FLAVOR DOT COMPONENT
+// ─────────────────────────────────────────────────────────────
+
 function FlavorDotsRow({ options, value, onChange }) {
   return (
     <div className="cake-flavor-dot-row">
@@ -57,8 +68,7 @@ function FlavorDotsRow({ options, value, onChange }) {
           key={opt.value}
           type="button"
           className={
-            "cake-flavor-dot" +
-            (value === opt.value ? " selected" : "")
+            "cake-flavor-dot" + (value === opt.value ? " selected" : "")
           }
           style={{ "--flavor-color": FLAVOR_COLORS[opt.value] || "#ddd" }}
           title={opt.label}
@@ -68,6 +78,11 @@ function FlavorDotsRow({ options, value, onChange }) {
     </div>
   );
 }
+
+// ─────────────────────────────────────────────────────────────
+// MAIN COMPONENT
+// ─────────────────────────────────────────────────────────────
+
 export default function CakeControls({
   layers,
   setLayers,
@@ -81,8 +96,9 @@ export default function CakeControls({
   setSendAsGift,
   price,
   textSize,
-  setTextSize
+  setTextSize,
 }) {
+  // UPDATE A LAYER
   const updateLayer = (id, key, value) => {
     setLayers((prev) =>
       prev.map((layer) =>
@@ -91,6 +107,7 @@ export default function CakeControls({
     );
   };
 
+  // ADD / REMOVE LAYERS
   const addLayer = () => {
     setLayers((prev) => [
       ...prev,
@@ -108,9 +125,47 @@ export default function CakeControls({
     setLayers((prev) => (prev.length > 1 ? prev.slice(0, -1) : prev));
   };
 
+  // TOGGLE DECORATIONS
   const toggleDecoration = (key) => {
     setDecorations((prev) => ({ ...prev, [key]: !prev[key] }));
   };
+
+  // ─────────────────────────────────────────────────────────────
+  // SAVE ORDER TO FIRESTORE
+  // ─────────────────────────────────────────────────────────────
+
+  const addToCart = async () => {
+    const user = auth.currentUser;
+
+    if (!user) {
+      alert("Please sign in to add items to your cart.");
+      return;
+    }
+
+    try {
+      const order = {
+        layers,
+        cakeSize,
+        decorations,
+        message,
+        textSize,
+        price,
+        sendAsGift,
+        createdAt: new Date(),
+      };
+
+      await addDoc(collection(db, "users", user.uid, "cart"), order);
+
+      alert("Added to cart!");
+    } catch (error) {
+      console.error("Cart save error:", error);
+      alert("Something went wrong saving your order.");
+    }
+  };
+
+  // ─────────────────────────────────────────────────────────────
+  // UI
+  // ─────────────────────────────────────────────────────────────
 
   return (
     <div className="cake-controls">
@@ -134,9 +189,7 @@ export default function CakeControls({
             <button
               key={key}
               type="button"
-              className={
-                "cake-pill" + (cakeSize === key ? " active" : "")
-              }
+              className={"cake-pill" + (cakeSize === key ? " active" : "")}
               onClick={() => setCakeSize(key)}
             >
               <span className="cake-pill-label">{info.title}</span>
@@ -161,9 +214,7 @@ export default function CakeControls({
           {layers.map((layer, index) => (
             <div key={layer.id} className="cake-layer-card">
               <div className="cake-layer-row">
-                <span className="cake-layer-label">
-                  Layer {index + 1}
-                </span>
+                <span className="cake-layer-label">Layer {index + 1}</span>
               </div>
 
               {/* HEIGHT */}
@@ -179,16 +230,15 @@ export default function CakeControls({
                   step="0.05"
                   value={layer.height}
                   onChange={(e) =>
-                    updateLayer(
-                      layer.id,
-                      "height",
-                      parseFloat(e.target.value)
-                    )
+                    updateLayer(layer.id, "height", parseFloat(e.target.value))
                   }
                 />
-                {/* 🔤 TEXT SIZE SLIDER */}
+
+                {/* TEXT SIZE */}
                 <div className="cake-slider-row" style={{ marginTop: 12 }}>
-                  <div className="cake-slider-label">Text Size: {textSize.toFixed(2)}</div>
+                  <div className="cake-slider-label">
+                    Text Size: {textSize.toFixed(2)}
+                  </div>
 
                   <input
                     className="cake-slider"
@@ -242,11 +292,7 @@ export default function CakeControls({
         </div>
 
         <div className="cake-btn-row">
-          <button
-            type="button"
-            className="cake-btn primary"
-            onClick={addLayer}
-          >
+          <button type="button" className="cake-btn primary" onClick={addLayer}>
             + Add Layer
           </button>
           <button
@@ -270,8 +316,7 @@ export default function CakeControls({
           <button
             type="button"
             className={
-              "cake-toggle-pill" +
-              (decorations.candles ? " active" : "")
+              "cake-toggle-pill" + (decorations.candles ? " active" : "")
             }
             onClick={() => toggleDecoration("candles")}
           >
@@ -292,8 +337,7 @@ export default function CakeControls({
           <button
             type="button"
             className={
-              "cake-toggle-pill" +
-              (decorations.oreos ? " active" : "")
+              "cake-toggle-pill" + (decorations.oreos ? " active" : "")
             }
             onClick={() => toggleDecoration("oreos")}
           >
@@ -303,8 +347,7 @@ export default function CakeControls({
           <button
             type="button"
             className={
-              "cake-toggle-pill" +
-              (decorations.sprinkles ? " active" : "")
+              "cake-toggle-pill" + (decorations.sprinkles ? " active" : "")
             }
             onClick={() => toggleDecoration("sprinkles")}
           >
@@ -313,7 +356,7 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* 🎨 CANDLE COLOR SELECTOR */}
+      {/* CANDLE COLOR */}
       {decorations.candles && (
         <div className="cake-section">
           <div className="cake-section-header">
@@ -332,7 +375,10 @@ export default function CakeControls({
                 }
                 style={{ "--flavor-color": c.value }}
                 onClick={() =>
-                  setDecorations((prev) => ({ ...prev, candleColor: c.value }))
+                  setDecorations((prev) => ({
+                    ...prev,
+                    candleColor: c.value,
+                  }))
                 }
               />
             ))}
@@ -376,7 +422,7 @@ export default function CakeControls({
           <div className="cake-price-value">${price}</div>
         </div>
 
-        <button type="button" className="cake-primary-action">
+        <button type="button" className="cake-primary-action" onClick={addToCart}>
           Add to Cart & Gift
         </button>
       </div>

@@ -3,6 +3,7 @@ import { Text3D } from "@react-three/drei";
 import Strawberry from "../../models/Strawberry";
 import Candle from "../../models/Candle";
 import Oreo from "../../models/Oreo";
+import { computeHeadingLevel } from "@testing-library/dom";
 
 const BASE_COLORS = {
   vanilla: "#f5d8a9",
@@ -32,12 +33,12 @@ const SIZE_RADIUS = {
 };
 
 const SPRINKLE_COLORS = [
-  "#ff6f91", // pink
-  "#ffd166", // yellow
-  "#06d6a0", // mint
-  "#4cc9f0", // blue
-  "#ff9e9e", // soft red
-  "#f7a6b8", // strawberry pink
+  "#ff6f91",
+  "#ffd166",
+  "#06d6a0",
+  "#4cc9f0",
+  "#ff9e9e",
+  "#f7a6b8",
 ];
 
 export default function Cake({
@@ -63,7 +64,6 @@ export default function Cake({
 
   return (
     <group position={[0, -1.2, 0]}>
-      {/* PLATE */}
       <mesh
         receiveShadow
         rotation={[-Math.PI / 2, 0, 0]}
@@ -116,7 +116,6 @@ export default function Cake({
               />
             </mesh>
 
-            {/* DECOR DOTS */}
             <group position={[0, frostingTopY + 0.08, 0]}>
               {Array.from({ length: 18 }).map((_, i2) => {
                 const angle = (i2 / 18) * Math.PI * 2;
@@ -140,45 +139,46 @@ export default function Cake({
       })}
 
       <group position={[0, topY + topLayerHeight / 2 + 0.24, 0]}>
+        {decorations.sprinkles && (
+          <group>
+            {Array.from({ length: 180 }).map((_, i) => {
+              const r = baseRadius * 0.5 + Math.random() * (baseRadius * 0.30);
+              const angle = Math.random() * Math.PI * 2;
 
-        <group>
-          {Array.from({ length: 180 }).map((_, i) => {
-            const r = baseRadius * 0.5 + Math.random() * (baseRadius * 0.30);
-            const angle = Math.random() * Math.PI * 2;
+              const x = Math.cos(angle) * r;
+              const z = Math.sin(angle) * r;
 
-            const x = Math.cos(angle) * r;
-            const z = Math.sin(angle) * r;
+              const length = 0.08 + Math.random() * 0.05;
+              const radius = 0.015 + Math.random() * 0.01;
 
-            const length = 0.08 + Math.random() * 0.05;
-            const radius = 0.015 + Math.random() * 0.01;
-
-            const color =
-              SPRINKLE_COLORS[
+              const color =
+                SPRINKLE_COLORS[
                 Math.floor(Math.random() * SPRINKLE_COLORS.length)
-              ];
+                ];
 
-            return (
-              <mesh
-                key={i}
-                position={[x, -0.08, z]}
-                rotation={[
-                  Math.random() * Math.PI,
-                  Math.random() * Math.PI,
-                  Math.random() * Math.PI,
-                ]}
-                castShadow
-                receiveShadow
-              >
-                <cylinderGeometry args={[radius, radius, length, 12, 1]} />
-                <meshStandardMaterial
-                  color={color}
-                  roughness={0.4}
-                  metalness={0.15}
-                />
-              </mesh>
-            );
-          })}
-        </group>
+              return (
+                <mesh
+                  key={i}
+                  position={[x, -0.08, z]}
+                  rotation={[
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI,
+                  ]}
+                  castShadow
+                  receiveShadow
+                >
+                  <cylinderGeometry args={[radius, radius, length, 12, 1]} />
+                  <meshStandardMaterial
+                    color={color}
+                    roughness={0.4}
+                    metalness={0.15}
+                  />
+                </mesh>
+              );
+            })}
+          </group>
+        )}
 
         {decorations.candles && (
           <group>
