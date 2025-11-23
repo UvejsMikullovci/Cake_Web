@@ -14,7 +14,12 @@ export default function Scene({
     <Canvas
       shadows
       camera={{ position: [4.5, 3.2, 6.2], fov: 45 }}
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
     >
+      {/* LIGHTS */}
       <ambientLight intensity={0.6} />
       <directionalLight
         position={[5, 8, 4]}
@@ -29,16 +34,21 @@ export default function Scene({
         intensity={0.2}
       />
 
+      {/* ENVIRONMENT */}
       <Environment preset="city" />
 
-      <Cake
-        layers={layers}
-        cakeSize={cakeSize}
-        decorations={decorations}
-        message={message}
-        sendAsGift={sendAsGift}
-      />
+      {/* LIFT THE CAKE HIGHER ON SCREEN */}
+      <group position={[0, 0.6, 0]}>
+        <Cake
+          layers={layers}
+          cakeSize={cakeSize}
+          decorations={decorations}
+          message={message}
+          sendAsGift={sendAsGift}
+        />
+      </group>
 
+      {/* CAMERA CONTROLS */}
       <OrbitControls
         enablePan={false}
         autoRotate

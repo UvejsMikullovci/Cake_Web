@@ -6,7 +6,9 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-import { auth, googleProvider } from "../firebase";
+import { auth, googleProvider, db } from "../firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+
 import { useNavigate } from "react-router-dom";
 
 import "./SignInSignUp.css";
@@ -45,6 +47,25 @@ const SignInSignUp = () => {
   const validateEmail = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  // ----------------------------------------------------
+  // FIRESTORE USER CREATION / UPDATE
+  // ----------------------------------------------------
+  const saveUserToFirestore = async (user, firstName = "", lastName = "") => {
+    const userRef = doc(db, "users", user.uid);
+
+    const existingDoc = await getDoc(userRef);
+
+    if (!existingDoc.exists()) {
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email,
+        firstName,
+        lastName,
+        createdAt: new Date(),
+      });
+    }
+  };
+
   // -----------------------------
   // EMAIL/PASSWORD (Sign Up / Sign In)
   // -----------------------------
@@ -73,26 +94,44 @@ const SignInSignUp = () => {
     }
 
     setLoading(true);
+
     try {
       if (isSignUp) {
-        await createUserWithEmailAndPassword(
+        // CREATE NEW USER
+        const userCredential = await createUserWithEmailAndPassword(
           auth,
           formData.email,
           formData.password
+        );
+
+        const user = userCredential.user;
+
+        await saveUserToFirestore(
+          user,
+          formData.firstName,
+          formData.lastName
         );
       } else {
-        await signInWithEmailAndPassword(
+        // SIGN IN EXISTING USER
+        const userCredential = await signInWithEmailAndPassword(
           auth,
           formData.email,
           formData.password
         );
+
+        await saveUserToFirestore(userCredential.user);
       }
+
       navigate("/");
     } catch (err) {
       let msg = "Something went wrong.";
-      if (err.code === "auth/email-already-in-use") msg = "Email already registered.";
-      if (err.code === "auth/wrong-password") msg = "Invalid password.";
-      if (err.code === "auth/user-not-found") msg = "User does not exist.";
+
+      if (err.code === "auth/email-already-in-use")
+        msg = "Email already registered.";
+      if (err.code === "auth/wrong-password")
+        msg = "Invalid password.";
+      if (err.code === "auth/user-not-found")
+        msg = "User does not exist.";
 
       setErrors(msg);
     } finally {
@@ -108,7 +147,11 @@ const SignInSignUp = () => {
     setSocialLoading((prev) => ({ ...prev, google: true }));
 
     try {
-      await signInWithPopup(auth, googleProvider);
+      const userCredential = await signInWithPopup(auth, googleProvider);
+      const user = userCredential.user;
+
+      await saveUserToFirestore(user);
+
       navigate("/");
     } catch (err) {
       console.error("Google login error:", err);
@@ -127,6 +170,9 @@ const SignInSignUp = () => {
     }
   };
 
+  // -----------------------------
+  // UI RENDER
+  // -----------------------------
   return (
     <>
       <Navbar />

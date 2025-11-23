@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "react";
 import Scene from "../../organisms/CustomCakes/Scene";
 import CakeControls from "../../organisms/CustomCakes/CakeControls";
 import "../../organisms/CustomCakes/cakeStyles.css";
+import Header from "../../organisms/Navbar";
+import Footer from "../../organisms/Footer";
 
 export default function CakePage() {
   const [cakeSize, setCakeSize] = useState("medium");
@@ -26,9 +28,12 @@ export default function CakePage() {
   const [decorations, setDecorations] = useState({
     candles: true,
     strawberries: true,
+    oreos: false,
     sprinkles: false,
+    candleColor: "red",
   });
 
+  const [textSize, setTextSize] = useState(0.22);
   const [message, setMessage] = useState("Happy Birthday");
   const [sendAsGift, setSendAsGift] = useState(false);
 
@@ -52,6 +57,7 @@ export default function CakePage() {
     let decorationsPrice = 0;
     if (decorations.candles) decorationsPrice += 4;
     if (decorations.strawberries) decorationsPrice += 5;
+    if (decorations.oreos) decorationsPrice += 4;
     if (decorations.sprinkles) decorationsPrice += 3;
 
     const giftPrice = sendAsGift ? 7 : 0;
@@ -66,6 +72,7 @@ export default function CakePage() {
 
   return (
     <div className="cake-page-layout">
+      <Header />
       <div className="cake-left-panel">
         <div className="cake-canvas-wrapper">
           <Scene
@@ -73,6 +80,7 @@ export default function CakePage() {
             cakeSize={cakeSize}
             decorations={decorations}
             message={message}
+            textSize={textSize}
             sendAsGift={sendAsGift}
           />
         </div>
@@ -88,6 +96,8 @@ export default function CakePage() {
           setDecorations={setDecorations}
           message={message}
           setMessage={setMessage}
+          textSize={textSize}
+          setTextSize={setTextSize}
           sendAsGift={sendAsGift}
           setSendAsGift={setSendAsGift}
           price={price}
