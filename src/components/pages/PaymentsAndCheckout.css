@@ -17,6 +17,14 @@
   color: #631a2b;
 }
 
+.wavy-divider svg {
+    width: calc(100% + 1.3px);
+    height: 60px;
+    display: block;
+    position: relative;
+    
+}
+
 .checkout-header p {
   color: #7a3d45;
   margin-top: 8px;
@@ -28,7 +36,7 @@
   margin: auto;
   display: flex;
   gap: 40px;
-  padding: 40px 20px;
+  padding: 100px 20px;
 }
 
 .left-column {
