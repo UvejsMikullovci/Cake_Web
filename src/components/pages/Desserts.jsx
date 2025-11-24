@@ -26,6 +26,8 @@ import ClassicApplePie from '../Photos/Random/ClassicApplePie.jpg';
 import Praline from '../Photos/Random/Praline.jpg';
 import CherryDelight from '../Photos/Random/CherryDelight.jpg';
 import ppink from '../Photos/Random/ppink.jpg';
+import CakePopup from "./CakePopup";
+
 import "./Desserts.css";
 
 const productsData = [
@@ -81,6 +83,7 @@ function Desserts() {
         return 0;
     }
   });
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   return (
     <div className="dessert-wrapper">
@@ -125,18 +128,24 @@ function Desserts() {
 
       <div className="dessert-grid">
         {sortedProducts.map((item) => (
-          <div className="dessert-card" key={item.id}>
+          <div className="dessert-card"  key={item.id} onClick={() => setSelectedProduct(item)}>
             <img src={item.img} className="dessert-img" alt={item.name} />
 
             <h3 className="dessert-name">{item.name}</h3>
             <p className="dessert-price">${item.price}.00</p>
           </div>
+          
         ))}
       </div>
            <button className="build-your-dream-cake-btn">Build Your Dream Cake</button>
+           <CakePopup
+    product={selectedProduct}
+    onClose={() => setSelectedProduct(null)}
+  />
            <section className="dessert-footer">
       <Footer />
       </section>
+      
     </div>
   );
 }
