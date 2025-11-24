@@ -10,6 +10,7 @@ import Blog from "./components/pages/Blog";
 import About from "./components/pages/About";
 import Gallery from "./components/pages/Gallery";
 import PaymentsAndCheckout from "./components/pages/PaymentsAndCheckout";
+import Dashboard from "./components/pages/Dashboard/MainDashboard/MainDashboard";
 
 import "./App.css";
 
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/checkout" element={<PaymentsAndCheckout />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

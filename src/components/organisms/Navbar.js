@@ -44,7 +44,7 @@ export default function Navbar() {
           </NavLink>
         </div>
 
-        <button className="dashboard-btn">Dashboard</button>
+        <a href="/dashboard"><button className="dashboard-btn">Dashboard</button></a>
       </div>
     </nav>
   );
