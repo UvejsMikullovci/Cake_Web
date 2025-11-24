@@ -9,9 +9,6 @@ export default function Blog() {
   const [posts, setPosts] = useState([]);
   const [activeFilter, setActiveFilter] = useState("All");
 
-  // -------------------------
-  // FORMAT DATE
-  // -------------------------
   const formatDate = (iso) => {
     if (!iso) return "";
     const d = new Date(iso);
@@ -22,9 +19,7 @@ export default function Blog() {
     });
   };
 
-  // -------------------------
-  // FETCH BLOG POSTS FROM FIRESTORE
-  // -------------------------
+  // Fetch blog posts
   useEffect(() => {
     const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
 
@@ -39,9 +34,7 @@ export default function Blog() {
     return () => unsub();
   }, []);
 
-  // -------------------------
-  // FILTERS — MATCH YOUR DASHBOARD CATEGORIES
-  // -------------------------
+  // Filters from your dashboard
   const filters = [
     "All",
     "Tips & Tricks",
@@ -57,10 +50,8 @@ export default function Blog() {
 
   return (
     <div className="blog-wrapper">
-
       <Navbar />
 
-      {/* HERO SECTION */}
       <div className="blog-hero">
         <h1>Our Blog</h1>
         <p>Tips, recipes, and sweet stories from the CakeCrush kitchen</p>
@@ -71,7 +62,6 @@ export default function Blog() {
         </div>
       </div>
 
-      {/* WAVE DIVIDER */}
       <svg className="svgBaner" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path
           d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
@@ -79,7 +69,6 @@ export default function Blog() {
         ></path>
       </svg>
 
-      {/* CATEGORY FILTER BUTTONS */}
       <div className="blog-filters">
         {filters.map((filter, i) => (
           <button
@@ -92,25 +81,16 @@ export default function Blog() {
         ))}
       </div>
 
-      {/* BLOG GRID */}
       <div className="blog-grid">
         {filteredPosts.map((post) => {
-          // ----------------------------------------------
-          // USE SAME SYSTEM AS SIDEBAR — BASE64 IN LOCALSTORAGE
-          // Firestore has: { imageKey: "blog_12345" }
-          // ----------------------------------------------
-          const base64Image = post.imageKey
-            ? localStorage.getItem(post.imageKey)
-            : null;
-
           const dateText = formatDate(post.publishedAt);
           const minutes = post.readingTime || 5;
 
           return (
             <article className="blog-card" key={post.id}>
               <div className="blog-img-wrapper">
-                {base64Image ? (
-                  <img src={base64Image} alt={post.title} />
+                {post.imageBase64 ? (
+                  <img src={post.imageBase64} alt={post.title} />
                 ) : (
                   <div className="blog-img-placeholder" />
                 )}
