@@ -174,29 +174,33 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="blog-section">
-        <div className="blog-section">
-          <h1 className="blog-title">Latest from Our Blog</h1>
-          <div className="blog-grid">
-            {posts.map((post, i) => (
-              <div className="blog-card" key={i}>
-                <div className="blog-image-wrapper">
-                  <img src={post.img} alt={post.title} className="blog-img" />
-                  <span className="blog-tag">{post.tag}</span>
-                </div>
-                <div className="blog-content">
-                  <h2 className="blog-card-title">{post.title}</h2>
-                  <button className="blog-readmore">
-                    Read More <span>→</span>
-                  </button>
-                </div>
-              </div>
-            ))}
+    <section className="blog-section">
+         <div className="blog-section">
+      <h1 className="blog-title">Latest from Our Blog</h1>
+
+      <div className="blog-grid">
+        {posts.map((post, i) => (
+          <div className="blog-card" key={i}>
+            <div className="blog-image-wrapper">
+              <img src={post.img} alt={post.title} className="blog-img" />
+              <span className="blog-tag">{post.tag}</span>
+            </div>
+
+            <div className="blog-content">
+              <h2 className="blog-card-title">{post.title}</h2>
+
+              <button className="blog-readmore">
+                Read More <span>→</span>
+              </button>
+            </div>
           </div>
-          <div className="blog-footer">
-            <button className="blog-view-all">View All Posts</button>
-          </div>
-        </div>
+        ))}
+      </div>
+
+      <div className="blog-footer">
+        <button className="blog-view-all">View All Posts</button>
+      </div>
+    </div>
       </section>
 
       <section className="subscribe-banner">
