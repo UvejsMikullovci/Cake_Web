@@ -19,8 +19,10 @@ export default function Blog() {
     });
   };
 
+  // Fetch blog posts
   useEffect(() => {
     const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
+
     const unsub = onSnapshot(q, (snapshot) => {
       const list = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -28,10 +30,18 @@ export default function Blog() {
       }));
       setPosts(list);
     });
+
     return () => unsub();
   }, []);
 
-  const filters = ["All", "Tips & Tricks", "Guides", "Inspiration", "Recipes"];
+  // Filters from your dashboard
+  const filters = [
+    "All",
+    "Tips & Tricks",
+    "Guides",
+    "Inspiration",
+    "Recipes",
+  ];
 
   const filteredPosts =
     activeFilter === "All"
@@ -40,7 +50,6 @@ export default function Blog() {
 
   return (
     <div className="blog-wrapper">
-
       <Navbar />
 
       <div className="blog-hero">
@@ -59,7 +68,7 @@ export default function Blog() {
           fill="#F7C0C3"
         ></path>
       </svg>
-      
+
       <div className="blog-filters">
         {filters.map((filter, i) => (
           <button
@@ -74,18 +83,14 @@ export default function Blog() {
 
       <div className="blog-grid">
         {filteredPosts.map((post) => {
-          const base64Image = post.imageKey
-            ? localStorage.getItem(post.imageKey)
-            : null;
-
           const dateText = formatDate(post.publishedAt);
           const minutes = post.readingTime || 5;
 
           return (
             <article className="blog-card" key={post.id}>
               <div className="blog-img-wrapper">
-                {base64Image ? (
-                  <img src={base64Image} alt={post.title} />
+                {post.imageBase64 ? (
+                  <img src={post.imageBase64} alt={post.title} />
                 ) : (
                   <div className="blog-img-placeholder" />
                 )}
@@ -93,7 +98,7 @@ export default function Blog() {
               </div>
 
               <h3>{post.title}</h3>
-              <p>{post.content}</p>
+              <p>{post.content?.slice(0, 150)}...</p>
 
               <div className="blog-meta">
                 <span>{dateText}</span>

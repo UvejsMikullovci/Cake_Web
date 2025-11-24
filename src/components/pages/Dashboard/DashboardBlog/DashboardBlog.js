@@ -28,7 +28,7 @@ export default function DashboardBlog() {
     const [previewImage, setPreviewImage] = useState(null);
     const [blogs, setBlogs] = useState([]);
 
-    // live blogs from Firestore
+    // LIVE BLOGS FROM FIRESTORE
     useEffect(() => {
         const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
 
@@ -43,7 +43,7 @@ export default function DashboardBlog() {
         return () => unsub();
     }, []);
 
-    // preview reading time (approx. 200 words / min)
+    // PREVIEW READING TIME
     const previewReadingTime = useMemo(() => {
         if (!content) return 1;
         const words = content.trim().split(/\s+/).length;
@@ -60,6 +60,7 @@ export default function DashboardBlog() {
         []
     );
 
+    // HANDLE IMAGE CHANGE (Preview)
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setImage(file || null);
@@ -72,6 +73,7 @@ export default function DashboardBlog() {
         }
     };
 
+    // SAVE BLOG INTO FIRESTORE WITH BASE64 IMAGE
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -80,13 +82,11 @@ export default function DashboardBlog() {
             return;
         }
 
-        let imageKey = "";
+        let imageBase64 = "";
 
-        // save image ONLY in localStorage
+        // 🔥 Convert to Base64 and save in Firestore
         if (image) {
-            const base64 = await toBase64(image);
-            imageKey = "blogImage-" + Date.now();
-            localStorage.setItem(imageKey, base64);
+            imageBase64 = await toBase64(image);
         }
 
         const now = new Date();
@@ -99,13 +99,13 @@ export default function DashboardBlog() {
             title,
             content,
             type: type || "Tips & Tricks",
-            imageKey,
+            imageBase64, // 🔥 SAVED TO FIRESTORE
             publishedAt,
             readingTime,
             createdAt: serverTimestamp(),
         });
 
-        // reset form
+        // RESET FORM
         setTitle("");
         setType("");
         setContent("");
@@ -126,7 +126,7 @@ export default function DashboardBlog() {
 
     return (
         <div className="dashboardBlog">
-            {/* LEFT: FORM + BLOG LIST */}
+            {/* LEFT SIDE FORM */}
             <div className="leftSide">
                 <h2 className="sectionTitle">Add New Blog</h2>
 
@@ -173,9 +173,7 @@ export default function DashboardBlog() {
 
                 <div className="blogList">
                     {blogs.map((blog) => {
-                        const base64Image = blog.imageKey
-                            ? localStorage.getItem(blog.imageKey)
-                            : null;
+                        const base64Image = blog.imageBase64 || null;
 
                         const dateText = formatDate(blog.publishedAt);
                         const minutes = blog.readingTime || 5;
@@ -214,7 +212,7 @@ export default function DashboardBlog() {
                 </div>
             </div>
 
-            {/* RIGHT: LIVE PREVIEW */}
+            {/* RIGHT SIDE — LIVE PREVIEW */}
             <aside className="rightPreview">
                 <h2 className="sectionTitle">Live Preview</h2>
 

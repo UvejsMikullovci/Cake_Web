@@ -116,7 +116,7 @@ img: emma,
                 {cards.map((c, i) =>(
                    <div key={i} className="ourvalues-card">
                    <div className="ourvalue-icon">{c.icon}</div>
-                   <h2 className="ourvalue-card-title">{c.title}</h2>
+                   <h2 className="ourvalue-card-title">{c.aboutTitle}</h2>
                    <p className="ourvalue-card-text">{c.text}</p>
                     </div>
 
