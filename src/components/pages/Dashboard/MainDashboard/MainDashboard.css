@@ -1,0 +1,14 @@
+main {
+    height: 200vh;
+}
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 160px);
+    /* header + footer estimated height */
+}
+
+.page-content {
+    flex: 1;
+    padding: 40px;
+}

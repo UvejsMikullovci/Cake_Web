@@ -1,0 +1,269 @@
+.dashboardBlog {
+  display: flex;
+  gap: 40px;
+  padding: 32px;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fffaf7;
+    margin-top: 6.2rem;
+}
+
+/* stack on mobile */
+@media (max-width: 960px) {
+  .dashboardBlog {
+    flex-direction: column;
+  }
+}
+
+.leftSide {
+  flex: 2;
+}
+
+.rightPreview {
+  flex: 1.2;
+  top: 24px;
+  align-self: flex-start;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #581b28;
+  margin-bottom: 16px;
+}
+
+/* FORM */
+
+.blogForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fff;
+  padding: 20px 20px 22px;
+  border-radius: 18px;
+  border: 1px solid #ffe3ea;
+  box-shadow: 0 16px 45px rgba(188, 44, 70, 0.06);
+  margin-bottom: 24px;
+  height: 28.7rem;
+}
+
+.blogForm input[type="text"],
+.blogForm select,
+.blogForm textarea,
+.blogForm input[type="file"] {
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #e2d9dc;
+  padding: 13px 12px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: #fffdfc;
+}
+
+.blogForm textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.blogForm input:focus,
+.blogForm textarea:focus,
+.blogForm select:focus {
+  border-color: #f7c0c3;
+  box-shadow: 0 0 0 1px #f7c0c3;
+}
+
+.blogForm button {
+  margin-top: auto;
+  padding: 11px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #581b28;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.blogForm button:hover {
+  background: #3f111c;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 36px rgba(88, 27, 40, 0.45);
+}
+
+.divider {
+  margin: 26px 0 20px;
+  border: none;
+  border-top: 1px solid #f0dde0;
+}
+
+/* BLOG LIST GRID */
+
+.blogList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+/* CARD + PREVIEW – SAME STYLE */
+
+.blogCard,
+.previewCard {
+  background: linear-gradient(to bottom right, #fff9fb, #ffeef4);
+  border-radius: 24px;
+  width: 310px;
+  padding: 18px 18px 22px;
+  box-shadow: 0 22px 60px rgba(188, 44, 70, 0.12);
+  border: 1px solid #ffe3ea;
+}
+
+/* IMAGE AREA – FIXED HEIGHT & SAME RATIO */
+
+.blogCard-imageWrapper {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffe3ea, #fff6f9);
+  margin-bottom: 16px;
+  height: 190px; /* fixed height for consistent cards */
+}
+
+.blogCard-imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* image fits nicely, no stretching */
+  display: block;
+}
+
+.blogCard-imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    #ffeef4,
+    #ffeef4 8px,
+    #ffe0eb 8px,
+    #ffe0eb 16px
+  );
+}
+
+/* TYPE BADGE */
+
+.blogTypeBadge {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #ffdce4;
+  color: #581b28;
+  font-weight: 600;
+  font-size: 12px;
+  box-shadow: 0 8px 18px rgba(215, 108, 132, 0.35);
+}
+
+/* CARD BODY */
+
+.blogCard-body {
+  padding: 2px 4px 0;
+}
+
+.blogCard-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #581b28;
+  margin-bottom: 6px;
+}
+
+.blogCard-excerpt {
+  font-size: 14px;
+  color: #7a3d45;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* META (DATE + MIN READ) */
+
+.blogMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #9a6b72;
+  margin-bottom: 12px;
+}
+
+/* READ BUTTON */
+
+.blogReadButton {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #581b28;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 10px 30px rgba(88, 27, 40, 0.4);
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background 0.12s ease;
+}
+
+.blogReadButton:hover {
+  background: #3f111c;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 38px rgba(88, 27, 40, 0.5);
+}
+
+/* STYLE THE ORIGINAL FILE INPUT */
+.blogForm input[type="file"] {
+  padding: 10px 14px;
+  background: #ffdce4;
+  border: 1px solid #f7c0c3;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #581b28;
+  cursor: pointer;
+  transition: 0.2s ease;
+  width: 100%;
+}
+
+/* Style the text and button inside the file input */
+.blogForm input[type="file"]::-webkit-file-upload-button {
+  background: #581b28;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  margin-right: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.blogForm input[type="file"]::-webkit-file-upload-button:hover {
+  background: #3b0f19;
+}
+
+/* Firefox */
+.blogForm input[type="file"]::file-selector-button {
+  background: #581b28;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  margin-right: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.blogForm input[type="file"]::file-selector-button:hover {
+  background: #3b0f19;
+}
