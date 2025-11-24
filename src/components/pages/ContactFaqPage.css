@@ -37,7 +37,7 @@ html,
 /* Hero Section */
 .cf-hero {
   padding: 180px 24px 64px;
-  background-color: var(--brand-pink-light);
+  background-color: #F7C0C3;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -203,7 +203,7 @@ label {
 
 
 .svgBaner{
-    background-color: #fffcf6;
+    background-color: none;
     height: 70px;
 }
 

@@ -5,7 +5,7 @@
 }
 
 .banner {
-      background: linear-gradient(133deg, #ffeaeb, #ffffff);
+    background-color: #F7C0C3;
     padding: 160px 40px 80px;
     display: flex;
     align-items: center;
@@ -21,8 +21,7 @@
     width: calc(100% + 1.3px);
     height: 60px;
     display: block;
-    position: relative;
-    
+    position: relative;   
 }
 
 .badge {
@@ -36,7 +35,7 @@
 }
 
 .title {
-  font-size: 52px;
+  font-size: 55px;
   font-weight: 800;
   color: #581b28;
   margin-top: 24px;
@@ -44,7 +43,7 @@
 }
 
 .title span {
-  color: #F7C0C3;
+  color: white;
 }
 
 .description {
@@ -82,7 +81,7 @@
     color: #581B28;
     padding: 14px 30px;
     border-radius: 12px;
-    background: transparent;
+    background: white;
     font-size: 18px;
     cursor: pointer;
     transition: 0.2s;
@@ -100,13 +99,16 @@
 }
 
 .stats h3 {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 700;
   color: #581b28;
+  margin: none;
+  margin-bottom: -10px;
 }
 
 .stats p {
   color: #00211ABF;
+  margin: none;
 }
 
 .banner-img-wrapper {
@@ -129,7 +131,7 @@
     top: -15px;
     width: 100px;               
   height: 100px;
-  background-color: #F7C0C3;     
+  background-color: white;     
   border-radius: 50%;       
   display: flex;
   align-items: center;

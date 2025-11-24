@@ -1,5 +1,5 @@
 .about-banner {
-      background: linear-gradient(133deg, #ffeaeb, #ffffff);
+    background-color: #F7C0C3;
     padding: 160px 40px 80px;
     display: flex;
     align-items: center;
@@ -175,7 +175,7 @@ padding: 60px 20px;
 }
 
 
-.title {
+.aboutTitle {
 font-size: 42px;
 font-weight: 700;
 color: #5a1c2e;
