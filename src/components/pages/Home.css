@@ -469,22 +469,21 @@ line-height: 1.6;
   font-size: 17px;
 }
 
-.blog-section {
+.section-blog {
   width: 100%;
   padding: 70px 0;
   background: linear-gradient(to bottom, #fff7f5, #fff3f0);
   text-align: center;
 }
 
-.blog-title {
+.tittle-blog {
   font-size: 42px;
   font-weight: 700;
   color: #581B28;
   margin-bottom: 50px;
 }
 
-/* Blog cards grid */
-.blog-grid {
+.grid-blog{
   max-width: 1400px;
     margin: auto;
     display: grid;
@@ -493,8 +492,7 @@ line-height: 1.6;
     padding: 0 20px;
 }
 
-/* Each card */
-.blog-card {
+.card-blog {
   background: #ffffff;
   border: 1px solid #f3c8c8;
   border-radius: 25px;
@@ -502,25 +500,23 @@ line-height: 1.6;
   transition: 0.3s ease;
 }
 
-.blog-card:hover {
+.card-blog:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
-/* Image wrapper */
-.blog-image-wrapper {
+.blog-wrapper-image {
   position: relative;
 }
 
-.blog-img {
+.img-blog {
     width: 100%;
     height: 180px;
     object-fit: cover;
     border-bottom: 1px solid #f3c8c8;
 }
 
-/* Tag badge */
-.blog-tag {
+.tag-blog{
   position: absolute;
   top: 15px;
   left: 15px;
@@ -531,22 +527,20 @@ line-height: 1.6;
   border-radius: 20px;
 }
 
-/* Card content */
-.blog-content {
+.content-blog {
       margin-top: -20px;
     padding: 25px;
     text-align: left;
 }
 
-.blog-card-title {
+.blog-title-card {
   font-size: 22px;
   font-weight: 600;
   color: #581B28;
   margin-bottom: 20px;
 }
 
-/* Read More button */
-.blog-readmore {
+.readmore-blog {
   border: none;
   background: none;
   color: #581B28;
@@ -557,17 +551,16 @@ line-height: 1.6;
   gap: 5px;
 }
 
-.blog-readmore span {
+.readmore-blog span {
   font-size: 20px;
   margin-top: -2px;
 }
 
-/* View All Button */
-.blog-footer {
+.footer-blog {
   margin-top: 40px;
 }
 
-.blog-view-all {
+.view-all-blog {
     background: none;
     border: 1px solid #581B28;
     color: #581B28;

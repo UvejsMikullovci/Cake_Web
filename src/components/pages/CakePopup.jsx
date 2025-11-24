@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db } from "../firebase"; // make sure your firebase is initialized
+import { db } from "../firebase";
 import "./CakePopup.css";
 
 function CakePopup({ product, onClose }) {
@@ -12,7 +12,6 @@ function CakePopup({ product, onClose }) {
     setLoading(true);
 
     try {
-      // Get current counter
       const counterRef = doc(db, "orderCounters", "orders");
       const counterSnap = await getDoc(counterRef);
       let orderNumber = 1;
@@ -30,7 +29,7 @@ function CakePopup({ product, onClose }) {
         items: [product],
         createdAt: new Date(),
         discount: 0,
-        cardInfo: {} // fill with real card info if needed
+        cardInfo: {} 
       });
 
       // Update counter
@@ -58,10 +57,15 @@ function CakePopup({ product, onClose }) {
 
           <h3 className="popup-subtitle">Ingredients</h3>
           <ul className="popup-list">
-            <li>Flour</li>
+            
+            <div className="ingredients1">
+                <li>Flour</li>
             <li>Sugar</li>
+            </div>
+            <div className="ingredients2">
             <li>Eggs</li>
             <li>Butter</li>
+            </div>
           </ul>
 
           <p className="popup-desc">
