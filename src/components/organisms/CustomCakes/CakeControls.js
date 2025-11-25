@@ -128,7 +128,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* Size */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Size</div>
@@ -149,7 +148,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* Layers */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">
@@ -165,7 +163,6 @@ export default function CakeControls({
                 <span className="cake-layer-label">Layer {index + 1}</span>
               </div>
 
-              {/* Layer height */}
               <div className="cake-slider-row">
                 <div className="cake-slider-label">
                   Height: {layer.height.toFixed(2)}
@@ -183,7 +180,6 @@ export default function CakeControls({
                 />
               </div>
 
-              {/* Base */}
               <div className="cake-flavor-group">
                 <div className="cake-flavor-group-title">Base</div>
                 <FlavorDotsRow
@@ -195,7 +191,6 @@ export default function CakeControls({
                 />
               </div>
 
-              {/* Frosting */}
               <div className="cake-flavor-group">
                 <div className="cake-flavor-group-title">Frosting</div>
                 <FlavorDotsRow
@@ -207,7 +202,6 @@ export default function CakeControls({
                 />
               </div>
 
-              {/* Filling */}
               <div className="cake-flavor-group">
                 <div className="cake-flavor-group-title">Filling</div>
                 <FlavorDotsRow
@@ -253,7 +247,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* Decorations */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Decorations</div>
@@ -299,7 +292,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* Candle Color */}
       {decorations.candles && (
         <div className="cake-section">
           <div className="cake-section-header">
@@ -325,7 +317,6 @@ export default function CakeControls({
         </div>
       )}
 
-      {/* Text + Gift */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Top Text & Gift</div>
@@ -352,7 +343,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* Footer */}
       <div className="cake-footer">
         <div className="cake-price-chip">
           <div className="cake-price-label">Live price</div>

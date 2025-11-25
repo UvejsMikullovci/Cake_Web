@@ -63,13 +63,11 @@ export default function Cake({
 
   return (
     <group position={[0, -1.2, 0]}>
-      {/* Table */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.05, 0]}>
         <circleGeometry args={[baseRadius * 1.8, 64]} />
         <meshStandardMaterial color="#fdf4ec" roughness={0.8} />
       </mesh>
 
-      {/* Cake Layers */}
       {layers.map((layer, index) => {
         const radius = baseRadius - index * 0.18;
         const height = layer.height;
@@ -89,7 +87,6 @@ export default function Cake({
 
         return (
           <group key={layer.id}>
-            {/* Cake Body (Base or Full Frosting Color) */}
             <mesh position={[0, cakeBodyY, 0]} castShadow receiveShadow>
               <cylinderGeometry
                 args={[radius, radius, height, radialSegments, 2]}
@@ -136,15 +133,13 @@ export default function Cake({
         );
       })}
 
-      {/* Decorations container */}
       <group position={[0, topY + topLayerHeight / 2 + 0.24, 0]}>
-        {/* Sprinkles */}
         {decorations.sprinkles && (
           <group>
             {Array.from({ length: 220 }).map((_, i) => {
-              const inner = baseRadius * 0.55;   // inner part of the ring
-              const outer = baseRadius * 0.85;   // outer part
-              const r = inner + Math.random() * (outer - inner); // RANGE radius
+              const inner = baseRadius * 0.55;
+              const outer = baseRadius * 0.85;
+              const r = inner + Math.random() * (outer - inner);
 
               const angle = Math.random() * Math.PI * 2;
               const x = Math.cos(angle) * r;
@@ -173,7 +168,7 @@ export default function Cake({
             })}
           </group>
         )}
-        {/* Candles */}
+
         {decorations.candles && (
           <group>
             {Array.from({ length: 8 }).map((_, i) => {
@@ -193,7 +188,6 @@ export default function Cake({
           </group>
         )}
 
-        {/* Strawberries / Oreos */}
         {(decorations.strawberries || decorations.oreos) && (
           <group>
             {Array.from({ length: 8 }).map((_, i) => {
@@ -218,7 +212,6 @@ export default function Cake({
           </group>
         )}
 
-        {/* Cake Top Text */}
         {message && message.length > 0 && (
           <Text
             position={[0, topLayerHeight + -0.55, 0]}
@@ -236,7 +229,6 @@ export default function Cake({
         )}
       </group>
 
-      {/* Gift Box */}
       {sendAsGift && (
         <group position={[0, 0.5, -4.4]}>
           <mesh castShadow>
