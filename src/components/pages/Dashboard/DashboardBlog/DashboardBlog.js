@@ -9,6 +9,9 @@ import {
     serverTimestamp,
     orderBy,
     query,
+    deleteDoc,
+    doc,
+    updateDoc,
 } from "firebase/firestore";
 
 // Convert image → Base64
@@ -27,6 +30,8 @@ export default function DashboardBlog() {
     const [image, setImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
     const [blogs, setBlogs] = useState([]);
+
+    const [editId, setEditId] = useState(null); // 🆕 Track editing blog ID
 
     // LIVE BLOGS FROM FIRESTORE
     useEffect(() => {
@@ -73,7 +78,7 @@ export default function DashboardBlog() {
         }
     };
 
-    // SAVE BLOG INTO FIRESTORE WITH BASE64 IMAGE
+    // SAVE OR UPDATE BLOG
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -84,33 +89,75 @@ export default function DashboardBlog() {
 
         let imageBase64 = "";
 
-        // 🔥 Convert to Base64 and save in Firestore
         if (image) {
             imageBase64 = await toBase64(image);
         }
 
-        const now = new Date();
-        const publishedAt = now.toISOString();
-
         const words = content.trim().split(/\s+/).length;
         const readingTime = Math.max(1, Math.round(words / 200));
+
+        // 🆕 UPDATE MODE
+        if (editId) {
+            const blogRef = doc(db, "blogs", editId);
+
+            const updateData = {
+                title,
+                type: type || "Tips & Tricks",
+                content,
+                readingTime,
+            };
+
+            // Only update image if a new one is selected
+            if (image) {
+                const newImageBase64 = await toBase64(image);
+                updateData.imageBase64 = newImageBase64;
+            }
+
+            await updateDoc(blogRef, updateData);
+
+            resetForm();
+            return;
+        }
+
+        // NORMAL CREATE MODE
+        const publishedAt = new Date().toISOString();
 
         await addDoc(collection(db, "blogs"), {
             title,
             content,
             type: type || "Tips & Tricks",
-            imageBase64, // 🔥 SAVED TO FIRESTORE
+            imageBase64,
             publishedAt,
             readingTime,
             createdAt: serverTimestamp(),
         });
 
-        // RESET FORM
+        resetForm();
+    };
+
+    const resetForm = () => {
         setTitle("");
         setType("");
         setContent("");
         setImage(null);
         setPreviewImage(null);
+        setEditId(null);
+    };
+
+    // DELETE BLOG
+    const handleDelete = async (id) => {
+        if (!window.confirm("Delete this blog?")) return;
+        await deleteDoc(doc(db, "blogs", id));
+    };
+
+    // EDIT BLOG — LOAD INTO FORM
+    const handleEdit = (blog) => {
+        setEditId(blog.id);
+        setTitle(blog.title);
+        setType(blog.type);
+        setContent(blog.content);
+        setPreviewImage(blog.imageBase64 || null);
+        setImage(null);
     };
 
     const formatDate = (iso) => {
@@ -128,7 +175,9 @@ export default function DashboardBlog() {
         <div className="dashboardBlog">
             {/* LEFT SIDE FORM */}
             <div className="leftSide">
-                <h2 className="sectionTitle">Add New Blog</h2>
+                <h2 className="sectionTitle">
+                    {editId ? "Edit Blog" : "Add New Blog"}
+                </h2>
 
                 <form className="blogForm" onSubmit={handleSubmit}>
                     <input
@@ -164,7 +213,19 @@ export default function DashboardBlog() {
                         />
                     </label>
 
-                    <button type="submit">Publish blog</button>
+                    <button type="submit">
+                        {editId ? "Save Changes" : "Publish blog"}
+                    </button>
+
+                    {editId && (
+                        <button
+                            type="button"
+                            className="cancelBtn"
+                            onClick={resetForm}
+                        >
+                            Cancel Edit
+                        </button>
+                    )}
                 </form>
 
                 <hr className="divider" />
@@ -202,9 +263,23 @@ export default function DashboardBlog() {
                                         <span>{minutes} min read</span>
                                     </div>
 
-                                    <button className="blogReadButton" type="button">
-                                        Read →
-                                    </button>
+                                    <div className="blogCard-actions">
+                                        <button
+                                            type="button"
+                                            className="editBtn"
+                                            onClick={() => handleEdit(blog)}
+                                        >
+                                            Edit
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            className="deleteBtn"
+                                            onClick={() => handleDelete(blog.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
                                 </div>
                             </article>
                         );

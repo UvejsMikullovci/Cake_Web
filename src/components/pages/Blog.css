@@ -186,7 +186,9 @@
 
 /* BUTTON */
 .read-btn {
-  margin-top: auto;
+  margin-top: 1rem;
+  position: relative;
+  bottom: -6px;
   padding: 10px 18px;
   background: #581b28;
   color: white;

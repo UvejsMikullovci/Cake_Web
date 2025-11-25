@@ -267,3 +267,44 @@
 .blogForm input[type="file"]::file-selector-button:hover {
   background: #3b0f19;
 }
+
+/* ACTION BUTTONS WRAPPER */
+.blogCard-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* EDIT BUTTON */
+.editBtn {
+    padding: 8px 14px;
+    background: #266e7c;      /* teal */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.editBtn:hover {
+    background: #1f5d69;
+}
+
+/* DELETE BUTTON */
+.deleteBtn {
+    padding: 8px 14px;
+    background: #df4c4a;      /* red */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.deleteBtn:hover {
+    background: #c43f3d;
+}

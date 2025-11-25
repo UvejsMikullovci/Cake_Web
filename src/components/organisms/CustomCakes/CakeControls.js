@@ -233,23 +233,6 @@ export default function CakeControls({
                     updateLayer(layer.id, "height", parseFloat(e.target.value))
                   }
                 />
-
-                {/* TEXT SIZE */}
-                <div className="cake-slider-row" style={{ marginTop: 12 }}>
-                  <div className="cake-slider-label">
-                    Text Size: {textSize.toFixed(2)}
-                  </div>
-
-                  <input
-                    className="cake-slider"
-                    type="range"
-                    min="0.12"
-                    max="0.45"
-                    step="0.01"
-                    value={textSize}
-                    onChange={(e) => setTextSize(parseFloat(e.target.value))}
-                  />
-                </div>
               </div>
 
               {/* BASE */}

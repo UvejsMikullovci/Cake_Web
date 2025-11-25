@@ -3,7 +3,6 @@ import { Text3D } from "@react-three/drei";
 import Strawberry from "../../models/Strawberry";
 import Candle from "../../models/Candle";
 import Oreo from "../../models/Oreo";
-import { computeHeadingLevel } from "@testing-library/dom";
 
 const BASE_COLORS = {
   vanilla: "#f5d8a9",
@@ -64,6 +63,7 @@ export default function Cake({
 
   return (
     <group position={[0, -1.2, 0]}>
+      {/* PLATE */}
       <mesh
         receiveShadow
         rotation={[-Math.PI / 2, 0, 0]}
@@ -78,6 +78,7 @@ export default function Cake({
         <meshBasicMaterial color="#e0c8ba" />
       </mesh>
 
+      {/* LAYERS */}
       {layers.map((layer, index) => {
         const radius = baseRadius - index * 0.18;
         const height = layer.height;
@@ -85,15 +86,14 @@ export default function Cake({
         const baseColor = BASE_COLORS[layer.baseFlavor];
         const frostingColor = FROSTING_COLORS[layer.frostingFlavor];
 
-        const yOffset = layers
-          .slice(0, index)
-          .reduce((s, l) => s + l.height, 0);
+        const yOffset = layers.slice(0, index).reduce((s, l) => s + l.height, 0);
 
         const cakeBodyY = yOffset + height / 2;
         const frostingTopY = yOffset + height + 0.08;
 
         return (
           <group key={layer.id}>
+            {/* Cake Body */}
             <mesh position={[0, cakeBodyY, 0]} castShadow receiveShadow>
               <cylinderGeometry
                 args={[radius, radius * 0.98, height, radialSegments, 2]}
@@ -105,6 +105,7 @@ export default function Cake({
               />
             </mesh>
 
+            {/* Frosting Cap */}
             <mesh position={[0, frostingTopY, 0]} castShadow>
               <cylinderGeometry
                 args={[radius * 1.02, radius * 1.01, 0.18, radialSegments, 1]}
@@ -116,6 +117,7 @@ export default function Cake({
               />
             </mesh>
 
+            {/* Frosting Balls */}
             <group position={[0, frostingTopY + 0.08, 0]}>
               {Array.from({ length: 18 }).map((_, i2) => {
                 const angle = (i2 / 18) * Math.PI * 2;
@@ -138,11 +140,13 @@ export default function Cake({
         );
       })}
 
+      {/* TOP DECORATIONS */}
       <group position={[0, topY + topLayerHeight / 2 + 0.24, 0]}>
+        {/* Sprinkles */}
         {decorations.sprinkles && (
           <group>
             {Array.from({ length: 180 }).map((_, i) => {
-              const r = baseRadius * 0.5 + Math.random() * (baseRadius * 0.30);
+              const r = baseRadius * 0.5 + Math.random() * (baseRadius * 0.3);
               const angle = Math.random() * Math.PI * 2;
 
               const x = Math.cos(angle) * r;
@@ -180,6 +184,7 @@ export default function Cake({
           </group>
         )}
 
+        {/* Candles */}
         {decorations.candles && (
           <group>
             {Array.from({ length: 8 }).map((_, i) => {
@@ -200,6 +205,7 @@ export default function Cake({
           </group>
         )}
 
+        {/* Strawberries / Oreos */}
         {(decorations.strawberries || decorations.oreos) && (
           <group>
             {Array.from({ length: 8 }).map((_, i) => {
@@ -227,49 +233,47 @@ export default function Cake({
           </group>
         )}
 
+        {/* FLAT ICING TEXT ON CAKE SURFACE */}
+        
         {message && message.length > 0 && (
           <Text3D
             font="/fonts/CakeFont.json"
-            size={textSize}
-            height={0.1}
-            bevelEnabled
-            bevelThickness={0.02}
-            bevelSize={0.015}
-            bevelSegments={4}
+            size={textSize * 0.8}
+            height={0.03}
+            curveSegments={32}
+            bevelEnabled={false}
             position={[
-              -(message.length * textSize * 0.18),
-              -0.03,
-              -0.1,
+              -(message.length * textSize * 0.2),
+              topLayerHeight + 10.25,  // LIFTED UP to surface
+              0
             ]}
             rotation={[-Math.PI / 2, 0, 0]}
           >
             {message}
             <meshStandardMaterial
               color="#ff6f91"
-              metalness={0.3}
               roughness={0.35}
+              metalness={0.25}
             />
           </Text3D>
         )}
       </group>
 
+      {/* GIFT BOX */}
       {sendAsGift && (
         <group position={[0, 0.5, -4.4]}>
           <mesh castShadow>
             <boxGeometry args={[boxWidth * 0.9, 1.2, boxDepth * 0.9]} />
             <meshStandardMaterial color="#fef2f5" />
           </mesh>
-
           <mesh castShadow>
             <boxGeometry args={[boxWidth * 0.92, 0.25, boxDepth * 0.92]} />
             <meshStandardMaterial color="#ff7e8b" />
           </mesh>
-
           <mesh>
             <boxGeometry args={[0.1, 1.25, boxDepth * 0.92]} />
             <meshStandardMaterial color="#ff7e8b" />
           </mesh>
-
           <mesh>
             <boxGeometry args={[boxWidth * 0.92, 1.25, 0.1]} />
             <meshStandardMaterial color="#ff7e8b" />
