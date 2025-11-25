@@ -141,8 +141,11 @@ export default function Cake({
         {/* Sprinkles */}
         {decorations.sprinkles && (
           <group>
-            {Array.from({ length: 180 }).map((_, i) => {
-              const r = baseRadius * 0.7;
+            {Array.from({ length: 220 }).map((_, i) => {
+              const inner = baseRadius * 0.55;   // inner part of the ring
+              const outer = baseRadius * 0.85;   // outer part
+              const r = inner + Math.random() * (outer - inner); // RANGE radius
+
               const angle = Math.random() * Math.PI * 2;
               const x = Math.cos(angle) * r;
               const z = Math.sin(angle) * r;
@@ -170,7 +173,6 @@ export default function Cake({
             })}
           </group>
         )}
-
         {/* Candles */}
         {decorations.candles && (
           <group>
