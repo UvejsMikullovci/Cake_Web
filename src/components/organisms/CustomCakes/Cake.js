@@ -63,7 +63,6 @@ export default function Cake({
 
   return (
     <group position={[0, -1.2, 0]}>
-      {/* PLATE */}
       <mesh
         receiveShadow
         rotation={[-Math.PI / 2, 0, 0]}
@@ -77,8 +76,6 @@ export default function Cake({
         <circleGeometry args={[baseRadius * 1.5, 48]} />
         <meshBasicMaterial color="#e0c8ba" />
       </mesh>
-
-      {/* LAYERS */}
       {layers.map((layer, index) => {
         const radius = baseRadius - index * 0.18;
         const height = layer.height;
@@ -93,7 +90,6 @@ export default function Cake({
 
         return (
           <group key={layer.id}>
-            {/* Cake Body */}
             <mesh position={[0, cakeBodyY, 0]} castShadow receiveShadow>
               <cylinderGeometry
                 args={[radius, radius * 0.98, height, radialSegments, 2]}
@@ -105,7 +101,6 @@ export default function Cake({
               />
             </mesh>
 
-            {/* Frosting Cap */}
             <mesh position={[0, frostingTopY, 0]} castShadow>
               <cylinderGeometry
                 args={[radius * 1.02, radius * 1.01, 0.18, radialSegments, 1]}
@@ -117,7 +112,6 @@ export default function Cake({
               />
             </mesh>
 
-            {/* Frosting Balls */}
             <group position={[0, frostingTopY + 0.08, 0]}>
               {Array.from({ length: 18 }).map((_, i2) => {
                 const angle = (i2 / 18) * Math.PI * 2;
@@ -140,9 +134,7 @@ export default function Cake({
         );
       })}
 
-      {/* TOP DECORATIONS */}
       <group position={[0, topY + topLayerHeight / 2 + 0.24, 0]}>
-        {/* Sprinkles */}
         {decorations.sprinkles && (
           <group>
             {Array.from({ length: 180 }).map((_, i) => {
@@ -184,7 +176,6 @@ export default function Cake({
           </group>
         )}
 
-        {/* Candles */}
         {decorations.candles && (
           <group>
             {Array.from({ length: 8 }).map((_, i) => {
@@ -205,7 +196,6 @@ export default function Cake({
           </group>
         )}
 
-        {/* Strawberries / Oreos */}
         {(decorations.strawberries || decorations.oreos) && (
           <group>
             {Array.from({ length: 8 }).map((_, i) => {
@@ -232,8 +222,6 @@ export default function Cake({
             })}
           </group>
         )}
-
-        {/* FLAT ICING TEXT ON CAKE SURFACE */}
         
         {message && message.length > 0 && (
           <Text3D
@@ -244,7 +232,7 @@ export default function Cake({
             bevelEnabled={false}
             position={[
               -(message.length * textSize * 0.2),
-              topLayerHeight + 10.25,  // LIFTED UP to surface
+              topLayerHeight + 10.25,
               0
             ]}
             rotation={[-Math.PI / 2, 0, 0]}
@@ -259,7 +247,6 @@ export default function Cake({
         )}
       </group>
 
-      {/* GIFT BOX */}
       {sendAsGift && (
         <group position={[0, 0.5, -4.4]}>
           <mesh castShadow>

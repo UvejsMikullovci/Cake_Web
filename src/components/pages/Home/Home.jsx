@@ -1,16 +1,16 @@
 import { LuSparkles } from "react-icons/lu";
-import cakee from '../Photos/Random/cakee.jpg';
-import ppink from  '../Photos/Random/ppink.jpg';
-import ArtisanPastries from '../Photos/Random/Artisanpastries.jpg';
-import birthdaycake from '../Photos/Random/birthdaycake.jpg';
-import cookies from '../Photos/Random/cookies.jpg';
-import pies from '../Photos/Random/pies.jpg';
-import weddingcake from '../Photos/Random/weddingcake.jpg';
+import cakee from '../../Photos/Random/cakee.jpg';
+import ppink from  '../../Photos/Random/ppink.jpg';
+import ArtisanPastries from '../../Photos/Random/Artisanpastries.jpg';
+import birthdaycake from '../../Photos/Random/birthdaycake.jpg';
+import cookies from '../../Photos/Random/cookies.jpg';
+import pies from '../../Photos/Random/pies.jpg';
+import weddingcake from '../../Photos/Random/weddingcake.jpg';
 import React, { useState, useEffect } from "react";
 import { FiEye, FiShoppingCart } from "react-icons/fi";
 import { Heart, Star, Sparkles } from "lucide-react";
-import Navbar from "../organisms/Navbar";
-import Footer from "../organisms/Footer";
+import Navbar from "../../organisms/NavBar/Navbar";
+import Footer from "../../organisms/Footer/Footer";
 import "./Home.css";
 
 export default function Home() {

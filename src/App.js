@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./components/pages/Home";
-import Desserts from "./components/pages/Desserts";
+import Home from "./components/pages/Home/Home";
+import Desserts from "./components/pages/Desserts/Desserts";
 import CustomCakePage from "./components/pages/CustomCakes/CakePage";
-import ContactFaqPage from "./components/pages/Contact";
-import SignInSignUp from "./components/pages/SignInSignUp";
-import Blog from "./components/pages/Blog";
-import About from "./components/pages/About";
-import Gallery from "./components/pages/Gallery";
-import PaymentsAndCheckout from "./components/pages/PaymentsAndCheckout";
+import ContactFaqPage from "./components/pages/Contact/Contact";
+import SignInSignUp from "./components/pages/SignInAndSignUp/SignInSignUp";
+import Blog from "./components/pages/Blog/Blog";
+import About from "./components/pages/About/About";
+import Gallery from "./components/pages/Gallery/Gallery";
+import PaymentsAndCheckout from "./components/pages/PaymentAndCheckout/PaymentsAndCheckout";
 import Dashboard from "./components/pages/Dashboard/MainDashboard/MainDashboard";
 
 import "./App.css";

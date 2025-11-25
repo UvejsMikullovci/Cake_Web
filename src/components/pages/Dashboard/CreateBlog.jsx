@@ -7,15 +7,13 @@ export default function CreateBlog() {
   const [content, setContent] = useState("");
   const [type, setType] = useState("Recipes");
   const [imageBase64, setImageBase64] = useState("");
-
-  // Convert image → Base64
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      setImageBase64(reader.result);  // STORE BASE64 HERE
+      setImageBase64(reader.result);
     };
     reader.readAsDataURL(file);
   };
@@ -30,7 +28,7 @@ export default function CreateBlog() {
       title,
       content,
       type,
-      imageBase64,          // SAVE BASE64 TO FIRESTORE
+      imageBase64,
       createdAt: new Date().toISOString(),
       publishedAt: new Date().toISOString(),
       readingTime: 5,

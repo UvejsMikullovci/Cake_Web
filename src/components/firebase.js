@@ -1,9 +1,7 @@
-// firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";  // <-- ADDED
+import { getFirestore } from "firebase/firestore";
 
-// ✅ Your Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyDlU191ihhs9NvL3j5LizVD-zBOxSYH-y8",
   authDomain: "cakeweb-eff60.firebaseapp.com",
@@ -14,17 +12,10 @@ const firebaseConfig = {
   measurementId: "G-YEETM4YJGG",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Auth
 export const auth = getAuth(app);
-
-// Google Provider
 export const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });
-
-// ✅ Firestore DB
-export const db = getFirestore(app);  // <-- ADDED
+export const db = getFirestore(app);
 
 export default app;

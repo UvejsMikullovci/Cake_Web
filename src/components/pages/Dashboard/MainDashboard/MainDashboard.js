@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from '../../../organisms/Sidebar/Sidebar'
-import Header from '../../../organisms/Navbar'
-import Footer from '../../../organisms/Footer'
+import Header from '../../../organisms/NavBar/Navbar'
+import Footer from '../../../organisms/Footer/Footer'
 
 import DashboardProfile from '../DashboardProfile/DashboardProfile'
 import DashboardOrders from '../DashboardOrders/DashboardOrders'

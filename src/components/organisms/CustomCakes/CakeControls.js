@@ -1,12 +1,7 @@
 import React from "react";
 import "./cakeStyles.css";
-
 import { db, auth } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
-
-// ─────────────────────────────────────────────────────────────
-// CONSTANTS
-// ─────────────────────────────────────────────────────────────
 
 const SIZE_LABELS = {
   small: { title: "Small", subtitle: "6–8 servings" },
@@ -56,10 +51,6 @@ const CANDLE_COLORS = [
   { value: "black", label: "Black" },
 ];
 
-// ─────────────────────────────────────────────────────────────
-// FLAVOR DOT COMPONENT
-// ─────────────────────────────────────────────────────────────
-
 function FlavorDotsRow({ options, value, onChange }) {
   return (
     <div className="cake-flavor-dot-row">
@@ -79,10 +70,6 @@ function FlavorDotsRow({ options, value, onChange }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// MAIN COMPONENT
-// ─────────────────────────────────────────────────────────────
-
 export default function CakeControls({
   layers,
   setLayers,
@@ -98,7 +85,6 @@ export default function CakeControls({
   textSize,
   setTextSize,
 }) {
-  // UPDATE A LAYER
   const updateLayer = (id, key, value) => {
     setLayers((prev) =>
       prev.map((layer) =>
@@ -107,7 +93,6 @@ export default function CakeControls({
     );
   };
 
-  // ADD / REMOVE LAYERS
   const addLayer = () => {
     setLayers((prev) => [
       ...prev,
@@ -125,14 +110,9 @@ export default function CakeControls({
     setLayers((prev) => (prev.length > 1 ? prev.slice(0, -1) : prev));
   };
 
-  // TOGGLE DECORATIONS
   const toggleDecoration = (key) => {
     setDecorations((prev) => ({ ...prev, [key]: !prev[key] }));
   };
-
-  // ─────────────────────────────────────────────────────────────
-  // SAVE ORDER TO FIRESTORE
-  // ─────────────────────────────────────────────────────────────
 
   const addToCart = async () => {
     const user = auth.currentUser;
@@ -163,10 +143,6 @@ export default function CakeControls({
     }
   };
 
-  // ─────────────────────────────────────────────────────────────
-  // UI
-  // ─────────────────────────────────────────────────────────────
-
   return (
     <div className="cake-controls">
       <div className="cake-controls-header">
@@ -178,7 +154,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* SIZE */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Size</div>
@@ -199,7 +174,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* LAYERS */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">
@@ -217,7 +191,6 @@ export default function CakeControls({
                 <span className="cake-layer-label">Layer {index + 1}</span>
               </div>
 
-              {/* HEIGHT */}
               <div className="cake-slider-row">
                 <div className="cake-slider-label">
                   Height: {layer.height.toFixed(2)}
@@ -235,7 +208,6 @@ export default function CakeControls({
                 />
               </div>
 
-              {/* BASE */}
               <div className="cake-flavor-group">
                 <div className="cake-flavor-group-title">Base</div>
                 <FlavorDotsRow
@@ -247,7 +219,6 @@ export default function CakeControls({
                 />
               </div>
 
-              {/* FROSTING */}
               <div className="cake-flavor-group">
                 <div className="cake-flavor-group-title">Frosting</div>
                 <FlavorDotsRow
@@ -259,7 +230,6 @@ export default function CakeControls({
                 />
               </div>
 
-              {/* FILLING */}
               <div className="cake-flavor-group">
                 <div className="cake-flavor-group-title">Filling</div>
                 <FlavorDotsRow
@@ -288,7 +258,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* DECORATIONS */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Decorations</div>
@@ -339,7 +308,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* CANDLE COLOR */}
       {decorations.candles && (
         <div className="cake-section">
           <div className="cake-section-header">
@@ -369,7 +337,6 @@ export default function CakeControls({
         </div>
       )}
 
-      {/* MESSAGE */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Top Text & Gift</div>
@@ -398,7 +365,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* FOOTER */}
       <div className="cake-footer">
         <div className="cake-price-chip">
           <div className="cake-price-label">Live price</div>

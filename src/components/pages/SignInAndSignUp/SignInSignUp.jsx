@@ -1,29 +1,22 @@
-// SignInSignUp.jsx
 import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-
-import { auth, googleProvider, db } from "../firebase";
+import { auth, googleProvider, db } from "../../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-
 import { useNavigate } from "react-router-dom";
-
 import "./SignInSignUp.css";
-import Navbar from "../organisms/Navbar";
-import Footer from "../organisms/Footer";
+import Navbar from "../../organisms/NavBar/Navbar";
+import Footer from "../../organisms/Footer/Footer";
 
-import signinBg from "../Photos/Random/cakee.jpg";
-import signupBg from "../Photos/Random/Artisanpastries.jpg";
+import signinBg from "../../Photos/Random/cakee.jpg";
+import signupBg from "../../Photos/Random/Artisanpastries.jpg";
 
 const SignInSignUp = () => {
   const navigate = useNavigate();
 
-  // -----------------------------
-  // STATES
-  // -----------------------------
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -37,19 +30,11 @@ const SignInSignUp = () => {
   const [socialLoading, setSocialLoading] = useState({
     google: false,
   });
-
-  // Handle Input
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
-  // Email validation
   const validateEmail = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  // ----------------------------------------------------
-  // FIRESTORE USER CREATION / UPDATE
-  // ----------------------------------------------------
   const saveUserToFirestore = async (user, firstName = "", lastName = "") => {
     const userRef = doc(db, "users", user.uid);
 
@@ -66,9 +51,6 @@ const SignInSignUp = () => {
     }
   };
 
-  // -----------------------------
-  // EMAIL/PASSWORD (Sign Up / Sign In)
-  // -----------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors("");
@@ -97,7 +79,6 @@ const SignInSignUp = () => {
 
     try {
       if (isSignUp) {
-        // CREATE NEW USER
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           formData.email,
@@ -112,7 +93,6 @@ const SignInSignUp = () => {
           formData.lastName
         );
       } else {
-        // SIGN IN EXISTING USER
         const userCredential = await signInWithEmailAndPassword(
           auth,
           formData.email,
@@ -138,10 +118,6 @@ const SignInSignUp = () => {
       setLoading(false);
     }
   };
-
-  // -----------------------------
-  // GOOGLE SIGN-IN
-  // -----------------------------
   const handleGoogleLogin = async () => {
     setErrors("");
     setSocialLoading((prev) => ({ ...prev, google: true }));
@@ -169,10 +145,6 @@ const SignInSignUp = () => {
       setSocialLoading((prev) => ({ ...prev, google: false }));
     }
   };
-
-  // -----------------------------
-  // UI RENDER
-  // -----------------------------
   return (
     <>
       <Navbar />
@@ -204,7 +176,6 @@ const SignInSignUp = () => {
             </div>
           </div>
 
-          {/* RIGHT SIDE */}
           <div className="auth-right">
             <div className="auth-header">
               <span className="auth-logo">🍰</span>
@@ -224,7 +195,6 @@ const SignInSignUp = () => {
                 : "Enter your credentials to access your account"}
             </p>
 
-            {/* FORM */}
             <form onSubmit={handleSubmit} className="auth-form" noValidate>
               {isSignUp && (
                 <div className="name-row">
@@ -285,8 +255,8 @@ const SignInSignUp = () => {
                 {loading
                   ? "Please wait..."
                   : isSignUp
-                  ? "Create Account"
-                  : "Sign In"}
+                    ? "Create Account"
+                    : "Sign In"}
               </button>
             </form>
 
@@ -294,7 +264,6 @@ const SignInSignUp = () => {
               <span>Or continue with</span>
             </div>
 
-            {/* SOCIAL BUTTONS */}
             <div className="social-buttons">
               <button
                 className="social social-google"

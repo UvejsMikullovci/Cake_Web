@@ -1,0 +1,264 @@
+.about-banner {
+    background-color: #F7C0C3;
+    padding: 160px 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 150px;
+}
+
+
+
+.about-title {
+    text-align: center;
+    font-size: 52px;
+    font-weight: 800;
+    color: #581b28;
+    margin-top: 24px;
+    line-height: 1.2;
+}
+
+.about-description {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #00211ABF;
+}
+
+.aboutwave img {
+    width: 100%;
+}
+
+.aboutwave {
+    top: 400px;
+    position: absolute;
+    background-size: cover;
+    height: 120px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.aboutus-section {
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.about-img {
+    position: relative;
+}
+
+.aboutimg {
+    object-fit: cover;
+    height: 60vh;
+    width: 600px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.aboutimg img {
+    width: 100%;
+}
+
+.about-title {
+    font-size: 40px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.about-p {
+    font-size: 14px;
+    color: #00211ABF;
+    text-align: left;
+    font-weight: 450;
+}
+
+.years {
+    right: 460px;
+    height: 130px;
+    width: 170px;
+    top: 335px;
+    position: absolute;
+    background-color: #F7C0C3;
+    color: #581b28;
+    border-radius: 15px;
+}
+
+.years h3 {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.years p {
+    line-height: 20px;
+    margin-left: 20px;
+    margin-top: -35px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.about-footer {
+    margin-top: 100px;
+}
+
+.ourvalues-flex {
+    margin: 50px auto;
+    gap: 30px;
+    padding: 0 10px;
+    max-width: 1350px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ourvalues-card {
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #f3c5c5;
+    border-radius: 25px;
+    padding: 40px;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.ourvalue-icon {
+    width: 65px;
+    height: 65px;
+    margin: auto;
+    border-radius: 50%;
+    background: linear-gradient(122deg, #F7C0C3, #581b28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+
+.ourvalue-card-title {
+    font-weight: 500;
+    font-size: 26px;
+    color: #581B28;
+    margin-bottom: 15px;
+}
+
+
+.ourvalue-card-text {
+    color: #444;
+    line-height: 1.6;
+}
+
+.ourvalues-section {
+    display: flex;
+    background: linear-gradient(to bottom, #f7c0c329, #FFFCF6);
+    text-align: center;
+    margin-top: 100px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ourvalues-title {
+    margin-top: 70px;
+    color: #581B28;
+    font-size: 40px;
+    color: #581B28;
+    font-size: 40px;
+}
+
+.ourvalues-p {
+    color: #00211ABF
+}
+
+.team-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+
+.aboutTitle {
+    font-size: 42px;
+    font-weight: 700;
+    color: #5a1c2e;
+    margin-bottom: 10px;
+}
+
+
+.subtitle {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 50px;
+}
+
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+
+.team-card {
+    background: #fff;
+    border: 2px solid #e8c8d0;
+    border-radius: 20px;
+    padding-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+    overflow: hidden;
+}
+
+
+.team-card:hover {
+    transform: none;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.15);
+}
+
+
+.team-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    transition: transform 0.3s ease;
+    transform: scale(1);
+    display: block;
+}
+
+
+.team-card:hover .team-image {
+    transform: scale(1.08);
+}
+
+
+.team-name {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #5a1c2e;
+}
+
+
+.team-role {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #555;
+}
+
+.visit-banner {
+    height: 350px;
+    width: 86%;
+    padding: 70px 20px;
+    border-radius: 40px;
+    text-align: center;
+    background: linear-gradient(to bottom, #F7C0C3, #581B28);
+    color: #FFFCF6;
+    font-family: 'Poppins', sans-serif;
+    max-width: 100%;
+    margin: 0 auto;
+}

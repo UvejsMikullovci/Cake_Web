@@ -1,32 +1,31 @@
 import React, { useState } from "react";
-import Navbar from "../organisms/Navbar";
-import Footer from "../organisms/Footer";
-import birthdaycake from '../Photos/Random/birthdaycake.jpg';
-import ChocolateDream from '../Photos/Random/ChocolateDream.jpg';
-import VanillaDelight from '../Photos/Random/VanillaDelight.jpg';
-import FunfettiParty from '../Photos/Random/FunfettiParty.jpg';
-import StrawberryBliss from '../Photos/Random/StrawberryBliss.jpg';
-import UnicornMagic from '../Photos/Random/UnicornMagic.jpg';
-import ClassicElegance from '../Photos/Random/ClassicElegance.jpg';
-import RomanticRose from '../Photos/Random/RomanticRose.jpg';
-import ModernMinimalist from '../Photos/Random/ModernMinimalist.jpg';
-import weddingcake from '../Photos/Random/weddingcake.jpg';
-import IvoryClassic from '../Photos/Random/IvoryClassic.jpg';
-import PinkLuxury from '../Photos/Random/PinkLuxury.jpg';
-import ChocolateChip from '../Photos/Random/ChocolateChip.jpg';
-import SugarCookies from '../Photos/Random/SugarCookies.jpg';
-import AssortedCookie from '../Photos/Random/AssortedCookie.jpg';
-import MacaronMix from '../Photos/Random/MacaronMix.jpg';
-import ButterCookie from '../Photos/Random/ButterCookie.jpg';
-import CaramelCookie from '../Photos/Random/CaramelCookie.jpg';
-import PastryAssortment from '../Photos/Random/PastryAssortment.jpg';
-import Tiramisu from '../Photos/Random/Tiramisu.jpg';
-import Bakllava from '../Photos/Random/Bakllava.jpg';
-import ClassicApplePie from '../Photos/Random/ClassicApplePie.jpg';
-import Praline from '../Photos/Random/Praline.jpg';
-import CherryDelight from '../Photos/Random/CherryDelight.jpg';
-import ppink from '../Photos/Random/ppink.jpg';
-import CakePopup from "./CakePopup";
+import Navbar from "../../organisms/NavBar/Navbar";
+import Footer from "../../organisms/Footer/Footer";
+import birthdaycake from '../../Photos/Random/birthdaycake.jpg';
+import ChocolateDream from '../../Photos/Random/ChocolateDream.jpg';
+import VanillaDelight from '../../Photos/Random/VanillaDelight.jpg';
+import FunfettiParty from '../../Photos/Random/FunfettiParty.jpg';
+import StrawberryBliss from '../../Photos/Random/StrawberryBliss.jpg';
+import UnicornMagic from '../../Photos/Random/UnicornMagic.jpg';
+import ClassicElegance from '../../Photos/Random/ClassicElegance.jpg';
+import RomanticRose from '../../Photos/Random/RomanticRose.jpg';
+import ModernMinimalist from '../../Photos/Random/ModernMinimalist.jpg';
+import weddingcake from '../../Photos/Random/weddingcake.jpg';
+import IvoryClassic from '../../Photos/Random/IvoryClassic.jpg';
+import PinkLuxury from '../../Photos/Random/PinkLuxury.jpg';
+import ChocolateChip from '../../Photos/Random/ChocolateChip.jpg';
+import SugarCookies from '../../Photos/Random/SugarCookies.jpg';
+import AssortedCookie from '../../Photos/Random/AssortedCookie.jpg';
+import MacaronMix from '../../Photos/Random/MacaronMix.jpg';
+import ButterCookie from '../../Photos/Random/ButterCookie.jpg';
+import CaramelCookie from '../../Photos/Random/CaramelCookie.jpg';
+import PastryAssortment from '../../Photos/Random/PastryAssortment.jpg';
+import Tiramisu from '../../Photos/Random/Tiramisu.jpg';
+import Bakllava from '../../Photos/Random/Bakllava.jpg';
+import ClassicApplePie from '../../Photos/Random/ClassicApplePie.jpg';
+import Praline from '../../Photos/Random/Praline.jpg';
+import CherryDelight from '../../Photos/Random/CherryDelight.jpg';
+import CakePopup from "../CakePopUp/CakePopup";
 
 import "./Desserts.css";
 
@@ -65,10 +64,10 @@ function Desserts() {
   const [category, setCategory] = useState("Birthday");
   const [sortBy, setSortBy] = useState("popular");
 
- 
+
   const filteredProducts = productsData.filter((p) => p.category === category);
 
-  
+
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
       case "newest":
@@ -121,31 +120,31 @@ function Desserts() {
             className={category === cat ? "active" : ""}
             onClick={() => setCategory(cat)}
           >
-            {cat === "Pies" ? "Pies & Other" : cat} 
+            {cat === "Pies" ? "Pies & Other" : cat}
           </button>
         ))}
       </div>
 
       <div className="dessert-grid">
         {sortedProducts.map((item) => (
-          <div className="dessert-card"  key={item.id} onClick={() => setSelectedProduct(item)}>
+          <div className="dessert-card" key={item.id} onClick={() => setSelectedProduct(item)}>
             <img src={item.img} className="dessert-img" alt={item.name} />
 
             <h3 className="dessert-name">{item.name}</h3>
             <p className="dessert-price">${item.price}.00</p>
           </div>
-          
+
         ))}
       </div>
-           <button className="build-your-dream-cake-btn">Build Your Dream Cake</button>
-           <CakePopup
-    product={selectedProduct}
-    onClose={() => setSelectedProduct(null)}
-  />
-           <section className="dessert-footer">
-      <Footer />
+      <button className="build-your-dream-cake-btn">Build Your Dream Cake</button>
+      <CakePopup
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
+      <section className="dessert-footer">
+        <Footer />
       </section>
-      
+
     </div>
   );
 }

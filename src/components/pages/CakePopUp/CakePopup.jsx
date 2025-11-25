@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import "./CakePopup.css";
 
 function CakePopup({ product, onClose }) {
@@ -20,7 +20,6 @@ function CakePopup({ product, onClose }) {
         orderNumber = counterSnap.data().count + 1;
       }
 
-      // Save the order
       const orderId = `ORDER-${String(orderNumber).padStart(5, "0")}`;
       const orderRef = doc(db, "orders", orderId);
 
@@ -31,8 +30,6 @@ function CakePopup({ product, onClose }) {
         discount: 0,
         cardInfo: {} 
       });
-
-      // Update counter
       await setDoc(counterRef, { count: orderNumber });
 
       alert(`Order ${orderId} added successfully!`);

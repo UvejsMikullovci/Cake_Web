@@ -11,18 +11,14 @@
   background: var(--cream);
   border-right: 2px solid var(--border);
   position: relative;
-
   padding-top: 11rem;
   padding-bottom: 40px;
-
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 200px);
-
   font-family: "Inter", sans-serif;
 }
 
-/* Logo */
 .sidebar-logo {
   display: flex;
   align-items: center;
@@ -38,7 +34,6 @@
   color: #00211a;
 }
 
-/* Menu */
 .sidebar-menu {
   display: flex;
   flex-direction: column;
@@ -49,18 +44,14 @@
   display: flex;
   align-items: center;
   gap: 14px;
-
   padding: 14px 22px;
   margin: 0 12px;
-
   font-size: 16px;
   font-weight: 500;
-
   color: var(--maroon);
   background: transparent;
   border: none;
   border-radius: 12px;
-
   cursor: pointer;
   transition: var(--transition);
 }
@@ -83,7 +74,6 @@
   box-shadow: rgba(88, 27, 40, 0.1) 0px 4px 8px;
 }
 
-/* Footer */
 .sidebar-footer {
   margin-top: 4rem;
   padding: 24px;
@@ -93,14 +83,11 @@
   display: flex;
   align-items: center;
   gap: 12px;
-
   font-size: 16px;
   font-weight: 500;
-
   border: none;
   background: none;
   color: var(--maroon);
-
   cursor: pointer;
 }
 

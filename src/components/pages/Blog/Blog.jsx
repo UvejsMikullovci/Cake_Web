@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Blog.css";
-import Navbar from "../organisms/Navbar";
-import Footer from "../organisms/Footer";
-import { db } from "../firebase";
+import Navbar from "../../organisms/NavBar/Navbar";
+import Footer from "../../organisms/Footer/Footer";
+import { db } from "../../firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
 export default function Blog() {
@@ -19,7 +19,6 @@ export default function Blog() {
     });
   };
 
-  // Fetch blog posts
   useEffect(() => {
     const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
 
@@ -34,7 +33,6 @@ export default function Blog() {
     return () => unsub();
   }, []);
 
-  // Filters from your dashboard
   const filters = [
     "All",
     "Tips & Tricks",

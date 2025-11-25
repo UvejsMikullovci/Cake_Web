@@ -2,8 +2,7 @@ import React, { useMemo, useState } from "react";
 import Scene from "../../organisms/CustomCakes/Scene";
 import CakeControls from "../../organisms/CustomCakes/CakeControls";
 import "../../organisms/CustomCakes/cakeStyles.css";
-import Header from "../../organisms/Navbar";
-import Footer from "../../organisms/Footer";
+import Header from "../../organisms/NavBar/Navbar";
 
 export default function CakePage() {
   const [cakeSize, setCakeSize] = useState("medium");

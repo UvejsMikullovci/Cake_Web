@@ -1,6 +1,3 @@
-/* ContactFaqPage.css */
-
-/* Root & base settings */
 :root {
   --brand-maroon: #5a1f26;
   --brand-pink-light: #fdeef0;
@@ -34,7 +31,6 @@ html,
   flex-direction: column;
 }
 
-/* Hero Section */
 .cf-hero {
   padding: 180px 24px 64px;
   background-color: #F7C0C3;
@@ -59,7 +55,6 @@ html,
   line-height: 1.4;
 }
 
-/* Main content area */
 .cf-main {
   max-width: 1140px;
   width: 100%;
@@ -71,14 +66,12 @@ html,
   gap: 64px;
 }
 
-/* Grid layout for form + contact info */
 .cf-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 32px;
 }
 
-/* Cards base style */
 .cf-card {
   background-color: #fff;
   border: 1.5px solid var(--border-pink);
@@ -97,9 +90,6 @@ html,
   color: var(--brand-maroon);
 }
 
-/* FORM CARD */
-
-/* Form styles */
 .cf-form {
   display: flex;
   flex-direction: column;
@@ -112,7 +102,7 @@ html,
   gap: 24px;
 }
 
-.cf-row > label {
+.cf-row>label {
   flex: 1;
   min-width: 140px;
   display: flex;
@@ -136,7 +126,6 @@ label {
   color: var(--brand-maroon);
 }
 
-/* Inputs and textarea */
 .cf-input,
 .cf-textarea {
   font-size: 1rem;
@@ -156,14 +145,12 @@ label {
   min-height: 120px;
 }
 
-/* Input & textarea focus effect */
 .cf-input:focus,
 .cf-textarea:focus {
   border-color: var(--brand-maroon);
   box-shadow: 0 0 6px rgb(90 31 38 / 0.3);
 }
 
-/* Button */
 .cf-btn {
   background-color: var(--brand-maroon);
   color: white;
@@ -183,11 +170,11 @@ label {
 }
 
 .wavy-divider svg {
-    width: calc(100% + 1.3px);
-    height: 60px;
-    display: block;
-    position: relative;
-    
+  width: calc(100% + 1.3px);
+  height: 60px;
+  display: block;
+  position: relative;
+
 }
 
 .error {
@@ -202,9 +189,9 @@ label {
 }
 
 
-.svgBaner{
-    background-color: none;
-    height: 70px;
+.svgBaner {
+  background-color: none;
+  height: 70px;
 }
 
 .cf-btn:hover,
@@ -213,8 +200,6 @@ label {
   outline: none;
   box-shadow: 0 0 8px rgb(125 48 57 / 0.7);
 }
-
-/* INFO CARD */
 
 .info-list {
   display: flex;
@@ -262,7 +247,6 @@ label {
   user-select: text;
 }
 
-/* Map Wrapper */
 .map-wrapper {
   margin-top: 32px;
   border-radius: 16px;
@@ -279,8 +263,6 @@ label {
   pointer-events: auto;
   border-radius: 16px;
 }
-
-/* FAQ SECTION */
 
 .faq-section {
   max-width: 1200px !important;
@@ -312,10 +294,10 @@ label {
 .faq-list {
   max-width: 900px !important;
   width: 100%;
-  margin: 0 auto;           /* centers it */
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px !important;     /* more space between boxes */
+  gap: 24px !important;
 }
 
 

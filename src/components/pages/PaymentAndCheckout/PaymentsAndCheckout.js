@@ -1,8 +1,7 @@
-// src/pages/PaymentsAndCheckout.js
 import React, { useEffect, useMemo, useState } from "react";
 import "./PaymentsAndCheckout.css";
-import Navbar from "../organisms/Navbar";
-import Footer from "../organisms/Footer";
+import Navbar from "../../organisms/NavBar/Navbar";
+import Footer from "../../organisms/Footer/Footer";
 import {
   collection,
   onSnapshot,
@@ -13,11 +12,9 @@ import {
   getDocs,
   getDoc,
 } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { auth, db } from "../../firebase";
 
-// ---------- HELPERS ----------
 
-// format: "1234 1234 1234 1234"
 function formatCardNumber(value) {
   return value
     .replace(/\D/g, "")
@@ -26,7 +23,6 @@ function formatCardNumber(value) {
     .trim();
 }
 
-// format: "MM/YY"
 function formatExpiry(value) {
   const digits = value.replace(/\D/g, "").slice(0, 4);
   if (digits.length <= 2) return digits;
@@ -41,8 +37,6 @@ export default function PaymentsAndCheckout() {
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [promoInput, setPromoInput] = useState("");
   const [appliedPromo, setAppliedPromo] = useState(null);
-
-  // SHIPPING DATA
   const [shippingInfo, setShippingInfo] = useState({
     firstName: "",
     lastName: "",
@@ -53,7 +47,6 @@ export default function PaymentsAndCheckout() {
     zip: "",
   });
 
-  // CREDIT CARD DATA
   const [cardInfo, setCardInfo] = useState({
     fullName: "",
     cardNumber: "",
@@ -69,7 +62,6 @@ export default function PaymentsAndCheckout() {
   const [showPopup, setShowPopup] = useState(false);
   const [recentOrderId, setRecentOrderId] = useState(null);
 
-  // --- LOAD CART FROM users/{uid}/cart ---
   useEffect(() => {
     if (!user) {
       setLoading(false);
@@ -118,8 +110,6 @@ export default function PaymentsAndCheckout() {
 
   const total = Math.max(0, subtotal + shipping - promoDiscount);
 
-  // ---------- HANDLERS ----------
-
   function handleShippingChange(e) {
     setShippingInfo((s) => ({ ...s, [e.target.name]: e.target.value }));
   }
@@ -154,12 +144,9 @@ export default function PaymentsAndCheckout() {
     else setAppliedPromo(null);
   }
 
-  // ---------- CREATE ORDER WITH GLOBAL COUNTER ----------
-
   async function createOrderRecord(method) {
     if (!user) throw new Error("Not logged in");
 
-    // global counter: orderCounters/global
     const counterRef = doc(db, "orderCounters", "global");
     const counterSnap = await getDoc(counterRef);
     const lastNum = counterSnap.exists()
@@ -234,7 +221,6 @@ export default function PaymentsAndCheckout() {
         <p>Almost there! Complete your order below</p>
       </div>
 
-      {/* Wave Banner */}
       <svg className="svgBaner" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path
           d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
@@ -243,9 +229,7 @@ export default function PaymentsAndCheckout() {
       </svg>
 
       <div className="checkout-container">
-        {/* LEFT SIDE */}
         <div className="left-column">
-          {/* SHIPPING BOX */}
           <div className="section-box">
             <h2 className="section-title">Shipping Information</h2>
 
@@ -317,11 +301,9 @@ export default function PaymentsAndCheckout() {
             </div>
           </div>
 
-          {/* PAYMENT METHOD */}
           <div className="section-box">
             <h2 className="section-title">Payment Method</h2>
 
-            {/* CREDIT CARD OPTION */}
             <div
               className={`payment-option ${
                 paymentMethod === "card" ? "active" : ""
@@ -336,7 +318,6 @@ export default function PaymentsAndCheckout() {
 
             {paymentMethod === "card" && (
               <>
-                {/* LIVE DIGITAL CARD */}
                 <div className="live-card">
                   <div className="card-chip" />
                   <div className="live-card-number">
@@ -354,7 +335,6 @@ export default function PaymentsAndCheckout() {
                   </div>
                 </div>
 
-                {/* CARD FORM */}
                 <div className="card-form">
                   <input
                     name="fullName"
@@ -368,7 +348,7 @@ export default function PaymentsAndCheckout() {
                     placeholder="Card Number"
                     value={cardInfo.cardNumber}
                     onChange={handleCardChange}
-                    maxLength={19} // 16 digits + 3 spaces
+                    maxLength={19}
                   />
 
                   <div className="form-row">
@@ -410,7 +390,6 @@ export default function PaymentsAndCheckout() {
             )}
 
 
-            {/* CASH ON DELIVERY */}
             <div
               className={`payment-option ${
                 paymentMethod === "cod" ? "active" : ""
@@ -425,7 +404,6 @@ export default function PaymentsAndCheckout() {
           </div>
         </div>
 
-        {/* RIGHT SIDE SUMMARY */}
         <div className="right-column">
           <div className="summary-box">
             <h2 className="summary-title">Order Summary</h2>
@@ -480,7 +458,6 @@ export default function PaymentsAndCheckout() {
         </div>
       </div>
 
-      {/* POPUP THANK YOU CARD */}
       {showPopup && (
         <div className="order-popup-overlay">
           <div className="order-popup">

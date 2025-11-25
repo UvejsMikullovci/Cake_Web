@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { MapPinIcon, PhoneIcon, EnvelopeIcon, ClockIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import emailjs from "@emailjs/browser";
 import "./ContactFaqPage.css";
-import Navbar from "../organisms/Navbar";
-import Footer from "../organisms/Footer"; 
+import Navbar from "../../organisms/NavBar/Navbar";
+import Footer from "../../organisms/Footer/Footer"; 
 
 const faqData = [
   { question: "What are your delivery areas?", answer: "We deliver within a 25-mile radius of our bakery..." },
@@ -83,35 +83,24 @@ const ContactFaqPage = () => {
   return (
     <div className="cf-page">
       <Navbar />
-      {/* ---------------- HERO SECTION ---------------- */}
       <section className="cf-hero">
-
-        {/* Navbar inside hero */}
         <div className="cf-hero-nav">
           <Navbar />
         </div>
-
         <div className="cf-hero-inner">
           <h1>Get in Touch</h1>
           <p>Have a question or special request? We'd love to hear from you!</p>
         </div>
-
         <div className="cf-hero-wave" aria-hidden="true" />
       </section>
-
-      {/* Wave Banner */}
       <svg className="svgBaner" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path
           d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
           fill="#F7C0C3"
         ></path>
       </svg>
-
-      {/* ---------------- MAIN CONTENT ---------------- */}
       <main className="cf-main">
         <div className="cf-grid">
-
-          {/* Contact Form */}
           <aside className="cf-card form-card" aria-labelledby="contact-form-title">
             <h2 id="contact-form-title">Send Us a Message</h2>
             <form className="cf-form" onSubmit={handleSubmit}>
@@ -128,7 +117,6 @@ const ContactFaqPage = () => {
                   />
                   {errors.name && <p className="error">{errors.name}</p>}
                 </label>
-
                 <label>
                   <span className="cf-label">Email</span>
                   <input
@@ -142,7 +130,6 @@ const ContactFaqPage = () => {
                   {errors.email && <p className="error">{errors.email}</p>}
                 </label>
               </div>
-
               <label>
                 <span className="cf-label">Phone (Optional)</span>
                 <input
@@ -154,7 +141,6 @@ const ContactFaqPage = () => {
                   onChange={handleChange}
                 />
               </label>
-
               <label>
                 <span className="cf-label">Address (Optional)</span>
                 <input
@@ -166,7 +152,6 @@ const ContactFaqPage = () => {
                   onChange={handleChange}
                 />
               </label>
-
               <label>
                 <span className="cf-label">Message</span>
                 <textarea
@@ -184,8 +169,6 @@ const ContactFaqPage = () => {
               </button>
             </form>
           </aside>
-
-          {/* Contact Information */}
           <section className="cf-card info-card" aria-labelledby="contact-info-title">
             <h2 id="contact-info-title">Contact Information</h2>
             <div className="info-list">
@@ -234,8 +217,6 @@ const ContactFaqPage = () => {
             <div className="logos-row" aria-hidden="true"></div>
           </section>
         </div>
-
-        {/* FAQ Section */}
         <section className="faq-section" aria-labelledby="faq-title">
           <div className="faq-header">
             <h2 id="faq-title">Frequently Asked Questions</h2>

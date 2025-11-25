@@ -14,7 +14,6 @@ import {
     updateDoc,
 } from "firebase/firestore";
 
-// Convert image → Base64
 const toBase64 = (file) =>
     new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -30,10 +29,8 @@ export default function DashboardBlog() {
     const [image, setImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
     const [blogs, setBlogs] = useState([]);
+    const [editId, setEditId] = useState(null);
 
-    const [editId, setEditId] = useState(null); // 🆕 Track editing blog ID
-
-    // LIVE BLOGS FROM FIRESTORE
     useEffect(() => {
         const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
 
@@ -48,7 +45,6 @@ export default function DashboardBlog() {
         return () => unsub();
     }, []);
 
-    // PREVIEW READING TIME
     const previewReadingTime = useMemo(() => {
         if (!content) return 1;
         const words = content.trim().split(/\s+/).length;
@@ -65,7 +61,6 @@ export default function DashboardBlog() {
         []
     );
 
-    // HANDLE IMAGE CHANGE (Preview)
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setImage(file || null);
@@ -78,7 +73,6 @@ export default function DashboardBlog() {
         }
     };
 
-    // SAVE OR UPDATE BLOG
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -96,7 +90,6 @@ export default function DashboardBlog() {
         const words = content.trim().split(/\s+/).length;
         const readingTime = Math.max(1, Math.round(words / 200));
 
-        // 🆕 UPDATE MODE
         if (editId) {
             const blogRef = doc(db, "blogs", editId);
 
@@ -107,7 +100,6 @@ export default function DashboardBlog() {
                 readingTime,
             };
 
-            // Only update image if a new one is selected
             if (image) {
                 const newImageBase64 = await toBase64(image);
                 updateData.imageBase64 = newImageBase64;
@@ -119,7 +111,6 @@ export default function DashboardBlog() {
             return;
         }
 
-        // NORMAL CREATE MODE
         const publishedAt = new Date().toISOString();
 
         await addDoc(collection(db, "blogs"), {
@@ -144,13 +135,11 @@ export default function DashboardBlog() {
         setEditId(null);
     };
 
-    // DELETE BLOG
     const handleDelete = async (id) => {
         if (!window.confirm("Delete this blog?")) return;
         await deleteDoc(doc(db, "blogs", id));
     };
 
-    // EDIT BLOG — LOAD INTO FORM
     const handleEdit = (blog) => {
         setEditId(blog.id);
         setTitle(blog.title);
@@ -173,7 +162,6 @@ export default function DashboardBlog() {
 
     return (
         <div className="dashboardBlog">
-            {/* LEFT SIDE FORM */}
             <div className="leftSide">
                 <h2 className="sectionTitle">
                     {editId ? "Edit Blog" : "Add New Blog"}
@@ -287,7 +275,6 @@ export default function DashboardBlog() {
                 </div>
             </div>
 
-            {/* RIGHT SIDE — LIVE PREVIEW */}
             <aside className="rightPreview">
                 <h2 className="sectionTitle">Live Preview</h2>
 

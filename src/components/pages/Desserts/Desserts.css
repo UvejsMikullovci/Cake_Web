@@ -1,0 +1,166 @@
+.dessert-wraper {
+  width: 100%;
+  min-height: 100vh;
+
+}
+
+.banner-collection {
+  background-color: #F7C0C3;
+  padding: 160px 40px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 150px;
+}
+
+
+
+.collection-title {
+  text-align: center;
+  font-size: 52px;
+  font-weight: 800;
+  color: #581b28;
+  margin-top: 24px;
+  line-height: 1.2;
+}
+
+.collection-description {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #00211ABF;
+}
+
+.sort-section {
+  margin: 40px auto 20px;
+  width: 90%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 18px;
+}
+
+.sort-section span {
+  color: #784848;
+}
+
+.sort-dropdown {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: 1px solid #F7C0C3;
+  font-size: 16px;
+  outline: none;
+  background: white;
+  cursor: pointer;
+}
+
+.filter-buttons {
+  height: 50px;
+  border-radius: 50px;
+  margin-left: 150px;
+  width: 80%;
+  background-color: #f7c0c342;
+  display: flex;
+  justify-content: space-around;
+  gap: 60px;
+  padding: 25px 0;
+  align-items: center;
+}
+
+.filter-buttons button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px 25px;
+  border-radius: 20px;
+  color: #000;
+  transition: 0.25s;
+}
+
+.filter-buttons button:hover {
+
+  opacity: 0.7;
+}
+
+.filter-buttons .active {
+  width: 250px;
+  background: #7d1334;
+  color: white;
+}
+
+.dessert-grid {
+  margin-left: 80px;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 55px;
+  width: 88%;
+}
+
+.dessert-card {
+  border: 3.5px dashed #f3b5c4;
+  width: 400px;
+  border-radius: 12px;
+  overflow: visible;
+  transition: transform .25s ease;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+.dessert-img {
+  width: 95%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+
+.dessert-name {
+  color: #581B28;
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.dessert-price {
+  text-align: center;
+  margin-top: 5px;
+  font-weight: 700;
+  color: #581B28;
+  font-size: 20px;
+}
+
+.build-your-dream-cake-btn {
+  margin-left: 650px;
+  background-color: #581B28;
+  margin-top: 40px;
+  color: #FFFCF6;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 30px;
+  border: 0.5px solid #581B28;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dessert-footer {
+  margin-top: 150px;
+}
+
+.pinkwave img {
+  width: 100%;
+}
+
+.pinkwave {
+  top: 420px;
+  position: absolute;
+  background-size: cover;
+  height: 120px;
+  width: 100%;
+  margin-bottom: 30px;
+}

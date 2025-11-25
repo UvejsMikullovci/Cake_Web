@@ -11,15 +11,11 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
 
-        {/* LEFT SIDE */}
         <div className="footer-brand">
-
-          {/* Clickable Logo */}
           <NavLink to="/" className="footer-logo">
             <span>🍰</span>
           </NavLink>
 
-          {/* Clickable CakeCrush Title */}
           <NavLink to="/" style={{ textDecoration: "none", color: "inherit" }}>
             <h2>CakeCrush</h2>
           </NavLink>
@@ -38,7 +34,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* QUICK LINKS */}
         <div className="footer-column">
           <h3>Quick Links</h3>
           <NavLink to="/">Home</NavLink>
@@ -48,7 +43,6 @@ export default function Footer() {
           <NavLink to="/gallery">Gallery</NavLink>
         </div>
 
-        {/* CUSTOMER SERVICE */}
         <div className="footer-column">
           <h3>Customer Service</h3>
           <a href="#">FAQ</a>
@@ -58,10 +52,8 @@ export default function Footer() {
           <a href="#">Terms & Conditions</a>
         </div>
 
-        {/* CONTACT */}
         <div className="footer-column">
           <h3>Contact Us</h3>
-
           <p className="footer-contact">
             <FaLocationDot /> 123 Sweet Street, Bakery Town, BT 12345
           </p>
