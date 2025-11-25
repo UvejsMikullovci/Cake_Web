@@ -13,14 +13,6 @@ export default function Sidebar({ onSelect, active }) {
       <nav className="sidebar-menu">
 
         <button
-          className={`menu-item ${active === "profile" ? "active" : ""}`}
-          onClick={() => onSelect("profile")}
-        >
-          <i className="fa-solid fa-user"></i>
-          <span>Profile</span>
-        </button>
-
-        <button
           className={`menu-item ${active === "orders" ? "active" : ""}`}
           onClick={() => onSelect("orders")}
         >

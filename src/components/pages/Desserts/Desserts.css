@@ -1,7 +1,8 @@
-.dessert-wraper {
+/* Desserts.css */
+.dessert-wrapper {
   width: 100%;
   min-height: 100vh;
-
+  background: #fffaf7;
 }
 
 .banner-collection {
@@ -9,14 +10,11 @@
   padding: 160px 40px 80px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  gap: 150px;
+  justify-content: center;
+  text-align: center;
 }
 
-
-
 .collection-title {
-  text-align: center;
   font-size: 52px;
   font-weight: 800;
   color: #581b28;
@@ -25,10 +23,9 @@
 }
 
 .collection-description {
-  text-align: center;
   margin-top: 20px;
   font-size: 18px;
-  color: #00211ABF;
+  color: #ffffffbf;
 }
 
 .sort-section {
@@ -46,7 +43,7 @@
 
 .sort-dropdown {
   padding: 8px 15px;
-  border-radius: 20px;
+  border-radius: 999px;
   border: 1px solid #F7C0C3;
   font-size: 16px;
   outline: none;
@@ -54,89 +51,159 @@
   cursor: pointer;
 }
 
+/* Filter buttons row */
 .filter-buttons {
-  height: 50px;
-  border-radius: 50px;
-  margin-left: 150px;
-  width: 80%;
-  background-color: #f7c0c342;
+  margin: 0 auto 20px;
+  width: 90%;
   display: flex;
-  justify-content: space-around;
-  gap: 60px;
-  padding: 25px 0;
-  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #ffe6ee;
 }
 
 .filter-buttons button {
-  background: none;
-  border: none;
-  font-size: 18px;
+  background: #fff;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 15px;
   cursor: pointer;
-  padding: 10px 25px;
-  border-radius: 20px;
-  color: #000;
-  transition: 0.25s;
+  padding: 8px 22px;
+  color: #581b28;
+  font-weight: 500;
+  transition: 0.2s ease;
 }
 
 .filter-buttons button:hover {
-
-  opacity: 0.7;
+  background: #ffd6e4;
 }
 
 .filter-buttons .active {
-  width: 250px;
-  background: #7d1334;
-  color: white;
+  background: #581b28;
+  color: #fffaf7;
+  border-color: #581b28;
 }
 
+/* Grid of dessert cards */
 .dessert-grid {
-  margin-left: 80px;
-  margin-top: 50px;
+  margin: 40px auto 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 55px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 80px;
   width: 88%;
 }
 
+/* Card similar to dashboard style */
 .dessert-card {
   border: 3.5px dashed #f3b5c4;
-  width: 400px;
-  border-radius: 12px;
-  overflow: visible;
-  transition: transform .25s ease;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  border-radius: 24px;
+  background: #fff7fa;
+  padding: 18px 18px 22px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 320px;
+}
+
+.dessert-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.dessert-image-wrapper {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f9e2ea;
+  margin-bottom: 16px;
 }
 
 .dessert-img {
-  width: 95%;
-  height: 350px;
+  width: 100%;
+  height: 260px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
+  display: block;
 }
 
+.dessert-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dessert-tag-row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.dessert-category-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #fde6f0;
+  color: #b2365c;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
 
 .dessert-name {
   color: #581B28;
-  margin-top: 15px;
-  font-size: 15px;
-  font-weight: 600;
-  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.dessert-description-card {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #4b3a40;
+  line-height: 1.5;
+}
+
+/* Price + plus button row */
+.dessert-price-row {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .dessert-price {
-  text-align: center;
-  margin-top: 5px;
-  font-weight: 700;
+  font-weight: 800;
   color: #581B28;
   font-size: 20px;
 }
 
+.dessert-plus-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: #581B28;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dessert-plus-btn:hover {
+  background: #7d1334;
+  transform: scale(1.05);
+}
+
+/* CTA button */
 .build-your-dream-cake-btn {
-  margin-left: 650px;
+  display: block;
+  margin: 40px auto 0;
   background-color: #581B28;
-  margin-top: 40px;
   color: #FFFCF6;
   border: none;
   padding: 14px 30px;
@@ -148,19 +215,33 @@
   transition: 0.3s;
 }
 
+.build-your-dream-cake-btn:hover {
+  opacity: 0.9;
+}
+
 .dessert-footer {
   margin-top: 150px;
 }
 
-.pinkwave img {
-  width: 100%;
+/* Responsive */
+@media (max-width: 1024px) {
+  .dessert-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 92%;
+  }
 }
 
-.pinkwave {
-  top: 420px;
-  position: absolute;
-  background-size: cover;
-  height: 120px;
-  width: 100%;
-  margin-bottom: 30px;
+@media (max-width: 768px) {
+  .banner-collection {
+    padding: 120px 16px 60px;
+  }
+
+  .collection-title {
+    font-size: 40px;
+  }
+
+  .dessert-grid {
+    grid-template-columns: 1fr;
+    width: 92%;
+  }
 }

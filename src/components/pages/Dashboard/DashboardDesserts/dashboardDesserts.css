@@ -1,3 +1,167 @@
-.dashboardMain {
-    margin-top: 8.2rem;
+.dashboard-desserts {
+  padding: 30px;
+  font-family: "Inter", sans-serif;
+  margin-top: 8.2rem;
+}
+
+.dashboard-desserts-form-preview-container {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.dashboard-desserts-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid #e7c9d3;
+  max-width: 500px;
+  flex: 1;
+}
+
+.dashboard-desserts-form input,
+.dashboard-desserts-form textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #caaebe;
+  font-size: 15px;
+}
+
+.dashboard-desserts-image-upload {
+  background: #fcdbe4;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dashboard-desserts-image-upload input {
+  display: none;
+}
+
+.dashboard-desserts-submit-btn {
+  background-color: #581b28;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #fff;
+}
+
+.dashboard-desserts-preview-card {
+  background: #fff;
+  padding: 22px;
+  border-radius: 20px;
+  border: 5px dashed #e7b8c7;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.08);
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.dashboard-desserts-card-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.dashboard-desserts-card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #581b28;
+  margin-bottom: 8px;
+  margin-top: 0px;
+}
+
+.dashboard-desserts-card-desc {
+  font-size: 15px;
+  color: #6a4a52;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+.dashboard-desserts-card-price {
+  font-size: 20px;
+  font-weight: 900;
+  color: #581b28;
+  margin-bottom: 10px;
+}
+
+.dashboard-desserts-card-ingredients {
+  font-size: 14px;
+  color: #6a4a52;
+  list-style: none;
+  padding-left: 0;
+}
+
+.dashboard-desserts-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.dashboard-desserts-card {
+  background: #fff;
+  padding: 22px;
+  border-radius: 20px;
+  border: 5px dashed #e7b8c7;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-desserts-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-desserts-card-actions button {
+  background: #581b28;
+  color: white;
+  padding: 6px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: poppins;
+}
+
+.dashboard-desserts-delete-btn {
+  background: #b83939 !important;
+}
+
+.dashboard-desserts-imageWrapper {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffe3ea, #fff6f9);
+  margin-bottom: 16px;
+  height: 190px;
+}
+
+.dashboard-desserts-imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dashboard-desserts-category-select {
+  padding: 4px 12px;
+  border-radius: 999px;
+
+  background: #fdf1f6;
+  border: 1px solid #f7c4d3;
+  color: #b52e5a;
+
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }

@@ -1,88 +1,76 @@
-import React, { useState } from "react";
+// Desserts.jsx
+import React, { useState, useEffect } from "react";
 import Navbar from "../../organisms/NavBar/Navbar";
 import Footer from "../../organisms/Footer/Footer";
-import birthdaycake from '../../Photos/Random/birthdaycake.jpg';
-import ChocolateDream from '../../Photos/Random/ChocolateDream.jpg';
-import VanillaDelight from '../../Photos/Random/VanillaDelight.jpg';
-import FunfettiParty from '../../Photos/Random/FunfettiParty.jpg';
-import StrawberryBliss from '../../Photos/Random/StrawberryBliss.jpg';
-import UnicornMagic from '../../Photos/Random/UnicornMagic.jpg';
-import ClassicElegance from '../../Photos/Random/ClassicElegance.jpg';
-import RomanticRose from '../../Photos/Random/RomanticRose.jpg';
-import ModernMinimalist from '../../Photos/Random/ModernMinimalist.jpg';
-import weddingcake from '../../Photos/Random/weddingcake.jpg';
-import IvoryClassic from '../../Photos/Random/IvoryClassic.jpg';
-import PinkLuxury from '../../Photos/Random/PinkLuxury.jpg';
-import ChocolateChip from '../../Photos/Random/ChocolateChip.jpg';
-import SugarCookies from '../../Photos/Random/SugarCookies.jpg';
-import AssortedCookie from '../../Photos/Random/AssortedCookie.jpg';
-import MacaronMix from '../../Photos/Random/MacaronMix.jpg';
-import ButterCookie from '../../Photos/Random/ButterCookie.jpg';
-import CaramelCookie from '../../Photos/Random/CaramelCookie.jpg';
-import PastryAssortment from '../../Photos/Random/PastryAssortment.jpg';
-import Tiramisu from '../../Photos/Random/Tiramisu.jpg';
-import Bakllava from '../../Photos/Random/Bakllava.jpg';
-import ClassicApplePie from '../../Photos/Random/ClassicApplePie.jpg';
-import Praline from '../../Photos/Random/Praline.jpg';
-import CherryDelight from '../../Photos/Random/CherryDelight.jpg';
 import CakePopup from "../CakePopUp/CakePopup";
-
+import { db } from "../../firebase";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import "./Desserts.css";
 
-const productsData = [
-
-  { id: 1, category: "Birthday", name: "Rainbow Celebration", price: 55, img: birthdaycake, date: "2024-11-12", popularity: 98 },
-  { id: 2, category: "Birthday", name: "Chocolate Dream", price: 48, img: ChocolateDream, date: "2024-10-02", popularity: 76 },
-  { id: 3, category: "Birthday", name: "Vanilla Delight", price: 62, img: VanillaDelight, date: "2024-11-01", popularity: 85 },
-  { id: 4, category: "Birthday", name: "Funfetti Party", price: 50, img: FunfettiParty, date: "2024-09-22", popularity: 71 },
-  { id: 5, category: "Birthday", name: "Strawberry Bliss", price: 45, img: StrawberryBliss, date: "2024-09-01", popularity: 90 },
-  { id: 6, category: "Birthday", name: "Unicorn Magic", price: 70, img: UnicornMagic, date: "2024-11-05", popularity: 100 },
-
-  { id: 7, category: "Wedding", name: "Classic Elegance", price: 120, img: ClassicElegance, date: "2024-10-11", popularity: 96 },
-  { id: 8, category: "Wedding", name: "Romantic Rose", price: 150, img: RomanticRose, date: "2024-11-03", popularity: 88 },
-  { id: 9, category: "Wedding", name: "Modern Minimalist", price: 180, img: ModernMinimalist, date: "2024-09-15", popularity: 100 },
-  { id: 10, category: "Wedding", name: "Deluxe Floral Cake", price: 135, img: weddingcake, date: "2024-11-11", popularity: 74 },
-  { id: 11, category: "Wedding", name: "Ivory Classic Cake", price: 160, img: IvoryClassic, date: "2024-10-01", popularity: 81 },
-  { id: 12, category: "Wedding", name: "Pink Luxury Cake", price: 145, img: PinkLuxury, date: "2024-11-07", popularity: 92 },
-
-  { id: 13, category: "Cookies", name: "Chocolate Chip", price: 10, img: ChocolateChip, date: "2024-11-10", popularity: 93 },
-  { id: 14, category: "Cookies", name: "Sugar Cookie", price: 8, img: SugarCookies, date: "2024-09-13", popularity: 70 },
-  { id: 15, category: "Cookies", name: "Macaron Mix", price: 12, img: MacaronMix, date: "2024-11-03", popularity: 89 },
-  { id: 16, category: "Cookies", name: "Butter Cookie", price: 7, img: ButterCookie, date: "2024-08-28", popularity: 63 },
-  { id: 17, category: "Cookies", name: "Assorted Cookie Box", price: 9, img: AssortedCookie, date: "2024-11-09", popularity: 86 },
-  { id: 18, category: "Cookies", name: "Caramel Cookie", price: 11, img: CaramelCookie, date: "2024-10-17", popularity: 82 },
-
-  { id: 19, category: "Pies", name: "Classic Apple Pie", price: 45, img: ClassicApplePie, date: "2024-11-04", popularity: 98 },
-  { id: 20, category: "Pies", name: "Tiramisu", price: 42, img: Tiramisu, date: "2024-09-26", popularity: 80 },
-  { id: 21, category: "Pies", name: "Pastry Assortment", price: 40, img: PastryAssortment, date: "2024-10-15", popularity: 72 },
-  { id: 22, category: "Pies", name: "Baklava", price: 47, img: Bakllava, date: "2024-11-06", popularity: 94 },
-  { id: 23, category: "Pies", name: "Cherry Delight", price: 44, img: CherryDelight, date: "2024-10-02", popularity: 79 },
-  { id: 24, category: "Pies", name: "Praline", price: 43, img: Praline, date: "2024-08-25", popularity: 67 },
-];
+const FILTERS = ["All", "Cakes", "Cookies", "Pies", "Wedding", "Other"];
 
 function Desserts() {
-  const [category, setCategory] = useState("Birthday");
+  const [activeFilter, setActiveFilter] = useState("All");
   const [sortBy, setSortBy] = useState("popular");
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
+  useEffect(() => {
+    const q = query(collection(db, "desserts"), orderBy("createdAt", "desc"));
 
-  const filteredProducts = productsData.filter((p) => p.category === category);
+    const unsub = onSnapshot(q, (snapshot) => {
+      const list = snapshot.docs.map((docSnap) => {
+        const data = docSnap.data();
+        return {
+          id: docSnap.id,
+          name: data.title || "Untitled Dessert",
+          price: Number(data.price) || 0,
+          img: data.image || "",
+          description: data.description || "",
+          ingredients: Array.isArray(data.ingredients)
+            ? data.ingredients
+            : [],
+          category: data.category || "Other",
+          createdAt: data.createdAt || null,
+          popularity: data.popularity ?? 0,
+        };
+      });
 
+      setProducts(list);
+    });
+
+    return () => unsub();
+  }, []);
+
+  const filteredProducts = products.filter((p) => {
+    if (activeFilter === "All") return true;
+    return p.category === activeFilter;
+  });
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
-      case "newest":
-        return new Date(b.date) - new Date(a.date);
+      case "newest": {
+        const getTime = (x) =>
+          x.createdAt && typeof x.createdAt.toMillis === "function"
+            ? x.createdAt.toMillis()
+            : 0;
+        return getTime(b) - getTime(a);
+      }
       case "low":
         return a.price - b.price;
       case "high":
         return b.price - a.price;
       case "popular":
-        return b.popularity - a.popularity;
+        return (b.popularity ?? 0) - (a.popularity ?? 0);
       default:
         return 0;
     }
   });
-  const [selectedProduct, setSelectedProduct] = useState(null);
 
   return (
     <div className="dessert-wrapper">
@@ -92,20 +80,30 @@ function Desserts() {
         <div className="collection-text">
           <h1 className="collection-title">Our Dessert Collection</h1>
           <p className="collection-description">
-            From birthday cakes to wedding masterpieces, cookies to pies – discover our
-            full <br /> range of handcrafted delights
+            From cakes to cookies, pies to wedding masterpieces – discover our full
+            range of handcrafted delights.
           </p>
         </div>
       </section>
-      <svg className="svgBaner" viewBox="0 0 1200 120" preserveAspectRatio="none">
+
+      <svg
+        className="svgBaner"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
         <path
           d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
           fill="#F7C0C3"
         ></path>
       </svg>
+
       <div className="sort-section">
         <span>Sort by:</span>
-        <select className="sort-dropdown" onChange={(e) => setSortBy(e.target.value)}>
+        <select
+          className="sort-dropdown"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
           <option value="popular">Most Popular</option>
           <option value="newest">Newest</option>
           <option value="low">Price: Low to High</option>
@@ -114,37 +112,75 @@ function Desserts() {
       </div>
 
       <div className="filter-buttons">
-        {["Birthday", "Wedding", "Cookies", "Pies"].map((cat) => (
+        {FILTERS.map((filter) => (
           <button
-            key={cat}
-            className={category === cat ? "active" : ""}
-            onClick={() => setCategory(cat)}
+            key={filter}
+            className={activeFilter === filter ? "active" : ""}
+            onClick={() => setActiveFilter(filter)}
           >
-            {cat === "Pies" ? "Pies & Other" : cat}
+            {filter}
           </button>
         ))}
       </div>
 
       <div className="dessert-grid">
         {sortedProducts.map((item) => (
-          <div className="dessert-card" key={item.id} onClick={() => setSelectedProduct(item)}>
-            <img src={item.img} className="dessert-img" alt={item.name} />
+          <div
+            className="dessert-card"
+            key={item.id}
+            onClick={() => setSelectedProduct(item)}
+          >
+            <div className="dessert-image-wrapper">
+              {item.img && (
+                <img
+                  src={item.img}
+                  className="dessert-img"
+                  alt={item.name}
+                />
+              )}
+            </div>
 
-            <h3 className="dessert-name">{item.name}</h3>
-            <p className="dessert-price">${item.price}.00</p>
+            <div className="dessert-card-body">
+              <div className="dessert-tag-row">
+                <span className="dessert-category-pill">{item.category}</span>
+              </div>
+
+              <h3 className="dessert-name">{item.name}</h3>
+
+              <p className="dessert-description-card">
+                {item.description || "Handcrafted dessert made with love."}
+              </p>
+
+              <div className="dessert-price-row">
+                <span className="dessert-price">€{item.price.toFixed(2)}</span>
+
+                <button
+                  className="dessert-plus-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedProduct(item);
+                  }}
+                >
+                  <i className="fa-solid fa-plus" />
+                </button>
+              </div>
+            </div>
           </div>
-
         ))}
       </div>
-      <button className="build-your-dream-cake-btn">Build Your Dream Cake</button>
+
+      <button className="build-your-dream-cake-btn">
+        Build Your Dream Cake
+      </button>
+
       <CakePopup
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
       />
+
       <section className="dessert-footer">
         <Footer />
       </section>
-
     </div>
   );
 }

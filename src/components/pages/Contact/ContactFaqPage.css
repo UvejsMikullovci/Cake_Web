@@ -40,7 +40,7 @@ html,
 }
 
 .cf-hero-inner h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bolder;
   margin: 0 0 16px;
   color: var(--brand-maroon);
@@ -48,8 +48,8 @@ html,
 }
 
 .cf-hero-inner p {
-  font-size: 1.25rem;
-  color: var(--text-muted);
+  font-size: 1rem;
+  color: #fff;
   max-width: 520px;
   margin: 0 auto;
   line-height: 1.4;

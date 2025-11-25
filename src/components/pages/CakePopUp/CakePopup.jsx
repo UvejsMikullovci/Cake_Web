@@ -28,8 +28,9 @@ function CakePopup({ product, onClose }) {
         items: [product],
         createdAt: new Date(),
         discount: 0,
-        cardInfo: {} 
+        cardInfo: {}
       });
+
       await setDoc(counterRef, { count: orderNumber });
 
       alert(`Order ${orderId} added successfully!`);
@@ -53,23 +54,26 @@ function CakePopup({ product, onClose }) {
           <h1 className="popup-title">{product.name}</h1>
 
           <h3 className="popup-subtitle">Ingredients</h3>
+
           <ul className="popup-list">
-            
             <div className="ingredients1">
-                <li>Flour</li>
-            <li>Sugar</li>
+              {product.ingredients?.slice(0, 2).map((ing, i) => (
+                <li key={i}>{ing}</li>
+              ))}
             </div>
+
             <div className="ingredients2">
-            <li>Eggs</li>
-            <li>Butter</li>
+              {product.ingredients?.slice(2, 4).map((ing, i) => (
+                <li key={i}>{ing}</li>
+              ))}
             </div>
           </ul>
 
           <p className="popup-desc">
-            A delicious, moist cake topped with smooth frosting and a rich chocolate glaze.
+            {product.description}
           </p>
 
-          <h2 className="popup-price">${product.price}.00</h2>
+          <h2 className="popup-price">€{product.price}</h2>
 
           <button className="popup-btn" onClick={handleAddToCart} disabled={loading}>
             {loading ? "Adding..." : "ADD TO CART"}
