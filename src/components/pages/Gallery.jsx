@@ -26,34 +26,42 @@ import Bakllava from '../Photos/Random/Bakllava.jpg';
 import ClassicApplePie from '../Photos/Random/ClassicApplePie.jpg';
 import Praline from '../Photos/Random/Praline.jpg';
 import CherryDelight from '../Photos/Random/CherryDelight.jpg';
+import Fruitcakes from '../Photos/Random/Fruitcakes.jpg'
+import pies from '../Photos/Random/pies.jpg'
+import cakee from '../Photos/Random/cakee.jpg'
+import Artisanpastries from '../Photos/Random/Artisanpastries.jpg'
 import Masonry from "react-masonry-css";
 import "./Gallery.css"
 
 export default function Gallery(){
     const images = [
     birthdaycake, 
-    ChocolateDream, 
-    VanillaDelight, 
-    FunfettiParty, 
-    StrawberryBliss, 
-    UnicornMagic, 
-    ClassicElegance, 
-    RomanticRose, 
-    ModernMinimalist,
-    weddingcake,
-    IvoryClassic,
     PinkLuxury,
+    Praline,
+    ClassicApplePie, 
+    VanillaDelight, 
+    ModernMinimalist, 
+    AssortedCookie, 
+    UnicornMagic, 
+    cakee,
+    ClassicElegance, 
+    FunfettiParty,
+    MacaronMix,
+    Artisanpastries,
+    weddingcake,
+   CaramelCookie,
+    Fruitcakes,
     ChocolateChip,
     SugarCookies,
-    AssortedCookie,
-    MacaronMix,
+    StrawberryBliss,
     ButterCookie,
-    CaramelCookie,
+     IvoryClassic,
     PastryAssortment,
     Tiramisu,
-    Praline,
     Bakllava,
-    ClassicApplePie,
+    pies,
+    ChocolateDream,
+     RomanticRose, 
     CherryDelight
 ]; 
     const breakpoints = { 
