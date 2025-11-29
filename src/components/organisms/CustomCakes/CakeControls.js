@@ -1,3 +1,4 @@
+// CakeControls.jsx
 import React from "react";
 import "./cakeStyles.css";
 import { db, auth } from "../../firebase";
@@ -51,6 +52,7 @@ const CANDLE_COLORS = [
   { value: "black", label: "Black" },
 ];
 
+// FlavorDotsRow (replace your current one)
 function FlavorDotsRow({ options, value, onChange }) {
   return (
     <div className="cake-flavor-dot-row">
@@ -58,9 +60,7 @@ function FlavorDotsRow({ options, value, onChange }) {
         <button
           key={opt.value}
           type="button"
-          className={
-            "cake-flavor-dot" + (value === opt.value ? " selected" : "")
-          }
+          className={`cake-flavor-dot${value === opt.value ? " selected" : ""}`}
           style={{ "--flavor-color": FLAVOR_COLORS[opt.value] }}
           onClick={() => onChange(opt.value)}
         />
@@ -226,7 +226,6 @@ export default function CakeControls({
         </div>
       </div>
 
-      {/* Full Frosting Toggle */}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Frosting Coverage</div>
@@ -292,31 +291,30 @@ export default function CakeControls({
         </div>
       </div>
 
-      {decorations.candles && (
-        <div className="cake-section">
-          <div className="cake-section-header">
-            <div className="cake-section-title">Candle Color</div>
-            <div className="cake-section-badge">8 colors</div>
-          </div>
+{decorations.candles && (
+  <div className="cake-section">
+    <div className="cake-section-header">
+      <div className="cake-section-title">Candle Color</div>
+      <div className="cake-section-badge">8 colors</div>
+    </div>
 
-          <div className="cake-flavor-dot-row">
-            {CANDLE_COLORS.map((c) => (
-              <button
-                key={c.value}
-                className={
-                  "cake-flavor-dot" +
-                  (decorations.candleColor === c.value ? " selected" : "")
-                }
-                style={{ "--flavor-color": c.value }}
-                onClick={() =>
-                  setDecorations((prev) => ({ ...prev, candleColor: c.value }))
-                }
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
+    <div className="cake-flavor-dot-row">
+      {CANDLE_COLORS.map((c) => (
+        <button
+          key={c.value}
+          className={
+            "cake-flavor-dot candle-dot" +
+            (decorations.candleColor === c.value ? " selected" : "")
+          }
+          style={{ "--flavor-color": c.value }}
+          onClick={() =>
+            setDecorations((prev) => ({ ...prev, candleColor: c.value }))
+          }
+        />
+      ))}
+    </div>
+  </div>
+)}
       <div className="cake-section">
         <div className="cake-section-header">
           <div className="cake-section-title">Top Text & Gift</div>

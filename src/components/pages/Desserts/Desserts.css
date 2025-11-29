@@ -1,12 +1,11 @@
-/* Desserts.css */
 .dessert-wrapper {
   width: 100%;
   min-height: 100vh;
-  background: #fffaf7;
+  background: var(--brand-soft-bg-1);
 }
 
 .banner-collection {
-  background-color: #F7C0C3;
+  background-color: var(--brand-secondary);
   padding: 160px 40px 80px;
   display: flex;
   align-items: center;
@@ -17,7 +16,7 @@
 .collection-title {
   font-size: 52px;
   font-weight: 800;
-  color: #581b28;
+  color: var(--brand-primary);
   margin-top: 24px;
   line-height: 1.2;
 }
@@ -26,6 +25,10 @@
   margin-top: 20px;
   font-size: 18px;
   color: #ffffffbf;
+}
+
+.svgBaner path {
+  fill: var(--brand-secondary);
 }
 
 .sort-section {
@@ -38,20 +41,20 @@
 }
 
 .sort-section span {
-  color: #784848;
+  color: var(--brand-primary);
 }
 
 .sort-dropdown {
   padding: 8px 15px;
   border-radius: 999px;
-  border: 1px solid #F7C0C3;
+  border: 1px solid var(--brand-secondary);
   font-size: 16px;
   outline: none;
   background: white;
   cursor: pointer;
 }
 
-/* Filter buttons row */
+/* Filter buttons */
 .filter-buttons {
   margin: 0 auto 20px;
   width: 90%;
@@ -61,7 +64,7 @@
   flex-wrap: wrap;
   padding: 12px 18px;
   border-radius: 999px;
-  background: #ffe6ee;
+  background: var(--brand-soft-bg-2);
 }
 
 .filter-buttons button {
@@ -71,19 +74,20 @@
   font-size: 15px;
   cursor: pointer;
   padding: 8px 22px;
-  color: #581b28;
+  color: var(--brand-primary);
   font-weight: 500;
   transition: 0.2s ease;
 }
 
 .filter-buttons button:hover {
-  background: #ffd6e4;
+  background: var(--brand-secondary);
+  color: white;
 }
 
 .filter-buttons .active {
-  background: #581b28;
-  color: #fffaf7;
-  border-color: #581b28;
+  background: var(--brand-primary);
+  color: var(--brand-soft-bg-1);
+  border-color: var(--brand-primary);
 }
 
 /* Grid of dessert cards */
@@ -95,11 +99,11 @@
   width: 88%;
 }
 
-/* Card similar to dashboard style */
+/* Card */
 .dessert-card {
-  border: 3.5px dashed #f3b5c4;
+  border: 3.5px dashed var(--brand-border-highlight);
   border-radius: 24px;
-  background: #fff7fa;
+  background: var(--brand-soft-bg-1);
   padding: 18px 18px 22px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -115,7 +119,7 @@
 .dessert-image-wrapper {
   border-radius: 18px;
   overflow: hidden;
-  background: #f9e2ea;
+  background: var(--brand-soft-bg-2);
   margin-bottom: 16px;
 }
 
@@ -144,14 +148,14 @@
   padding: 3px 12px;
   font-size: 11px;
   font-weight: 600;
-  background: #fde6f0;
-  color: #b2365c;
+  background: var(--brand-soft-bg-2);
+  color: var(--brand-primary);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .dessert-name {
-  color: #581B28;
+  color: var(--brand-primary);
   font-size: 20px;
   font-weight: 700;
   margin-top: 4px;
@@ -161,7 +165,7 @@
 .dessert-description-card {
   margin-top: 4px;
   font-size: 14px;
-  color: #4b3a40;
+  color: var(--brand-text-muted);
   line-height: 1.5;
 }
 
@@ -175,7 +179,7 @@
 
 .dessert-price {
   font-weight: 800;
-  color: #581B28;
+  color: var(--brand-primary);
   font-size: 20px;
 }
 
@@ -184,8 +188,8 @@
   height: 38px;
   border-radius: 50%;
   border: none;
-  background: #581B28;
-  color: #fff;
+  background: var(--brand-primary);
+  color: var(--brand-cream);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -199,16 +203,15 @@
   transform: scale(1.05);
 }
 
-/* CTA button */
 .build-your-dream-cake-btn {
   display: block;
   margin: 40px auto 0;
-  background-color: #581B28;
-  color: #FFFCF6;
+  background-color: var(--brand-primary);
+  color: var(--brand-cream);
   border: none;
   padding: 14px 30px;
   border-radius: 30px;
-  border: 0.5px solid #581B28;
+  border: 0.5px solid var(--brand-primary);
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;

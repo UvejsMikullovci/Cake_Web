@@ -1,7 +1,21 @@
 import React from "react";
 import "./Sidebar.css";
+import { auth } from "../../firebase";
+import { signOut } from "firebase/auth";
 
 export default function Sidebar({ onSelect, active }) {
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("User logged out");
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      });
+  };
+
   return (
     <aside className="sidebar">
 
@@ -11,6 +25,14 @@ export default function Sidebar({ onSelect, active }) {
       </div>
 
       <nav className="sidebar-menu">
+
+        <button
+          className={`menu-item ${active === "profile" ? "active" : ""}`}
+          onClick={() => onSelect("profile")}
+        >
+          <i className="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </button>
 
         <button
           className={`menu-item ${active === "orders" ? "active" : ""}`}
@@ -47,7 +69,7 @@ export default function Sidebar({ onSelect, active }) {
       </nav>
 
       <div className="sidebar-footer">
-        <button className="logout">
+        <button className="logout" onClick={handleLogout}>
           <i className="fa-solid fa-right-from-bracket"></i>
           Logout
         </button>

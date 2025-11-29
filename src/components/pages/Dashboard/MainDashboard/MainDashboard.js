@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Sidebar from '../../../organisms/Sidebar/Sidebar'
 import Header from '../../../organisms/NavBar/Navbar'
 import Footer from '../../../organisms/Footer/Footer'
-
+import DashboardProfile from '../DashboardProfile/DashboardProfile'
 import DashboardOrders from '../DashboardOrders/DashboardOrders'
 import DashboardDesserts from '../DashboardDesserts/DashboardDesserts'
 import DashboardBlog from '../DashboardBlog/DashboardBlog'
@@ -16,6 +16,8 @@ export default function MainDashboard() {
 
     const renderPage = () => {
         switch(activePage) {
+            case "profile" :
+                return <DashboardProfile />;
             case "orders":
                 return <DashboardOrders />;
             case "desserts":
@@ -25,7 +27,7 @@ export default function MainDashboard() {
             case "settings":
                 return <DashboardSettings />;
             default:
-                return <DashboardOrders />;
+                return <DashboardProfile />;
         }
     }
 

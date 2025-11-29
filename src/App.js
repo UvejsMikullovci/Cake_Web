@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { BrandThemeProvider } from "./theme/BrandThemeProvider";
 import Home from "./components/pages/Home/Home";
 import Desserts from "./components/pages/Desserts/Desserts";
 import CustomCakePage from "./components/pages/CustomCakes/CakePage";
@@ -16,20 +16,22 @@ import "./App.css";
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/cake" element={<CustomCakePage />} />
-        <Route path="/custom-cakes" element={<CustomCakePage />} />
-        <Route path="/contact" element={<ContactFaqPage />} />
-        <Route path="/auth" element={<SignInSignUp />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/desserts" element={<Desserts />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/checkout" element={<PaymentsAndCheckout />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </Router>
+    <BrandThemeProvider>
+      <Router>
+        <Routes>
+          <Route path="/cake" element={<CustomCakePage />} />
+          <Route path="/custom-cakes" element={<CustomCakePage />} />
+          <Route path="/contact" element={<ContactFaqPage />} />
+          <Route path="/auth" element={<SignInSignUp />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/desserts" element={<Desserts />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/checkout" element={<PaymentsAndCheckout />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </Router>
+    </BrandThemeProvider>
   );
 }

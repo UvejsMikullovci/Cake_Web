@@ -1,11 +1,11 @@
 import { LuSparkles } from "react-icons/lu";
-import cakee from '../../Photos/Random/cakee.jpg';
-import ppink from  '../../Photos/Random/ppink.jpg';
-import ArtisanPastries from '../../Photos/Random/Artisanpastries.jpg';
-import birthdaycake from '../../Photos/Random/birthdaycake.jpg';
-import cookies from '../../Photos/Random/cookies.jpg';
-import pies from '../../Photos/Random/pies.jpg';
-import weddingcake from '../../Photos/Random/weddingcake.jpg';
+import cakee from "../../Photos/Random/cakee.jpg";
+import ppink from "../../Photos/Random/ppink.jpg";
+import ArtisanPastries from "../../Photos/Random/Artisanpastries.jpg";
+import birthdaycake from "../../Photos/Random/birthdaycake.jpg";
+import cookies from "../../Photos/Random/cookies.jpg";
+import pies from "../../Photos/Random/pies.jpg";
+import weddingcake from "../../Photos/Random/weddingcake.jpg";
 import React, { useState, useEffect } from "react";
 import { FiEye, FiShoppingCart } from "react-icons/fi";
 import { Heart, Star, Sparkles } from "lucide-react";
@@ -14,13 +14,12 @@ import Footer from "../../organisms/Footer/Footer";
 import "./Home.css";
 
 export default function Home() {
-
   const Counter = ({ end, duration = 2000 }) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
       let start = 0;
-      const increment = end / (duration / 50); 
+      const increment = end / (duration / 50);
       const timer = setInterval(() => {
         start += increment;
         if (start >= end) {
@@ -46,22 +45,34 @@ export default function Home() {
   ];
 
   const cards = [
-    { icon: <Heart size={40} strokeWidth={1.5} />, title: "Weddings", text: "Elegant custom wedding cakes that make your special day unforgettable" },
-    { icon: <Star size={40} strokeWidth={1.5} />, title: "Birthdays", text: "Fun and colorful birthday cakes that bring joy to any celebration" },
-    { icon: <Sparkles size={40} strokeWidth={1.5} />, title: "Special Events", text: "Custom creations for corporate events, baby showers, and more" },
+    {
+      icon: <Heart size={40} strokeWidth={1.5} />,
+      title: "Weddings",
+      text: "Elegant custom wedding cakes that make your special day unforgettable"
+    },
+    {
+      icon: <Star size={40} strokeWidth={1.5} />,
+      title: "Birthdays",
+      text: "Fun and colorful birthday cakes that bring joy to any celebration"
+    },
+    {
+      icon: <Sparkles size={40} strokeWidth={1.5} />,
+      title: "Special Events",
+      text: "Custom creations for corporate events, baby showers, and more"
+    }
   ];
 
   const steps = [
     { number: "1", title: "Choose Your Cake", text: "Browse our delicious selection" },
     { number: "2", title: "Customize", text: "Add your personal touches" },
     { number: "3", title: "Place Order", text: "Secure checkout process" },
-    { number: "4", title: "Enjoy!", text: "Pick up or get it delivered" },
+    { number: "4", title: "Enjoy!", text: "Pick up or get it delivered" }
   ];
 
   const posts = [
     { img: birthdaycake, tag: "Tips & Tricks", title: "10 Tips for the Perfect Birthday Cake" },
     { img: weddingcake, tag: "Wedding", title: "Wedding Cake Trends 2025" },
-    { img: cookies, tag: "Recipes", title: "Our Secret Cookie Recipe" },
+    { img: cookies, tag: "Recipes", title: "Our Secret Cookie Recipe" }
   ];
 
   return (
@@ -69,9 +80,12 @@ export default function Home() {
       <Navbar />
       <section className="banner">
         <div className="banner-text">
-          <span className="badge"><LuSparkles /> Freshly Baked Daily</span>
+          <span className="badge">
+            <LuSparkles /> Freshly Baked Daily
+          </span>
           <h1 className="title">
-            Sweet Moments,<br />
+            Sweet Moments,
+            <br />
             <span>Made Perfect</span>
           </h1>
           <p className="description">
@@ -110,10 +124,7 @@ export default function Home() {
       </section>
 
       <svg className="svgBaner" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path
-          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-          fill="#F7C0C3"
-        ></path>
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" />
       </svg>
 
       <section className="banner2">
@@ -123,14 +134,18 @@ export default function Home() {
             Discover our most loved creations, baked fresh every day with premium ingredients
           </p>
           <div className="cards-grid">
-            {items.map((item) => (
+            {items.map(item => (
               <div key={item.id} className="sweet-card">
                 <div className="image-wrapper">
                   <img src={item.img} alt={item.title} />
                   <div className="hover-overlay">
                     <div className="hover-icons">
-                      <div className="Eye"><FiEye /></div>
-                      <div className="shopcart"><FiShoppingCart /></div>
+                      <div className="Eye">
+                        <FiEye />
+                      </div>
+                      <div className="shopcart">
+                        <FiShoppingCart />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -213,7 +228,7 @@ export default function Home() {
       </section>
 
       <section className="footer-section">
-        <Footer/>
+        <Footer />
       </section>
     </div>
   );

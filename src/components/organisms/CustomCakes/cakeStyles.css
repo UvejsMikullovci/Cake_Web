@@ -1,3 +1,4 @@
+
 .cake-page-layout {
   display: flex;
   width: 100vw;
@@ -12,6 +13,10 @@
   flex: 3;
   min-width: 0;
   position: sticky;
+}
+
+#root {
+  overflow-x: hidden;
 }
 
 .cake-right-panel {
@@ -53,19 +58,19 @@
   font-size: 22px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: #101010;
+  color: var(--brand-primary);
 }
 
 .cake-controls-subtitle {
   font-size: 13px;
-  color: #7b7b7b;
+  color: var(--brand-text-muted);
 }
 
 .cake-section {
   border-radius: 16px;
   padding: 14px 14px 12px;
-  background: #ffffff;
-  border: 1px solid #f0e4dd;
+  background: var(--brand-soft-bg-1);
+  border: 1px solid var(--brand-border-soft);
 }
 
 .cake-section-header {
@@ -78,15 +83,15 @@
 .cake-section-title {
   font-size: 14px;
   font-weight: 600;
-  color: #101010;
+  color: var(--brand-primary);
 }
 
 .cake-section-badge {
   font-size: 11px;
   padding: 2px 8px;
   border-radius: 999px;
-  background: #f7e7dc;
-  color: #8a5a3c;
+  background: var(--brand-secondary);
+  color: #ffffff;
 }
 
 .cake-size-options {
@@ -99,8 +104,8 @@
   border-radius: 999px;
   padding: 7px 10px;
   font-size: 13px;
-  border: 1px solid #e6d8d0;
-  background: #fffdfb;
+  border: 1px solid var(--brand-border-soft);
+  background: var(--brand-cream);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -115,18 +120,18 @@
 
 .cake-pill-label {
   font-weight: 500;
-  color: #1c1c1c;
+  color: var(--brand-primary);
 }
 
 .cake-pill-sub {
   font-size: 11px;
-  color: #272727;
+  color: var(--brand-primary);
 }
 
 .cake-pill.active {
-  background: #fb91a8be;
-  color: #1b1b1b;
-  border-color: #581b28;
+  background: var(--brand-secondary);
+  color: #ffffff;
+  border-color: var(--brand-primary);
 }
 
 .cake-layers-list {
@@ -149,8 +154,8 @@
 .cake-layer-card {
   border-radius: 12px;
   padding: 10px 11px;
-  background: #fffdfb;
-  border: 1px solid #efe1d9;
+  background: var(--brand-cream);
+  border: 1px solid var(--brand-border-soft);
 }
 
 .cake-layer-row {
@@ -163,7 +168,7 @@
 .cake-layer-label {
   font-size: 13px;
   font-weight: 500;
-  color: #101010;
+  color: var(--brand-primary);
 }
 
 .cake-slider-row {
@@ -172,7 +177,7 @@
 
 .cake-slider-label {
   font-size: 11px;
-  color: #8a8a8a;
+  color: var(--brand-text-muted);
   margin-bottom: 3px;
 }
 
@@ -189,7 +194,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #9b8c83;
+  color: var(--brand-primary);
   margin-bottom: 6px;
 }
 
@@ -210,14 +215,25 @@
     border-color 0.12s ease;
 }
 
+.cake-page-layout {
+  overflow-x: hidden;
+}
+
+.cake-flavor-dot.selected {
+  background: var(--flavor-color, #ddd);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px var(--brand-secondary);
+}
+
 .cake-flavor-dot:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
-.cake-flavor-dot.selected {
-  border-color: #581b28;
-  box-shadow: 0 0 0 2px rgba(247, 192, 195, 0.7);
+.cake-flavor-dot.candle-dot.selected {
+  background: var(--flavor-color);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px var(--brand-secondary);
 }
 
 
@@ -238,13 +254,13 @@
 }
 
 .cake-btn.primary {
-  background: #581b28;
-  color: white;
+  background: var(--brand-primary);
+  color: #ffffff;
 }
 
 .cake-btn.secondary {
-  background: #f3e4dd;
-  color: #5f4330;
+  background: var(--brand-soft-bg-2);
+  color: var(--brand-primary);
 }
 
 .cake-toggle-row {
@@ -258,17 +274,18 @@
   padding: 5px 10px;
   font-size: 12px;
   border-radius: 999px;
-  border: 1px solid #e1d5ce;
-  background: white;
+  border: 1px solid var(--brand-border-soft);
+  background: var(--brand-cream);
   cursor: pointer;
   transition: background 0.16s ease, border-color 0.16s ease,
     color 0.16s ease;
+  color: var(--brand-primary);
 }
 
 .cake-toggle-pill.active {
-  background: #f7c0c3;
-  border-color: #e89bab;
-  color: #581b28;
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #ffffff;
 }
 
 .cake-input {
@@ -276,8 +293,8 @@
   padding: 7px 9px;
   font-size: 13px;
   border-radius: 9px;
-  border: 1px solid #e1d5ce;
-  background: #fffcf6;
+  border: 1px solid var(--brand-border-soft);
+  background: var(--brand-cream);
 }
 
 .cake-gift-row {
@@ -289,7 +306,7 @@
 
 .cake-gift-label {
   font-size: 13px;
-  color: #101010;
+  color: var(--brand-primary);
 }
 
 .cake-switch {
@@ -297,7 +314,7 @@
   width: 40px;
   height: 22px;
   border-radius: 999px;
-  background: #d5d5d5;
+  background: var(--brand-secondary);
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -309,12 +326,12 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: white;
+  background: #ffffff;
   transition: transform 0.2s ease;
 }
 
 .cake-switch.on {
-  background: #581b28;
+  background: var(--brand-primary);
 }
 
 .cake-switch.on .cake-switch-thumb {
@@ -338,21 +355,25 @@
 
 .cake-price-label {
   font-size: 11px;
-  color: #8a8a8a;
+  color: var(--brand-text-muted);
 }
 
 .cake-price-value {
   font-size: 20px;
   font-weight: 700;
-  color: #101010;
+  color: var(--brand-primary);
 }
 
 .cake-primary-action {
   padding: 9px 14px;
   border-radius: 999px;
   border: none;
-  background: linear-gradient(135deg, #f7c0c3, #581b28);
-  color: white;
+  background: linear-gradient(
+    135deg,
+    var(--brand-secondary),
+    var(--brand-primary)
+  );
+  color: #ffffff;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -369,11 +390,10 @@
   }
 }
 
-
 .ios-toggle {
   width: 50px;
   height: 25px;
-  background: #ffd3e1;
+  background: var(--brand-secondary);
   border-radius: 30px;
   position: relative;
   cursor: pointer;
@@ -384,16 +404,16 @@
 }
 
 .ios-toggle.on {
-  background: #ff6f91;
+  background: var(--brand-primary);
 }
 
 .ios-toggle-thumb {
   width: 20px;
   height: 20px;
-  background: white;
+  background: #ffffff;
   border-radius: 50%;
   transition: 0.25s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   transform: translateX(0);
 }
 
@@ -404,8 +424,7 @@
 .cake-toggle-label {
   font-size: 15px;
   font-weight: 500;
-  color: #581b28;
-  margin-right: 12px;
+  color: var(--brand-primary);
 }
 
 .cake-toggle-row1 {
