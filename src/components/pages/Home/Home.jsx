@@ -11,6 +11,7 @@ import { FiEye, FiShoppingCart } from "react-icons/fi";
 import { Heart, Star, Sparkles } from "lucide-react";
 import Navbar from "../../organisms/NavBar/Navbar";
 import Footer from "../../organisms/Footer/Footer";
+import { Link } from "react-router-dom";
 import "./Home.css";
 
 export default function Home() {
@@ -143,9 +144,11 @@ export default function Home() {
                       <div className="Eye">
                         <FiEye />
                       </div>
-                      <div className="shopcart">
-                        <FiShoppingCart />
-                      </div>
+                      <Link to="/checkout" style={{ textDecoration: "none", color: "inherit" }}>
+      <div className="shopcart">
+        <FiShoppingCart />
+      </div>
+    </Link>
                     </div>
                   </div>
                 </div>
