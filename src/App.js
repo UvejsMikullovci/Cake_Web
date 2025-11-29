@@ -11,6 +11,7 @@ import About from "./components/pages/About/About";
 import Gallery from "./components/pages/Gallery/Gallery";
 import PaymentsAndCheckout from "./components/pages/PaymentAndCheckout/PaymentsAndCheckout";
 import Dashboard from "./components/pages/Dashboard/MainDashboard/MainDashboard";
+import SingleBlog from "./components/pages/Blog/singelBlog"; // Add this import
 
 import "./App.css";
 
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/checkout" element={<PaymentsAndCheckout />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/blog/:id" element={<SingleBlog />} /> {/* Add dynamic route for individual blog post */}
         </Routes>
       </Router>
     </BrandThemeProvider>
