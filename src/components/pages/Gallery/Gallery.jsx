@@ -25,12 +25,12 @@ import Bakllava from '../../Photos/Random/Bakllava.jpg';
 import ClassicApplePie from '../../Photos/Random/ClassicApplePie.jpg';
 import Praline from '../../Photos/Random/Praline.jpg';
 import CherryDelight from '../../Photos/Random/CherryDelight.jpg';
-import Fruitcakes from '../../Photos/Random/Fruitcakes.jpg'
-import pies from '../../Photos/Random/pies.jpg'
-import cakee from '../../Photos/Random/cakee.jpg'
-import Artisanpastries from '../../Photos/Random/Artisanpastries.jpg'
+import Fruitcakes from '../../Photos/Random/Fruitcakes.jpg';
+import pies from '../../Photos/Random/pies.jpg';
+import cakee from '../../Photos/Random/cakee.jpg';
+import Artisanpastries from '../../Photos/Random/Artisanpastries.jpg';
 import Masonry from "react-masonry-css";
-import "./Gallery.css"
+import "./Gallery.css";
 
 export default function Gallery() {
     const images = [
@@ -63,15 +63,18 @@ export default function Gallery() {
         RomanticRose,
         CherryDelight
     ];
+
     const breakpoints = {
         default: 3,
         1100: 3,
         800: 2,
         500: 1,
     };
+
     return (
-        <div className="gallery-section">
+        <div className="gallery-wrapper">
             <Navbar />
+
             <section className="gallery-banner">
                 <div className="gallery-text">
                     <h1 className="gallery-title">Our Gallery</h1>
@@ -80,13 +83,15 @@ export default function Gallery() {
                     </p>
                 </div>
             </section>
+
             <svg className="svgBaner" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path
                     d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                    fill="#F7C0C3"
+                    fill="var(--brand-secondary)"
                 ></path>
             </svg>
-            <section className="gallery-section">
+
+            <section className="gallery-grid-section">
                 <Masonry
                     breakpointCols={breakpoints}
                     className="masonry-grid"
@@ -95,7 +100,6 @@ export default function Gallery() {
                     {images.map((src, index) => (
                         <div key={index} className="gallery-item">
                             <img src={src} alt={`Gallery ${index}`} className="gallery-image" />
-
                         </div>
                     ))}
                 </Masonry>
@@ -105,5 +109,5 @@ export default function Gallery() {
                 <Footer />
             </section>
         </div>
-    )
+    );
 }

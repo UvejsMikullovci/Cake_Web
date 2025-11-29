@@ -69,9 +69,7 @@ function CakePopup({ product, onClose }) {
             </div>
           </ul>
 
-          <p className="popup-desc">
-            {product.description}
-          </p>
+          <p className="popup-desc">{product.description}</p>
 
           <h2 className="popup-price">€{product.price}</h2>
 
