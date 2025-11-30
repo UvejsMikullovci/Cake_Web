@@ -23,7 +23,9 @@ export default function Navbar() {
       </div>
       <div className="nav-icon-button">
         <div className="nav-icons">
-          <FiHeart className="icon" />
+         <Link to="/favorites">
+  <FiHeart className="icon" />
+</Link>
           <Link to="/checkout">
             <FiShoppingCart className="icon" />
           </Link>

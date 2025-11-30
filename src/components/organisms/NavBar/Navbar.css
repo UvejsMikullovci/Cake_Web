@@ -49,6 +49,7 @@
 }
 
 .icon:hover {
+  border-radius: 30px;
   background-color: #F7C0C385;
 }
 

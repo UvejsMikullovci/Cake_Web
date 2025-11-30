@@ -590,14 +590,14 @@
   transition: 0.3s ease;
 }
 
-.blog-view-all:hover {
-  background: var(--brand-primary);
+.view-all-blog:hover {
+  background-color:#581b28;
   color: white;
 }
 
 .newsletter-banner {
   height: 300px;
-  width: 86%;
+  width: 90%;
   padding: 70px 20px;
   border-radius: 40px;
   text-align: center;
@@ -609,7 +609,7 @@
   color: white;
   font-family: "Poppins", sans-serif;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 100px auto;
 }
 
 .newsletter-content {
