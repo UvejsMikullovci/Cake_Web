@@ -11,7 +11,12 @@ import About from "./components/pages/About/About";
 import Gallery from "./components/pages/Gallery/Gallery";
 import PaymentsAndCheckout from "./components/pages/PaymentAndCheckout/PaymentsAndCheckout";
 import Dashboard from "./components/pages/Dashboard/MainDashboard/MainDashboard";
+<<<<<<< HEAD
+import Favorite from "./components/pages/Favorite/Favorite";
+=======
+import SingleBlog from "./components/pages/Blog/singelBlog"; // Add this import
 
+>>>>>>> 29e5216fb60d76de6758c731bc8c850eb51854ad
 import "./App.css";
 
 export default function App() {
@@ -30,6 +35,11 @@ export default function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/checkout" element={<PaymentsAndCheckout />} />
           <Route path="/dashboard" element={<Dashboard />} />
+<<<<<<< HEAD
+          <Route path="/favorites" element={<Favorite />} />
+=======
+          <Route path="/blog/:id" element={<SingleBlog />} /> {/* Add dynamic route for individual blog post */}
+>>>>>>> 29e5216fb60d76de6758c731bc8c850eb51854ad
         </Routes>
       </Router>
     </BrandThemeProvider>

@@ -160,7 +160,7 @@
   padding: 60px 20px;
 }
 
-.title {
+.about-banner .title {
   font-size: 42px;
   font-weight: 700;
   color: var(--brand-primary);

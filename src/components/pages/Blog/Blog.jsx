@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./Blog.css";
+import { Link } from "react-router-dom"; // Import Link for navigation
 import Navbar from "../../organisms/NavBar/Navbar";
 import Footer from "../../organisms/Footer/Footer";
 import { db } from "../../firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import "./Blog.css";
 
 export default function Blog() {
   const [posts, setPosts] = useState([]);
@@ -21,7 +22,8 @@ export default function Blog() {
 
   useEffect(() => {
     const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
-
+    
+    // Listen to the Firestore collection for updates
     const unsub = onSnapshot(q, (snapshot) => {
       const list = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -30,21 +32,13 @@ export default function Blog() {
       setPosts(list);
     });
 
-    return () => unsub();
+    return () => unsub(); // Unsubscribe when component unmounts
   }, []);
 
-  const filters = [
-    "All",
-    "Tips & Tricks",
-    "Guides",
-    "Inspiration",
-    "Recipes",
-  ];
+  const filters = ["All", "Tips & Tricks", "Guides", "Inspiration", "Recipes"];
 
   const filteredPosts =
-    activeFilter === "All"
-      ? posts
-      : posts.filter((p) => p.type === activeFilter);
+    activeFilter === "All" ? posts : posts.filter((p) => p.type === activeFilter);
 
   return (
     <div className="blog-wrapper">
@@ -86,25 +80,27 @@ export default function Blog() {
 
           return (
             <article className="blog-card" key={post.id}>
-              <div className="blog-img-wrapper">
-                {post.imageBase64 ? (
-                  <img src={post.imageBase64} alt={post.title} />
-                ) : (
-                  <div className="blog-img-placeholder" />
-                )}
-                <span className="tag-label">{post.type}</span>
-              </div>
+              <Link to={`/blog/${post.id}`} className="blog-card-link">
+                <div className="blog-img-wrapper">
+                  {post.imageBase64 ? (
+                    <img src={post.imageBase64} alt={post.title} />
+                  ) : (
+                    <div className="blog-img-placeholder" />
+                  )}
+                  <span className="tag-label">{post.type}</span>
+                </div>
 
-              <h3>{post.title}</h3>
-              <p>{post.content?.slice(0, 150)}...</p>
+                <h3>{post.title}</h3>
+                <p>{post.content?.slice(0, 150)}...</p>
 
-              <div className="blog-meta">
-                <span>{dateText}</span>
-                <span>•</span>
-                <span>{minutes} min read</span>
-              </div>
+                <div className="blog-meta">
+                  <span>{dateText}</span>
+                  <span>•</span>
+                  <span>{minutes} min read</span>
+                </div>
 
-              <button className="read-btn">Read →</button>
+                <button className="read-btn">Read →</button>
+              </Link>
             </article>
           );
         })}

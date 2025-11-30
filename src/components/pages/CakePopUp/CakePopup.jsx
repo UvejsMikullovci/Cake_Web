@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { FiHeart } from "react-icons/fi";
 import "./CakePopup.css";
 
 function CakePopup({ product, onClose }) {
@@ -8,6 +9,29 @@ function CakePopup({ product, onClose }) {
 
   if (!product) return null;
 
+  // ✅ ADD TO FAVORITES
+  const handleAddToFavorites = async () => {
+    try {
+      const favRef = doc(db, "favorites", product.id);
+
+      await setDoc(favRef, {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        img: product.img,
+        description: product.description,
+        ingredients: product.ingredients || [],
+        category: product.category || "Other",
+        createdAt: new Date()
+      });
+
+      alert("Added to Favorites!");
+    } catch (error) {
+      console.error("Error adding favorite: ", error);
+    }
+  };
+
+  // ADD TO CART (unchanged)
   const handleAddToCart = async () => {
     setLoading(true);
 
@@ -46,11 +70,20 @@ function CakePopup({ product, onClose }) {
   return (
     <div className="popup-overlay" onClick={onClose}>
       <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+
+        {/* LEFT SIDE IMAGE */}
         <div className="popup-left">
           <img src={product.img} alt={product.name} className="popup-img" />
         </div>
 
+        {/* RIGHT SIDE INFO */}
         <div className="popup-right">
+
+          {/* ❤️ HEART BUTTON */}
+          <div className="popup-icon" onClick={handleAddToFavorites}>
+            <FiHeart className="pop-icon" />
+          </div>
+
           <h1 className="popup-title">{product.name}</h1>
 
           <h3 className="popup-subtitle">Ingredients</h3>
@@ -69,13 +102,15 @@ function CakePopup({ product, onClose }) {
             </div>
           </ul>
 
-          <p className="popup-desc">
-            {product.description}
-          </p>
+          <p className="popup-desc">{product.description}</p>
 
           <h2 className="popup-price">€{product.price}</h2>
 
-          <button className="popup-btn" onClick={handleAddToCart} disabled={loading}>
+          <button
+            className="popup-btn"
+            onClick={handleAddToCart}
+            disabled={loading}
+          >
             {loading ? "Adding..." : "ADD TO CART"}
           </button>
         </div>
