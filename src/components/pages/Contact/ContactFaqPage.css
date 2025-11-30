@@ -1,28 +1,9 @@
-:root {
-  --brand-maroon: #5a1f26;
-  --brand-pink-light: #fdeef0;
-  --border-pink: #f4c3c8;
-  --text-dark: #3a3a3a;
-  --text-muted: #787878;
-  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body,
-html,
 .cf-page {
   margin: 0;
   padding: 0;
-  font-family: var(--font-family);
-  color: var(--text-dark);
-  background-color: #fff9f8;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--brand-cream);
+  font-family: var(--brand-font);
+  color: var(--brand-text);
 }
 
 .cf-page {
@@ -33,7 +14,7 @@ html,
 
 .cf-hero {
   padding: 180px 24px 64px;
-  background-color: #F7C0C3;
+  background-color: var(--brand-secondary);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -41,9 +22,9 @@ html,
 
 .cf-hero-inner h1 {
   font-size: 3rem;
-  font-weight: bolder;
+  font-weight: 800;
   margin: 0 0 16px;
-  color: var(--brand-maroon);
+  color: var(--brand-primary);
   letter-spacing: -0.02em;
 }
 
@@ -74,20 +55,19 @@ html,
 
 .cf-card {
   background-color: #fff;
-  border: 1.5px solid var(--border-pink);
+  border: 1.5px solid var(--brand-border-soft);
   border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 4px 12px rgb(90 31 38 / 0.07);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  user-select: none;
 }
 
 .cf-card h2 {
   font-weight: 700;
   font-size: 1.75rem;
   margin: 0 0 24px;
-  color: var(--brand-maroon);
+  color: var(--brand-primary);
 }
 
 .cf-form {
@@ -102,7 +82,7 @@ html,
   gap: 24px;
 }
 
-.cf-row>label {
+.cf-row > label {
   flex: 1;
   min-width: 140px;
   display: flex;
@@ -116,29 +96,27 @@ label {
   gap: 6px;
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--brand-maroon);
-  cursor: pointer;
+  color: var(--brand-primary);
 }
 
 .cf-label {
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--brand-maroon);
+  color: var(--brand-primary);
 }
 
 .cf-input,
 .cf-textarea {
   font-size: 1rem;
   padding: 12px 16px;
-  border: 1.5px solid var(--border-pink);
+  border: 1.5px solid var(--brand-border-soft);
   border-radius: 12px;
   outline-offset: 2px;
-  color: var(--text-dark);
+  color: var(--brand-text);
   background-color: #fff;
-  transition: border-color 0.25s ease;
+  transition: 0.25s ease;
   font-family: inherit;
   resize: vertical;
-  min-height: 40px;
 }
 
 .cf-textarea {
@@ -147,12 +125,12 @@ label {
 
 .cf-input:focus,
 .cf-textarea:focus {
-  border-color: var(--brand-maroon);
-  box-shadow: 0 0 6px rgb(90 31 38 / 0.3);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 6px rgba(88, 27, 40, 0.35);
 }
 
 .cf-btn {
-  background-color: var(--brand-maroon);
+  background-color: var(--brand-primary);
   color: white;
   font-weight: 700;
   padding: 14px 24px;
@@ -160,45 +138,21 @@ label {
   border-radius: 40px;
   cursor: pointer;
   font-size: 1.1rem;
-  transition: background-color 0.3s ease;
-  align-self: flex-start;
+  transition: 0.25s ease;
   width: 100%;
   max-width: 300px;
-  user-select: none;
   margin-left: auto;
   margin-right: auto;
 }
 
-.wavy-divider svg {
-  width: calc(100% + 1.3px);
-  height: 60px;
-  display: block;
-  position: relative;
-
+.cf-btn:hover {
+  background-color: #6d2231;
 }
 
 .error {
   color: red;
   font-size: 0.85rem;
   margin-top: 4px;
-}
-
-.cf-input.error-border,
-.cf-textarea.error-border {
-  border: 1px solid red;
-}
-
-
-.svgBaner {
-  background-color: none;
-  height: 70px;
-}
-
-.cf-btn:hover,
-.cf-btn:focus {
-  background-color: #7d3039;
-  outline: none;
-  box-shadow: 0 0 8px rgb(125 48 57 / 0.7);
 }
 
 .info-list {
@@ -219,22 +173,19 @@ label {
   align-items: center;
   min-width: 44px;
   min-height: 44px;
-  background: radial-gradient(circle at center, #7d3039 10%, #5a1f26 90%);
+  background: var(--brand-primary);
   border-radius: 50%;
   color: white;
   flex-shrink: 0;
   font-size: 1.25rem;
   padding: 8px;
-  user-select: none;
 }
 
 .info-text h4 {
   margin: 0 0 4px;
   font-weight: 700;
   font-size: 1rem;
-  color: var(--brand-maroon);
-  line-height: 1.3;
-  user-select: text;
+  color: var(--brand-primary);
 }
 
 .info-text p {
@@ -242,16 +193,13 @@ label {
   white-space: pre-line;
   font-weight: 500;
   font-size: 0.9rem;
-  color: var(--text-muted);
-  line-height: 1.4;
-  user-select: text;
+  color: var(--brand-text-light);
 }
 
 .map-wrapper {
   margin-top: 32px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgb(90 31 38 / 0.1);
   height: 180px;
 }
 
@@ -260,12 +208,11 @@ label {
   width: 100%;
   height: 100%;
   display: block;
-  pointer-events: auto;
   border-radius: 16px;
 }
 
 .faq-section {
-  max-width: 1200px !important;
+  max-width: 1200px;
   width: 100%;
   padding: 0 24px;
 }
@@ -278,54 +225,51 @@ label {
 .faq-header h2 {
   font-weight: 700;
   font-size: 2.25rem;
-  color: var(--brand-maroon);
+  color: var(--brand-primary);
   margin-bottom: 8px;
-  letter-spacing: -0.02em;
 }
 
 .faq-header p {
   max-width: 520px;
   margin: 0 auto;
   font-size: 1.05rem;
-  color: var(--text-muted);
-  line-height: 1.5;
+  color: var(--brand-text-light);
 }
 
 .faq-list {
-  max-width: 900px !important;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px !important;
+  gap: 24px;
 }
-
 
 .faq-item {
   border-radius: 14px;
-  border: 1.5px solid var(--border-pink);
+  border: 1.5px solid var(--brand-border-soft);
+  transition: 0.25s ease;
 }
 
 .faq-item:hover {
-  border-color: var(--brand-maroon);
+  border-color: var(--brand-primary);
 }
 
 .faq-q {
   padding: 20px 24px;
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--brand-maroon);
+  color: var(--brand-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  user-select: text;
 }
 
 .chev {
   width: 22px;
   height: 22px;
   transition: transform 0.3s ease;
-  color: var(--brand-maroon);
+  color: var(--brand-primary);
 }
 
 .chev.rot {
@@ -336,16 +280,14 @@ label {
   height: 0;
   overflow: hidden;
   transition: height 0.35s ease;
-  border-radius: 20px;
 }
 
 .faq-a-inner {
   padding: 16px 24px;
   font-weight: 500;
   font-size: 1rem;
-  color: var(--text-dark);
+  color: var(--brand-text);
   line-height: 1.5;
-  user-select: text;
 }
 
 @media (max-width: 640px) {
