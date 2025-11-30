@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link } from "react-router-dom";
 import Navbar from "../../organisms/NavBar/Navbar";
 import Footer from "../../organisms/Footer/Footer";
 import { db } from "../../firebase";
@@ -9,6 +9,7 @@ import "./Blog.css";
 export default function Blog() {
   const [posts, setPosts] = useState([]);
   const [activeFilter, setActiveFilter] = useState("All");
+  const [searchText, setSearchText] = useState("");
 
   const formatDate = (iso) => {
     if (!iso) return "";
@@ -22,23 +23,20 @@ export default function Blog() {
 
   useEffect(() => {
     const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
-    
-    // Listen to the Firestore collection for updates
     const unsub = onSnapshot(q, (snapshot) => {
-      const list = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setPosts(list);
     });
-
-    return () => unsub(); // Unsubscribe when component unmounts
+    return () => unsub();
   }, []);
 
   const filters = ["All", "Tips & Tricks", "Guides", "Inspiration", "Recipes"];
 
-  const filteredPosts =
-    activeFilter === "All" ? posts : posts.filter((p) => p.type === activeFilter);
+  const filteredPosts = posts
+    .filter((p) => (activeFilter === "All" ? true : p.type === activeFilter))
+    .filter((p) =>
+      p.title.toLowerCase().includes(searchText.toLowerCase())
+    );
 
   return (
     <div className="blog-wrapper">
@@ -50,7 +48,12 @@ export default function Blog() {
 
         <div className="blog-search">
           <i className="fi fi-rr-search"></i>
-          <input type="text" placeholder="Search articles…" />
+          <input
+            type="text"
+            placeholder="Search articles…"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
         </div>
       </div>
 
@@ -92,15 +95,18 @@ export default function Blog() {
 
                 <h3>{post.title}</h3>
                 <p>{post.content?.slice(0, 150)}...</p>
+              </Link>
 
+              <div className="blog-card-footer">
                 <div className="blog-meta">
                   <span>{dateText}</span>
                   <span>•</span>
                   <span>{minutes} min read</span>
                 </div>
-
-                <button className="read-btn">Read →</button>
-              </Link>
+                <Link to={`/blog/${post.id}`}>
+                  <button className="read-btn">Read →</button>
+                </Link>
+              </div>
             </article>
           );
         })}
