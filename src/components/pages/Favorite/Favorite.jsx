@@ -8,6 +8,7 @@ import Footer from "../../organisms/Footer/Footer";
 
 export default function Favorite() {
   const [favorites, setFavorites] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -27,48 +28,69 @@ export default function Favorite() {
     await deleteDoc(doc(db, "users", user.uid, "favorites", id));
   };
 
+  // Filter favorites based on search
+  const filteredFavorites = favorites.filter((item) =>
+    item.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   return (
     <div className="favorites-wrapper">
       <Navbar />
-      <h1 className="fav-title">Your Favorites</h1>
+
+      <div className="fav-banner">
+        <h1 className="fav-title">Your Favorites</h1>
+
+        {/* Search bar */}
+        <div className="fav-search">
+          <input
+            type="text"
+            placeholder="Search favorites…"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
+      </div>
 
       <div className="fav-grid">
-        {favorites.length === 0 && (
-          <p className="no-favorites">No favorites yet ❤️</p>
+        {filteredFavorites.length === 0 && (
+          <p className="no-favorites">No favorites found ❤️</p>
         )}
 
-        {favorites.map((item) => (
+        {filteredFavorites.map((item) => (
           <div className="fav-card" key={item.id}>
-            <div className="fav-img-box">
-              <img src={item.img} alt={item.name} />
+            <div className="fav-img-wrapper">
+              <img src={item.img} alt={item.name} className="fav-img" />
             </div>
 
-            <div className="fav-info">
-              <h2 className="fav-item-title">{item.name}</h2>
+            <div className="fav-card-body">
+              <h2 className="fav-name">{item.name}</h2>
 
-              <h3 className="ingredients-title">Ingredients</h3>
-              <ul className="ingredients-list">
+              <h3 className="fav-ingredients-title">Ingredients</h3>
+              <ul className="fav-ingredients-list">
                 {item.ingredients?.map((ing, i) => (
                   <li key={i}>{ing}</li>
                 ))}
               </ul>
 
-              <p className="fav-desc">{item.description}</p>
+              <p className="fav-description">{item.description}</p>
 
-              <p className="fav-price">€{item.price}</p>
-              <div className="buttons">
-                <button className="add-btn">ADD TO CART</button>
-                <button
-                  className="remove-btn"
-                  onClick={() => removeFavorite(item.id)}
-                >
-                  REMOVE
-                </button>
+              <div className="fav-price-row">
+                <span className="fav-price">€{item.price}</span>
+                <div className="fav-buttons">
+                  <button className="fav-add-btn">ADD TO CART</button>
+                  <button
+                    className="fav-remove-btn"
+                    onClick={() => removeFavorite(item.id)}
+                  >
+                    REMOVE
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
+
       <Footer />
     </div>
   );
