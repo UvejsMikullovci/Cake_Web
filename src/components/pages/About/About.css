@@ -34,6 +34,7 @@
   margin-top: 100px;
   justify-content: space-evenly;
   align-items: center;
+  gap:200px
 }
 
 .about-img {
@@ -42,8 +43,8 @@
 
 .aboutimg {
   object-fit: cover;
-  height: 60vh;
-  width: 600px;
+  height: 65vh;
+  width: 650px;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
@@ -56,17 +57,17 @@
 }
 
 .about-p {
-  font-size: 14px;
+  font-size: 15px;
   color: #00211abf;
   text-align: left;
   font-weight: 450;
 }
 
 .years {
-  right: 460px;
+  right: 520px;
   height: 130px;
   width: 170px;
-  top: 335px;
+  top: 380px;
   position: absolute;
   background-color: var(--brand-secondary);
   color: var(--brand-primary);

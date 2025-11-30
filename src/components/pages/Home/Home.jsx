@@ -212,7 +212,9 @@ export default function Home() {
             ))}
           </div>
           <div className="footer-blog">
+            <Link to='/blog'>
             <button className="view-all-blog">View All Posts</button>
+            </Link>
           </div>
         </div>
       </section>

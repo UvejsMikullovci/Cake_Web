@@ -91,19 +91,19 @@ export default function About() {
         <div className="about-text">
           <h1 className="about-title">Our Story</h1>
           <p className="about-p">
-            CakeCrush Bakery started in 2015 with a simple dream: to bring joy to
-            people's lives through exceptional cakes and pastries. What began as a
+            CakeCrush Bakery started in 2015 with a simple dream: to bring joy to<br></br>
+            people's lives through exceptional cakes and pastries. What began as a<br></br>
             small home kitchen operation has grown into a beloved community bakery.
             <br />
             <br />
-            Our founder, Sarah Johnson, grew up watching her grandmother bake.
-            Those childhood memories of flour-dusted counters and the sweet smell
+            Our founder, Sarah Johnson, grew up watching her grandmother bake.<br></br>
+            Those childhood memories of flour-dusted counters and the sweet smell<br></br>
             of vanilla inspired her to share that same warmth and comfort with
             others.
             <br />
             <br />
-            Today, we're proud to serve our community with handcrafted cakes,
-            cookies, and pastries made from scratch daily. Every creation is made
+            Today, we're proud to serve our community with handcrafted cakes,<br></br>
+            cookies, and pastries made from scratch daily. Every creation is made<br></br>
             with love, quality ingredients, and attention to detail.
           </p>
         </div>
