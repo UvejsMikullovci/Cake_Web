@@ -1,7 +1,7 @@
 .navbar {
   width: 100%;
   padding: 0px 40px;
-  background: white;
+  background: var(--brand-cream);
   display: flex;
   height: 121px;
   justify-content: space-between;
@@ -13,12 +13,14 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.logo-img {
-  width: 100%;
-}
-
 .logo {
   width: 200px;
+}
+
+.logo-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -29,9 +31,13 @@
 }
 
 .nav-links a {
-  color: #101010;
+  color: var(--brand-text-main);
   text-decoration: none;
   transition: 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--brand-primary);
 }
 
 .nav-icon-button {
@@ -45,24 +51,23 @@
   display: flex;
   gap: 15px;
   align-items: center;
-  padding: 0px;
-}
-
-.icon:hover {
-  border-radius: 30px;
-  background-color: #F7C0C385;
 }
 
 .icon {
   font-size: 25px;
   cursor: pointer;
-  color: #101010;
+  color: var(--brand-text-main);
   padding: 5px;
   transition: all 0.3s ease;
+  border-radius: 30px;
+}
+
+.icon:hover {
+  background-color: var(--brand-secondary-soft);
 }
 
 .dashboard-btn {
-  background: #581B28;
+  background: var(--brand-primary);
   color: white;
   padding: 10px 26px;
   border-radius: 20px;
@@ -72,5 +77,6 @@
 }
 
 .dashboard-btn:hover {
-  background: #581b28e8;
+  background: var(--brand-secondary);
+  color: var(--brand-primary);
 }

@@ -3,11 +3,12 @@ import { Link, NavLink } from "react-router-dom";
 import { FiHeart, FiUser, FiShoppingCart } from "react-icons/fi";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase"; 
-import logo from "../../Photos/Logos/logo.jpg";
+import { useBrandTheme } from "../../../theme/BrandThemeProvider";
 import "./Navbar.css";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
+  const theme = useBrandTheme();
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
@@ -18,12 +19,18 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
+      {/* LOGO - Dynamic */}
       <div className="logo">
         <NavLink to="/">
-          <img src={logo} alt="logo" className="logo-img" />
+          {theme.logoBase64 ? (
+            <img src={theme.logoBase64} alt="Logo" className="logo-img" />
+          ) : (
+            <img src="/default-logo.png" alt="Logo" className="logo-img" />
+          )}
         </NavLink>
       </div>
 
+      {/* NAV LINKS */}
       <div className="nav-links">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/desserts">Desserts</NavLink>
@@ -50,9 +57,9 @@ export default function Navbar() {
         </div>
 
         {user ? (
-          <a href="/dashboard">
+          <NavLink to="/dashboard">
             <button className="dashboard-btn">Dashboard</button>
-          </a>
+          </NavLink>
         ) : (
           <NavLink to="/auth">
             <button className="dashboard-btn">Register</button>

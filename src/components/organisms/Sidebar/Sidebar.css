@@ -1,15 +1,7 @@
-:root {
-  --cream: #fffaf7;
-  --pink: #f7c0c3;
-  --maroon: #581b28;
-  --border: #efdfda;
-  --transition: 0.25s ease;
-}
-
 .sidebar {
   width: 260px;
-  background: var(--cream);
-  border-right: 2px solid var(--border);
+  background: var(--brand-cream);
+  border-right: 2px solid var(--brand-border-soft);
   position: relative;
   padding-top: 11rem;
   padding-bottom: 40px;
@@ -23,15 +15,20 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0 24px 32px;
   font-weight: 700;
   font-size: 22px;
-  color: var(--maroon);
+  color: var(--brand-primary);
+}
+
+.sidebar-logo-img {
+  width: 300px;
+  height: 100px;
+  object-fit: contain;
 }
 
 .sidebar-logo i {
   font-size: 26px;
-  color: #00211a;
+  color: var(--brand-primary);
 }
 
 .sidebar-menu {
@@ -48,30 +45,35 @@
   margin: 0 12px;
   font-size: 16px;
   font-weight: 500;
-  color: var(--maroon);
+  color: var(--brand-primary);
   background: transparent;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: var(--transition);
+  transition: 0.25s ease;
 }
 
 .menu-item i {
   font-size: 18px;
   width: 22px;
   text-align: center;
-  color: #00211a;
+  color: var(--brand-primary);
 }
 
 .menu-item:hover {
-  background: var(--pink);
+  background: var(--brand-secondary-soft);
   transform: translateX(3px);
 }
 
 .menu-item.active {
-  background: var(--pink);
+  background: var(--brand-secondary);
+  color: white;
   font-weight: 600;
-  box-shadow: rgba(88, 27, 40, 0.1) 0px 4px 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 8px;
+}
+
+.menu-item.active i {
+  color: white;
 }
 
 .sidebar-footer {
@@ -87,15 +89,17 @@
   font-weight: 500;
   border: none;
   background: none;
-  color: var(--maroon);
+  color: var(--brand-primary);
   cursor: pointer;
-}
-
-.logout i {
-  font-size: 18px;
+  transition: 0.25s ease;
 }
 
 .logout:hover {
   opacity: 0.7;
   transform: translateX(3px);
+}
+
+.logout i {
+  font-size: 18px;
+  color: var(--brand-primary);
 }

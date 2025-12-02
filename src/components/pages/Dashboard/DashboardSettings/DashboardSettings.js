@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import "./dashboardSettings.css";
 
@@ -14,7 +14,10 @@ export default function DashboardSettings() {
     brandText: "#2b2b2b",
     brandTextLight: "#6d6d6d",
     brandBorderSoft: "#f4d5d8",
+    logoBase64: "",  // NEW
   });
+
+  const [previewLogo, setPreviewLogo] = useState(null);
 
   useEffect(() => {
     const loadConfig = async () => {
@@ -22,8 +25,11 @@ export default function DashboardSettings() {
       const snap = await getDoc(ref);
 
       if (snap.exists()) {
-        setSettings({ ...settings, ...snap.data() });
+        const data = snap.data();
+        setSettings(prev => ({ ...prev, ...data }));
+        if (data.logoBase64) setPreviewLogo(data.logoBase64);
       }
+
       setLoading(false);
     };
 
@@ -46,15 +52,26 @@ export default function DashboardSettings() {
     applyToCSS(updated);
   };
 
-  const saveSettings = async () =>
-  {
+  const handleLogoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSettings(prev => ({ ...prev, logoBase64: reader.result }));
+      setPreviewLogo(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const saveSettings = async () => {
     setSaving(true);
 
     const ref = doc(db, "brandConfig", "dynamic");
     await setDoc(ref, settings, { merge: true });
 
     setSaving(false);
-    alert("Brand colors updated successfully!");
+    alert("Brand settings updated successfully!");
   };
 
   if (loading) return <div className="settings-loading">Loading...</div>;
@@ -62,63 +79,43 @@ export default function DashboardSettings() {
   return (
     <div className="settings-wrapper">
       <h1 className="settings-title">Brand Settings</h1>
-      <p className="settings-subtitle">Customize the website theme colors</p>
+      <p className="settings-subtitle">Customize theme colors and logo</p>
 
       <div className="settings-grid">
 
-        <div className="setting-box">
-          <label>Primary Color</label>
-          <input
-            type="color"
-            value={settings.brandPrimary}
-            onChange={(e) => handleChange("brandPrimary", e.target.value)}
-          />
+        {/* Colors */}
+        {[
+          ["Primary Color", "brandPrimary"],
+          ["Secondary Color", "brandSecondary"],
+          ["Cream Background", "brandCream"],
+          ["Main Text", "brandText"],
+          ["Muted Text", "brandTextLight"],
+          ["Soft Border", "brandBorderSoft"],
+        ].map(([label, key]) => (
+          <div className="setting-box" key={key}>
+            <label>{label}</label>
+            <input
+              type="color"
+              value={settings[key]}
+              onChange={(e) => handleChange(key, e.target.value)}
+            />
+          </div>
+        ))}
+
+        {/* Logo Upload */}
+        <div className="setting-box logo-box">
+          <label>Logo (Base64)</label>
+          <input type="file" accept="image/*" onChange={handleLogoUpload} />
+
+          {previewLogo && (
+            <img
+              className="logo-preview"
+              src={previewLogo}
+              alt="Logo Preview"
+            />
+          )}
         </div>
 
-        <div className="setting-box">
-          <label>Secondary Color</label>
-          <input
-            type="color"
-            value={settings.brandSecondary}
-            onChange={(e) => handleChange("brandSecondary", e.target.value)}
-          />
-        </div>
-
-        <div className="setting-box">
-          <label>Cream Background</label>
-          <input
-            type="color"
-            value={settings.brandCream}
-            onChange={(e) => handleChange("brandCream", e.target.value)}
-          />
-        </div>
-
-        <div className="setting-box">
-          <label>Main Text</label>
-          <input
-            type="color"
-            value={settings.brandText}
-            onChange={(e) => handleChange("brandText", e.target.value)}
-          />
-        </div>
-        
-        <div className="setting-box">
-          <label>Muted Text</label>
-          <input
-            type="color"
-            value={settings.brandTextLight}
-            onChange={(e) => handleChange("brandTextLight", e.target.value)}
-          />
-        </div>
-
-        <div className="setting-box">
-          <label>Soft Border</label>
-          <input
-            type="color"
-            value={settings.brandBorderSoft}
-            onChange={(e) => handleChange("brandBorderSoft", e.target.value)}
-          />
-        </div>
       </div>
 
       <button className="save-btn" onClick={saveSettings} disabled={saving}>

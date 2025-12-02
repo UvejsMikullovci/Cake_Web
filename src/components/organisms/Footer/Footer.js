@@ -1,23 +1,33 @@
 import React from "react";
 import "./Footer.css";
 import { NavLink } from "react-router-dom";
+import { useBrandTheme } from "../../../theme/BrandThemeProvider";
+
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 
 export default function Footer() {
+  const theme = useBrandTheme();
+
   return (
     <footer className="footer">
       <div className="footer-container">
 
         <div className="footer-brand">
+
+          {/* Dynamic Logo */}
           <NavLink to="/" className="footer-logo">
-            <span>🍰</span>
+            {theme.logoBase64 ? (
+              <img src={theme.logoBase64} alt="Logo" className="footer-logo-img" />
+            ) : (
+              <span>🍰</span>
+            )}
           </NavLink>
 
           <NavLink to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            <h2>CakeCrush</h2>
+            <h2>{theme.brandName || "CakeCrush"}</h2>
           </NavLink>
 
           <span className="subtitle">BAKERY</span>

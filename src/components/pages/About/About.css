@@ -4,6 +4,9 @@
   background: var(--brand-cream);
 }
 
+/* =============================
+    BANNER
+============================= */
 .about-banner {
   background-color: var(--brand-secondary);
   padding: 160px 40px 80px;
@@ -26,15 +29,23 @@
   text-align: center;
   margin-top: 20px;
   font-size: 18px;
-  color: #ffffffbf;
+  color: var(--brand-cream);
+  opacity: 0.9;
 }
 
+.svgBaner path {
+  fill: var(--brand-secondary);
+}
+
+/* =============================
+     OUR STORY
+============================= */
 .aboutus-section {
   display: flex;
   margin-top: 100px;
   justify-content: space-evenly;
   align-items: center;
-  gap:200px
+  gap: 200px;
 }
 
 .about-img {
@@ -58,7 +69,7 @@
 
 .about-p {
   font-size: 15px;
-  color: #00211abf;
+  color: var(--brand-text-main);
   text-align: left;
   font-weight: 450;
 }
@@ -72,6 +83,7 @@
   background-color: var(--brand-secondary);
   color: var(--brand-primary);
   border-radius: 15px;
+  text-align: left;
 }
 
 .years h3 {
@@ -89,13 +101,16 @@
   font-weight: 500;
 }
 
-.about-footer {
-  margin-top: 100px;
-}
-
+/* =============================
+    OUR VALUES
+============================= */
 .ourvalues-section {
   display: flex;
-  background: linear-gradient(to bottom, var(--brand-soft-bg-1), var(--brand-cream));
+  background: linear-gradient(
+    to bottom,
+    var(--brand-soft-bg-1),
+    var(--brand-cream)
+  );
   text-align: center;
   margin-top: 100px;
   flex-direction: column;
@@ -109,7 +124,7 @@
 }
 
 .ourvalues-p {
-  color: #00211abf;
+  color: var(--brand-text-main);
 }
 
 .ourvalues-flex {
@@ -123,7 +138,7 @@
 
 .ourvalues-card {
   text-align: center;
-  background: #ffffff;
+  background: var(--brand-cream);
   border: 1px solid var(--brand-border-soft);
   border-radius: 25px;
   padding: 40px;
@@ -131,12 +146,21 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+.ourvalues-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
 .ourvalue-icon {
   width: 65px;
   height: 65px;
   margin: auto;
   border-radius: 50%;
-  background: linear-gradient(122deg, var(--brand-secondary), var(--brand-primary));
+  background: linear-gradient(
+    122deg,
+    var(--brand-secondary),
+    var(--brand-primary)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,16 +176,19 @@
 }
 
 .ourvalue-card-text {
-  color: #444;
+  color: var(--brand-text-muted);
   line-height: 1.6;
 }
 
+/* =============================
+    TEAM
+============================= */
 .team-section {
   text-align: center;
   padding: 60px 20px;
 }
 
-.about-banner .title {
+.team-section .title {
   font-size: 42px;
   font-weight: 700;
   color: var(--brand-primary);
@@ -170,7 +197,7 @@
 
 .subtitle {
   font-size: 18px;
-  color: #666;
+  color: var(--brand-text-muted);
   margin-bottom: 50px;
 }
 
@@ -183,7 +210,7 @@
 }
 
 .team-card {
-  background: #fff;
+  background: var(--brand-cream);
   border: 2px solid var(--brand-border-soft);
   border-radius: 20px;
   padding-bottom: 20px;
@@ -200,12 +227,9 @@
   width: 100%;
   height: 300px;
   object-fit: cover;
-  object-position: center center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   transition: transform 0.3s ease;
-  transform: scale(1);
-  display: block;
 }
 
 .team-card:hover .team-image {
@@ -222,19 +246,25 @@
 .team-role {
   margin-top: 8px;
   font-size: 16px;
-  color: #555;
+  color: var(--brand-text-muted);
 }
 
+/* =============================
+    VISIT SECTION
+============================= */
 .visit-banner {
   height: 350px;
   width: 86%;
   padding: 70px 20px;
   border-radius: 40px;
   text-align: center;
-  background: linear-gradient(to bottom, var(--brand-secondary), var(--brand-primary));
+  background: linear-gradient(
+    to bottom,
+    var(--brand-secondary),
+    var(--brand-primary)
+  );
   color: var(--brand-cream);
   font-family: "Poppins", sans-serif;
-  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -255,4 +285,11 @@
 .hours-p {
   font-size: 16px;
   margin: 6px 0;
+}
+
+/* =============================
+    FOOTER WRAPPER
+============================= */
+.about-footer {
+  margin-top: 100px;
 }
