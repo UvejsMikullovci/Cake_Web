@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function Sidebar({ onSelect, active }) {
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const fetchRole = async () => {
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+      if (snap.exists()) setRole(snap.data().role);
+    };
+
+    fetchRole();
+  }, []);
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        console.log("User logged out");
         window.location.href = "/";
       })
       .catch((error) => {
@@ -18,7 +32,6 @@ export default function Sidebar({ onSelect, active }) {
 
   return (
     <aside className="sidebar">
-
       <div className="sidebar-logo">
         <i className="fa-solid fa-cake-candles"></i>
         <span>CakeCrush</span>
@@ -26,6 +39,7 @@ export default function Sidebar({ onSelect, active }) {
 
       <nav className="sidebar-menu">
 
+        {/* Always visible */}
         <button
           className={`menu-item ${active === "profile" ? "active" : ""}`}
           onClick={() => onSelect("profile")}
@@ -34,30 +48,50 @@ export default function Sidebar({ onSelect, active }) {
           <span>Profile</span>
         </button>
 
-        <button
-          className={`menu-item ${active === "orders" ? "active" : ""}`}
-          onClick={() => onSelect("orders")}
-        >
-          <i className="fa-solid fa-box"></i>
-          <span>Orders</span>
-        </button>
+        {/* CUSTOMER: "Order History" */}
+        {role === "customer" && (
+          <button
+            className={`menu-item ${active === "orders" ? "active" : ""}`}
+            onClick={() => onSelect("orders")}
+          >
+            <i className="fa-solid fa-clock-rotate-left"></i>
+            <span>Order History</span>
+          </button>
+        )}
 
-        <button
-          className={`menu-item ${active === "desserts" ? "active" : ""}`}
-          onClick={() => onSelect("desserts")}
-        >
-          <i className="fa-solid fa-cookie-bite"></i>
-          <span>Desserts</span>
-        </button>
+        {/* BUSINESS: Original Orders */}
+        {role === "business" && (
+          <button
+            className={`menu-item ${active === "orders" ? "active" : ""}`}
+            onClick={() => onSelect("orders")}
+          >
+            <i className="fa-solid fa-box"></i>
+            <span>Orders</span>
+          </button>
+        )}
 
-        <button
-          className={`menu-item ${active === "blog" ? "active" : ""}`}
-          onClick={() => onSelect("blog")}
-        >
-          <i className="fa-solid fa-pen-nib"></i>
-          <span>Blogs</span>
-        </button>
+        {/* BUSINESS ONLY */}
+        {role === "business" && (
+          <>
+            <button
+              className={`menu-item ${active === "desserts" ? "active" : ""}`}
+              onClick={() => onSelect("desserts")}
+            >
+              <i className="fa-solid fa-cookie-bite"></i>
+              <span>Desserts</span>
+            </button>
 
+            <button
+              className={`menu-item ${active === "blog" ? "active" : ""}`}
+              onClick={() => onSelect("blog")}
+            >
+              <i className="fa-solid fa-pen-nib"></i>
+              <span>Blogs</span>
+            </button>
+          </>
+        )}
+
+        {/* Always visible */}
         <button
           className={`menu-item ${active === "settings" ? "active" : ""}`}
           onClick={() => onSelect("settings")}
@@ -74,7 +108,6 @@ export default function Sidebar({ onSelect, active }) {
           Logout
         </button>
       </div>
-
     </aside>
   );
 }

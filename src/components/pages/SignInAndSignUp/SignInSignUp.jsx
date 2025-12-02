@@ -24,18 +24,24 @@ const SignInSignUp = () => {
     firstName: "",
     lastName: "",
     confirmPassword: "",
+    role: "customer", // new field
   });
+
   const [errors, setErrors] = useState("");
   const [loading, setLoading] = useState(false);
+
   const [socialLoading, setSocialLoading] = useState({
     google: false,
   });
+
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
   const validateEmail = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const saveUserToFirestore = async (user, firstName = "", lastName = "") => {
+
+  const saveUserToFirestore = async (user, firstName = "", lastName = "", role = "customer") => {
     const userRef = doc(db, "users", user.uid);
 
     const existingDoc = await getDoc(userRef);
@@ -46,6 +52,7 @@ const SignInSignUp = () => {
         email: user.email,
         firstName,
         lastName,
+        role,               // save role (business/customer)
         createdAt: new Date(),
       });
     }
@@ -90,8 +97,10 @@ const SignInSignUp = () => {
         await saveUserToFirestore(
           user,
           formData.firstName,
-          formData.lastName
+          formData.lastName,
+          formData.role
         );
+
       } else {
         const userCredential = await signInWithEmailAndPassword(
           auth,
@@ -102,49 +111,49 @@ const SignInSignUp = () => {
         await saveUserToFirestore(userCredential.user);
       }
 
-      navigate("/");
+      navigate("/dashboard"); // redirect after login/signup
+
     } catch (err) {
       let msg = "Something went wrong.";
 
-      if (err.code === "auth/email-already-in-use")
-        msg = "Email already registered.";
-      if (err.code === "auth/wrong-password")
-        msg = "Invalid password.";
-      if (err.code === "auth/user-not-found")
-        msg = "User does not exist.";
+      if (err.code === "auth/email-already-in-use") msg = "Email already registered.";
+      if (err.code === "auth/wrong-password") msg = "Invalid password.";
+      if (err.code === "auth/user-not-found") msg = "User does not exist.";
 
       setErrors(msg);
     } finally {
       setLoading(false);
     }
   };
+
   const handleGoogleLogin = async () => {
     setErrors("");
     setSocialLoading((prev) => ({ ...prev, google: true }));
 
     try {
-      const userCredential = await signInWithPopup(auth, googleProvider);
-      const user = userCredential.user;
-
-      await saveUserToFirestore(user);
-
-      navigate("/");
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) {
+        await auth.signOut();
+        setErrors("This Google account is not registered. Please sign up first.");
+        return;
+      }
+      navigate("/dashboard");
     } catch (err) {
-      console.error("Google login error:", err);
-
       let msg = "Google login failed.";
-      if (err.code === "auth/popup-blocked")
-        msg = "Popup blocked. Please allow popups.";
-      else if (err.code === "auth/popup-closed-by-user")
-        msg = "Popup closed.";
+
+      if (err.code === "auth/popup-blocked") msg = "Popup blocked.";
+      else if (err.code === "auth/popup-closed-by-user") msg = "Popup closed.";
       else if (err.code === "auth/cancelled-popup-request")
         msg = "Another popup is open.";
-
       setErrors(msg);
     } finally {
       setSocialLoading((prev) => ({ ...prev, google: false }));
     }
   };
+
   return (
     <>
       <Navbar />
@@ -158,16 +167,13 @@ const SignInSignUp = () => {
             }}
           >
             <div className="auth-left-overlay" />
-
             <div className="auth-left-content">
               <div className="auth-left-icon-wrap">
                 <span className="auth-left-icon">{isSignUp ? "🎂" : "🍰"}</span>
               </div>
-
               <h1 className="auth-left-title">
                 {isSignUp ? "Join CakeCrush!" : "Welcome Back!"}
               </h1>
-
               <p className="auth-left-sub">
                 {isSignUp
                   ? "Create an account to unlock perks and sweet deals."
@@ -189,31 +195,41 @@ const SignInSignUp = () => {
               {isSignUp ? "Create Account" : "Sign In"}
             </h2>
 
-            <p className="auth-desc">
-              {isSignUp
-                ? "Sign up to start your sweet journey with us"
-                : "Enter your credentials to access your account"}
-            </p>
-
             <form onSubmit={handleSubmit} className="auth-form" noValidate>
-              {isSignUp && (
-                <div className="name-row">
-                  <input
-                    name="firstName"
-                    placeholder="First Name"
-                    onChange={handleChange}
-                    value={formData.firstName}
-                    className="input"
-                  />
 
-                  <input
-                    name="lastName"
-                    placeholder="Last Name"
-                    onChange={handleChange}
-                    value={formData.lastName}
-                    className="input"
-                  />
-                </div>
+              {isSignUp && (
+                <>
+                  <div className="name-row">
+                    <input
+                      name="firstName"
+                      placeholder="First Name"
+                      onChange={handleChange}
+                      value={formData.firstName}
+                      className="input"
+                    />
+
+                    <input
+                      name="lastName"
+                      placeholder="Last Name"
+                      onChange={handleChange}
+                      value={formData.lastName}
+                      className="input"
+                    />
+                  </div>
+
+                  {/* NEW ROLE SELECT */}
+                  <div className="field">
+                    <select
+                      name="role"
+                      value={formData.role}
+                      onChange={handleChange}
+                      className="input"
+                    >
+                      <option value="customer">Customer</option>
+                      <option value="business">Business</option>
+                    </select>
+                  </div>
+                </>
               )}
 
               <div className="field">
@@ -260,9 +276,7 @@ const SignInSignUp = () => {
               </button>
             </form>
 
-            <div className="divider">
-              <span>Or continue with</span>
-            </div>
+            <div className="divider"><span>Or continue with</span></div>
 
             <div className="social-buttons">
               <button
@@ -277,10 +291,7 @@ const SignInSignUp = () => {
 
             <p className="toggle-text">
               {isSignUp ? "Already have an account?" : "Don't have an account?"}
-              <span
-                className="toggle-link"
-                onClick={() => setIsSignUp((prev) => !prev)}
-              >
+              <span className="toggle-link" onClick={() => setIsSignUp((prev) => !prev)}>
                 {isSignUp ? " Sign in" : " Sign up"}
               </span>
             </p>
