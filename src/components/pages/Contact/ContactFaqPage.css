@@ -1,17 +1,16 @@
+/* PAGE BASE */
 .cf-page {
   margin: 0;
   padding: 0;
   background-color: var(--brand-cream);
-  font-family: var(--brand-font);
-  color: var(--brand-text);
-}
-
-.cf-page {
+  font-family: "Inter", sans-serif;
+  color: var(--brand-text-main);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+/* HERO */
 .cf-hero {
   padding: 180px 24px 64px;
   background-color: var(--brand-secondary);
@@ -30,12 +29,14 @@
 
 .cf-hero-inner p {
   font-size: 1rem;
-  color: #fff;
+  color: var(--brand-cream);
   max-width: 520px;
   margin: 0 auto;
   line-height: 1.4;
+  opacity: 0.95;
 }
 
+/* MAIN */
 .cf-main {
   max-width: 1140px;
   width: 100%;
@@ -47,6 +48,7 @@
   gap: 64px;
 }
 
+/* CARDS GRID */
 .cf-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -54,7 +56,7 @@
 }
 
 .cf-card {
-  background-color: #fff;
+  background-color: var(--brand-cream);
   border: 1.5px solid var(--brand-border-soft);
   border-radius: 16px;
   padding: 32px;
@@ -70,6 +72,7 @@
   color: var(--brand-primary);
 }
 
+/* FORM */
 .cf-form {
   display: flex;
   flex-direction: column;
@@ -90,7 +93,9 @@
   gap: 6px;
 }
 
-label {
+/* LABELS */
+label,
+.cf-label {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -99,12 +104,7 @@ label {
   color: var(--brand-primary);
 }
 
-.cf-label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--brand-primary);
-}
-
+/* INPUTS */
 .cf-input,
 .cf-textarea {
   font-size: 1rem;
@@ -112,8 +112,8 @@ label {
   border: 1.5px solid var(--brand-border-soft);
   border-radius: 12px;
   outline-offset: 2px;
-  color: var(--brand-text);
-  background-color: #fff;
+  color: var(--brand-text-main);
+  background-color: var(--brand-cream);
   transition: 0.25s ease;
   font-family: inherit;
   resize: vertical;
@@ -126,12 +126,13 @@ label {
 .cf-input:focus,
 .cf-textarea:focus {
   border-color: var(--brand-primary);
-  box-shadow: 0 0 6px rgba(88, 27, 40, 0.35);
+  box-shadow: 0 0 6px var(--brand-border-soft);
 }
 
+/* BUTTON */
 .cf-btn {
   background-color: var(--brand-primary);
-  color: white;
+  color: var(--brand-cream);
   font-weight: 700;
   padding: 14px 24px;
   border: none;
@@ -146,15 +147,17 @@ label {
 }
 
 .cf-btn:hover {
-  background-color: #6d2231;
+  background: var(--brand-heading);
 }
 
+/* ERRORS */
 .error {
-  color: red;
+  color: crimson;
   font-size: 0.85rem;
   margin-top: 4px;
 }
 
+/* CONTACT INFO SECTION */
 .info-list {
   display: flex;
   flex-direction: column;
@@ -173,9 +176,13 @@ label {
   align-items: center;
   min-width: 44px;
   min-height: 44px;
-  background: var(--brand-primary);
+  background: linear-gradient(
+    135deg,
+    var(--brand-secondary),
+    var(--brand-primary)
+  );
   border-radius: 50%;
-  color: white;
+  color: var(--brand-cream);
   flex-shrink: 0;
   font-size: 1.25rem;
   padding: 8px;
@@ -193,9 +200,10 @@ label {
   white-space: pre-line;
   font-weight: 500;
   font-size: 0.9rem;
-  color: var(--brand-text-light);
+  color: var(--brand-text-muted);
 }
 
+/* MAP */
 .map-wrapper {
   margin-top: 32px;
   border-radius: 16px;
@@ -211,6 +219,7 @@ label {
   border-radius: 16px;
 }
 
+/* FAQ SECTION */
 .faq-section {
   max-width: 1200px;
   width: 100%;
@@ -233,7 +242,7 @@ label {
   max-width: 520px;
   margin: 0 auto;
   font-size: 1.05rem;
-  color: var(--brand-text-light);
+  color: var(--brand-text-muted);
 }
 
 .faq-list {
@@ -249,12 +258,14 @@ label {
   border-radius: 14px;
   border: 1.5px solid var(--brand-border-soft);
   transition: 0.25s ease;
+  background: var(--brand-cream);
 }
 
 .faq-item:hover {
   border-color: var(--brand-primary);
 }
 
+/* QUESTION */
 .faq-q {
   padding: 20px 24px;
   font-weight: 700;
@@ -276,6 +287,7 @@ label {
   transform: rotate(180deg);
 }
 
+/* ANSWER */
 .faq-a {
   height: 0;
   overflow: hidden;
@@ -284,12 +296,12 @@ label {
 
 .faq-a-inner {
   padding: 16px 24px;
-  font-weight: 500;
   font-size: 1rem;
-  color: var(--brand-text);
+  color: var(--brand-text-main);
   line-height: 1.5;
 }
 
+/* RESPONSIVE */
 @media (max-width: 640px) {
   .cf-grid {
     grid-template-columns: 1fr;

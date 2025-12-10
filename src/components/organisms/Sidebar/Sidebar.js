@@ -3,21 +3,30 @@ import "./Sidebar.css";
 import { auth, db } from "../../firebase";
 import { signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { useBrandTheme } from "../../../theme/BrandThemeProvider.jsx";
 
 export default function Sidebar({ onSelect, active }) {
   const [role, setRole] = useState(null);
+  const theme = useBrandTheme();
 
   useEffect(() => {
-    const user = auth.currentUser;
-    if (!user) return;
+    const unsub = auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        setRole(null);
+        return;
+      }
 
-    const fetchRole = async () => {
       const ref = doc(db, "users", user.uid);
       const snap = await getDoc(ref);
-      if (snap.exists()) setRole(snap.data().role);
-    };
 
-    fetchRole();
+      if (snap.exists()) {
+        setRole(snap.data().role);
+      } else {
+        setRole("customer");
+      }
+    });
+
+    return () => unsub();
   }, []);
 
   const handleLogout = () => {
@@ -25,21 +34,21 @@ export default function Sidebar({ onSelect, active }) {
       .then(() => {
         window.location.href = "/";
       })
-      .catch((error) => {
-        console.error("Logout error:", error);
-      });
+      .catch((error) => console.error("Logout error:", error));
   };
 
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <i className="fa-solid fa-cake-candles"></i>
-        <span>CakeCrush</span>
+        {theme.logoBase64 ? (
+          <img src={theme.logoBase64} alt="Logo" className="sidebar-logo-img" />
+        ) : (
+          <i className="fa-solid fa-cake-candles"></i>
+        )}
       </div>
 
       <nav className="sidebar-menu">
 
-        {/* Always visible */}
         <button
           className={`menu-item ${active === "profile" ? "active" : ""}`}
           onClick={() => onSelect("profile")}
@@ -48,7 +57,7 @@ export default function Sidebar({ onSelect, active }) {
           <span>Profile</span>
         </button>
 
-        {/* CUSTOMER: "Order History" */}
+        {/* CUSTOMER */}
         {role === "customer" && (
           <button
             className={`menu-item ${active === "orders" ? "active" : ""}`}
@@ -59,20 +68,17 @@ export default function Sidebar({ onSelect, active }) {
           </button>
         )}
 
-        {/* BUSINESS: Original Orders */}
-        {role === "business" && (
-          <button
-            className={`menu-item ${active === "orders" ? "active" : ""}`}
-            onClick={() => onSelect("orders")}
-          >
-            <i className="fa-solid fa-box"></i>
-            <span>Orders</span>
-          </button>
-        )}
-
-        {/* BUSINESS ONLY */}
+        {/* BUSINESS */}
         {role === "business" && (
           <>
+            <button
+              className={`menu-item ${active === "orders" ? "active" : ""}`}
+              onClick={() => onSelect("orders")}
+            >
+              <i className="fa-solid fa-box"></i>
+              <span>Orders</span>
+            </button>
+
             <button
               className={`menu-item ${active === "desserts" ? "active" : ""}`}
               onClick={() => onSelect("desserts")}
@@ -91,7 +97,6 @@ export default function Sidebar({ onSelect, active }) {
           </>
         )}
 
-        {/* Always visible */}
         <button
           className={`menu-item ${active === "settings" ? "active" : ""}`}
           onClick={() => onSelect("settings")}
@@ -99,7 +104,6 @@ export default function Sidebar({ onSelect, active }) {
           <i className="fa-solid fa-gear"></i>
           <span>Settings</span>
         </button>
-
       </nav>
 
       <div className="sidebar-footer">

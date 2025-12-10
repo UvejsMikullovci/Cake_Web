@@ -1,32 +1,31 @@
 /* GENERAL LAYOUT */
 .checkout-wrapper {
   width: 100%;
-  background: #fffaf7;
+  background: var(--brand-soft-bg-1);
   font-family: "Inter", sans-serif;
 }
 
 .checkout-header {
   text-align: center;
   padding: 170px 0 50px;
-  background-color: #F7C0C3;
+  background-color: var(--brand-secondary);
 }
 
 .checkout-header h1 {
   font-size: 48px;
   font-weight: 800;
-  color: #631a2b;
+  color: var(--brand-primary);
 }
 
 .wavy-divider svg {
-    width: calc(100% + 1.3px);
-    height: 60px;
-    display: block;
-    position: relative;
-    
+  width: calc(100% + 1.3px);
+  height: 60px;
+  display: block;
+  position: relative;
 }
 
 .checkout-header p {
-  color: #7a3d45;
+  color: var(--brand-text-muted);
   margin-top: 8px;
 }
 
@@ -47,8 +46,8 @@
 }
 
 .section-box {
-  background: white;
-  border: 2px solid #f7b7c4;
+  background: var(--brand-cream);
+  border: 2px solid var(--brand-border-highlight);
   border-radius: 16px;
   padding: 25px;
   margin-bottom: 30px;
@@ -56,7 +55,7 @@
 
 .section-title {
   font-size: 22px;
-  color: #631a2b;
+  color: var(--brand-primary);
   margin-bottom: 20px;
 }
 
@@ -74,50 +73,50 @@
 
 label {
   font-size: 14px;
-  color: #631a2b;
+  color: var(--brand-primary);
   margin-bottom: 6px;
 }
 
 input {
   padding: 12px;
-  border: 1px solid #f0b6c0;
+  border: 1px solid var(--brand-border-soft);
   border-radius: 8px;
   font-size: 14px;
   outline: none;
-  background: #ffffff;
+  background: var(--brand-cream);
 }
 
 input:focus {
-  border-color: #d66d82;
+  border-color: var(--brand-primary);
 }
 
 .payment-option {
   display: flex;
   align-items: center;
-  border: 2px solid #f0b6c0;
+  border: 2px solid var(--brand-border-soft);
   margin-bottom: 12px;
   padding: 14px 16px;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.25s ease;
-  background: #ffffff;
+  background: var(--brand-cream);
 }
 
 .payment-option:hover {
-  border-color: #d66d82;
-  background: #fff4f7;
+  border-color: var(--brand-border-highlight);
+  background: var(--brand-soft-bg-2);
 }
 
 .payment-option.active {
-  border-color: #d66d82;
-  background: #ffe9ef;
+  border-color: var(--brand-border-highlight);
+  background: var(--brand-secondary-soft);
 }
 
 .radio-dot {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid #631a2b;
+  border: 2px solid var(--brand-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,16 +126,16 @@ input:focus {
 .radio-dot .inner-dot {
   width: 10px;
   height: 10px;
-  background: #d66d82;
+  background: var(--brand-primary);
   border-radius: 50%;
 }
 
 .card-form {
   margin: 15px 0;
   padding: 14px;
-  background: #fff7fa;
+  background: var(--brand-soft-bg-1);
   border-radius: 10px;
-  border: 1px solid #f4b6c3;
+  border: 1px solid var(--brand-border-soft);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -153,21 +152,21 @@ input:focus {
 .paypal-box {
   margin-top: 10px;
   padding: 12px;
-  background: #eef8ff;
+  background: var(--brand-soft-bg-2);
   border-radius: 8px;
-  border: 1px solid #b9dcff;
+  border: 1px solid var(--brand-border-soft-2);
   font-size: 14px;
 }
 
 .summary-box {
-  border: 2px dashed #f7b7c4;
+  border: 2px dashed var(--brand-border-highlight);
   border-radius: 16px;
   padding: 25px;
 }
 
 .summary-title {
   font-size: 22px;
-  color: #631a2b;
+  color: var(--brand-primary);
   margin-bottom: 20px;
 }
 
@@ -188,16 +187,17 @@ input:focus {
 .item-name {
   font-size: 16px;
   font-weight: 600;
-  color: #631a2b;
+  color: var(--brand-primary);
 }
 
 .item-qty {
   font-size: 14px;
+  color: var(--brand-text-muted);
 }
 
 .item-price {
   font-weight: bold;
-  color: #631a2b;
+  color: var(--brand-primary);
 }
 
 .delete-btn {
@@ -207,6 +207,7 @@ input:focus {
   opacity: 0.6;
   font-size: 18px;
 }
+
 .promo-section {
   margin-top: 20px;
 }
@@ -219,15 +220,15 @@ input:focus {
 
 .promo-btn {
   width: 48px;
-  background: #ffffff;
-  border: 1px solid #f0b6c0;
+  background: var(--brand-cream);
+  border: 1px solid var(--brand-border-soft);
   border-radius: 8px;
   cursor: pointer;
 }
 
 .promo-hint {
   font-size: 12px;
-  color: #7a3d45;
+  color: var(--brand-text-muted);
   margin-top: 6px;
 }
 
@@ -245,14 +246,14 @@ input:focus {
 .total span {
   font-size: 20px;
   font-weight: bold;
-  color: #631a2b;
+  color: var(--brand-primary);
 }
 
 .complete-btn {
   width: 100%;
   padding: 14px;
-  background: #631a2b;
-  color: white;
+  background: var(--brand-primary);
+  color: var(--brand-cream);
   border: none;
   border-radius: 8px;
   margin-top: 20px;
@@ -262,10 +263,10 @@ input:focus {
 
 .live-card {
   width: 100%;
-  background: linear-gradient(135deg, #531a29, #b7486a);
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-heading));
   border-radius: 16px;
   padding: 20px;
-  color: white;
+  color: var(--brand-cream);
   margin-bottom: 20px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -295,6 +296,7 @@ input:focus {
 .live-card-footer label {
   font-size: 10px;
   opacity: 0.7;
+  color: var(--brand-cream);
 }
 
 .live-card-footer p {
@@ -318,7 +320,7 @@ input:focus {
 .order-popup {
   width: 90%;
   max-width: 380px;
-  background: white;
+  background: var(--brand-cream);
   border-radius: 16px;
   padding: 28px;
   text-align: center;
@@ -332,10 +334,10 @@ input:focus {
 }
 
 .popup-close-btn {
-  background: #631a2b;
+  background: var(--brand-primary);
   padding: 12px 20px;
   border: none;
-  color: white;
+  color: var(--brand-cream);
   border-radius: 8px;
   cursor: pointer;
   margin-top: 20px;

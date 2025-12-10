@@ -1,11 +1,10 @@
-
 .cake-page-layout {
   display: flex;
   width: 100vw;
   height: 100vh;
   margin-top: 7.3rem;
   overflow-y: hidden;
-  background: #fffcf6;
+  background: var(--brand-cream);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
 }
 
@@ -23,7 +22,7 @@
   flex: 2;
   min-width: 321px;
   max-width: 480px;
-  background: rgba(255, 252, 246, 0.98);
+  background: var(--brand-cream);
   backdrop-filter: blur(14px);
   box-shadow: -12px 0 35px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -110,8 +109,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  transition: background 0.18s ease, border-color 0.18s ease,
-    transform 0.1s ease;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.1s ease;
 }
 
 .cake-pill:hover {
@@ -211,12 +209,7 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   background: var(--flavor-color, #ddd);
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease,
-    border-color 0.12s ease;
-}
-
-.cake-page-layout {
-  overflow-x: hidden;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
 }
 
 .cake-flavor-dot.selected {
@@ -235,7 +228,6 @@
   border-color: var(--brand-primary);
   box-shadow: 0 0 0 2px var(--brand-secondary);
 }
-
 
 .cake-btn-row {
   display: flex;
@@ -277,8 +269,7 @@
   border: 1px solid var(--brand-border-soft);
   background: var(--brand-cream);
   cursor: pointer;
-  transition: background 0.16s ease, border-color 0.16s ease,
-    color 0.16s ease;
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
   color: var(--brand-primary);
 }
 
@@ -341,7 +332,7 @@
 .cake-footer {
   margin-top: auto;
   padding-top: 10px;
-  border-top: 1px dashed #eadbd1;
+  border-top: 1px dashed var(--brand-border-soft);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -368,11 +359,7 @@
   padding: 9px 14px;
   border-radius: 999px;
   border: none;
-  background: linear-gradient(
-    135deg,
-    var(--brand-secondary),
-    var(--brand-primary)
-  );
+  background: linear-gradient(135deg, var(--brand-secondary), var(--brand-primary));
   color: #ffffff;
   font-size: 13px;
   font-weight: 600;

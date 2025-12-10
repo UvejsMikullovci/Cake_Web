@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./dashboardOrders.css";
-
 import { db } from "../../../firebase";
 import {
   collection,
@@ -16,39 +15,31 @@ export default function DashboardOrders() {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [statusFilter, setStatusFilter] = useState("all");
 
-  // Subscribe to custom cake orders
   useEffect(() => {
     const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
 
-    const unsub = onSnapshot(
-      q,
-      (snap) => {
-        const list = snap.docs.map((d) => {
-          const data = d.data();
+    const unsub = onSnapshot(q, (snap) => {
+      const list = snap.docs.map((d) => {
+        const data = d.data();
 
-          return {
-            docId: d.id, // Firestore doc id
-            orderId: data.id || d.id, // your ORDER-00001
-            status: data.status || "pending",
-            createdAt: data.createdAt || null,
-            total: data.total ?? 0,
-            subtotal: data.subtotal ?? 0,
-            discount: data.discount ?? 0,
-            shipping: data.shipping ?? 0,
-            paymentMethod: data.paymentMethod || "unknown",
-            cardInfo: data.cardInfo || null,
-            shippingInfo: data.shippingInfo || null,
-            items: Array.isArray(data.items) ? data.items : [],
-            raw: data,
-          };
-        });
+        return {
+          docId: d.id,
+          orderId: data.id || d.id,
+          status: data.status || "pending",
+          createdAt: data.createdAt || null,
+          total: data.total ?? 0,
+          subtotal: data.subtotal ?? 0,
+          discount: data.discount ?? 0,
+          shipping: data.shipping ?? 0,
+          paymentMethod: data.paymentMethod || "unknown",
+          cardInfo: data.cardInfo || null,
+          shippingInfo: data.shippingInfo || null,
+          items: Array.isArray(data.items) ? data.items : [],
+        };
+      });
 
-        setOrders(list);
-      },
-      (err) => {
-        console.error("orders snapshot error:", err);
-      }
-    );
+      setOrders(list);
+    });
 
     return () => unsub();
   }, []);
@@ -69,7 +60,6 @@ export default function DashboardOrders() {
   const formatDateTime = (ts) => {
     if (!ts) return "";
     try {
-      // Firestore Timestamp
       const d =
         typeof ts.toDate === "function" ? ts.toDate() : new Date(ts.seconds * 1000);
       return d.toLocaleString("en-GB", {
@@ -79,7 +69,7 @@ export default function DashboardOrders() {
         hour: "2-digit",
         minute: "2-digit",
       });
-    } catch (e) {
+    } catch {
       return "";
     }
   };
@@ -90,7 +80,6 @@ export default function DashboardOrders() {
         return "status-pill status-completed";
       case "processing":
         return "status-pill status-processing";
-      case "pending":
       default:
         return "status-pill status-pending";
     }
@@ -101,8 +90,7 @@ export default function DashboardOrders() {
       order.status === "completed" ? "processing" : "completed";
 
     try {
-      const ref = doc(db, "orders", order.docId);
-      await updateDoc(ref, { status: nextStatus });
+      await updateDoc(doc(db, "orders", order.docId), { status: nextStatus });
     } catch (err) {
       console.error("Failed to update status", err);
     }
@@ -130,6 +118,7 @@ export default function DashboardOrders() {
             >
               All ({stats.total})
             </button>
+
             <button
               className={
                 statusFilter === "processing"
@@ -140,6 +129,7 @@ export default function DashboardOrders() {
             >
               Processing ({stats.processing})
             </button>
+
             <button
               className={
                 statusFilter === "pending"
@@ -150,6 +140,7 @@ export default function DashboardOrders() {
             >
               Pending ({stats.pending})
             </button>
+
             <button
               className={
                 statusFilter === "completed"
@@ -164,7 +155,6 @@ export default function DashboardOrders() {
         </div>
       </div>
 
-      {/* main white card */}
       <div className="orders-card">
         <div className="orders-table-wrapper">
           <table className="orders-table">
@@ -179,6 +169,7 @@ export default function DashboardOrders() {
                 <th style={{ textAlign: "right" }}>Actions</th>
               </tr>
             </thead>
+
             <tbody>
               {filteredOrders.length === 0 && (
                 <tr>
@@ -198,6 +189,7 @@ export default function DashboardOrders() {
                       {order.orderId}
                     </button>
                   </td>
+
                   <td>
                     {order.shippingInfo ? (
                       <>
@@ -213,22 +205,20 @@ export default function DashboardOrders() {
                       "-"
                     )}
                   </td>
-                  <td className="cell-muted">
-                    {order.paymentMethod === "card"
-                      ? "Card"
-                      : order.paymentMethod === "paypal"
-                      ? "PayPal"
-                      : order.paymentMethod}
-                  </td>
+
+                  <td className="cell-muted">{order.paymentMethod}</td>
                   <td className="cell-muted">
                     {formatDateTime(order.createdAt)}
                   </td>
+
                   <td className="cell-amount">€{order.total.toFixed(2)}</td>
+
                   <td>
                     <span className={statusClass(order.status)}>
                       {order.status}
                     </span>
                   </td>
+
                   <td className="cell-actions">
                     <button
                       className="text-button"
@@ -236,6 +226,7 @@ export default function DashboardOrders() {
                     >
                       View
                     </button>
+
                     <button
                       className="text-button text-button-primary"
                       onClick={() => handleToggleCompleted(order)}
@@ -252,9 +243,11 @@ export default function DashboardOrders() {
         </div>
       </div>
 
-      {/* DETAIL MODAL */}
       {selectedOrder && (
-        <div className="order-modal-backdrop" onClick={() => setSelectedOrder(null)}>
+        <div
+          className="order-modal-backdrop"
+          onClick={() => setSelectedOrder(null)}
+        >
           <div
             className="order-modal"
             onClick={(e) => e.stopPropagation()}
@@ -284,11 +277,11 @@ export default function DashboardOrders() {
                     {formatDateTime(selectedOrder.createdAt)}
                   </p>
                   <p>
-                    <strong>Payment Method:</strong>{" "}
-                    {selectedOrder.paymentMethod}
+                    <strong>Payment:</strong> {selectedOrder.paymentMethod}
                   </p>
                   <p>
-                    <strong>Total:</strong> €{selectedOrder.total.toFixed(2)}
+                    <strong>Total:</strong> €
+                    {selectedOrder.total.toFixed(2)}
                   </p>
                   <p>
                     <strong>Subtotal:</strong> €
@@ -339,6 +332,7 @@ export default function DashboardOrders() {
                 {selectedOrder.items.length === 0 && (
                   <p className="cell-muted">No items.</p>
                 )}
+
                 {selectedOrder.items.length > 0 && (
                   <table className="order-items-table">
                     <thead>
@@ -348,15 +342,16 @@ export default function DashboardOrders() {
                         <th style={{ textAlign: "right" }}>Price</th>
                       </tr>
                     </thead>
+
                     <tbody>
                       {selectedOrder.items.map((item, idx) => (
                         <tr key={idx}>
                           <td>{item.title}</td>
                           <td style={{ textAlign: "center" }}>
-                            {item.number ?? 1}
+                            {item.number}
                           </td>
                           <td style={{ textAlign: "right" }}>
-                            €{(item.price ?? 0).toFixed(2)}
+                            €{item.price.toFixed(2)}
                           </td>
                         </tr>
                       ))}
@@ -373,13 +368,14 @@ export default function DashboardOrders() {
               >
                 Close
               </button>
+
               <button
                 className="primary-btn"
                 onClick={() => handleToggleCompleted(selectedOrder)}
               >
                 {selectedOrder.status === "completed"
-                  ? "Mark as Processing"
-                  : "Mark as Completed"}
+                  ? "Mark Processing"
+                  : "Mark Completed"}
               </button>
             </div>
           </div>
